@@ -1,2 +1,2 @@
-# analisi-matematica-2
+# Analisi Matematica 2
 Risultati notevoli.
