@@ -1,4 +1,5 @@
 \documentclass[a4paper]{book}
+\usepackage[Bjornstrup]{fncychap}
 \usepackage[usenames, dvipsnames]{xcolor}
 \usepackage[greek.ancient,italian]{babel}
 \usepackage[T1]{fontenc}
@@ -217,6 +218,55 @@ Dunque la classe delle funzioni differenziabili in un aperto $A$ contiene strett
 
 \subsection{Derivate e differenziali di ordine superiore}
 
+Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto. Se, fissata la direzione $\vec{v} \in \mathbb{R}^n$, esiste $D_{\vec{v}}f$ in un intorno $U(\vec{x})$ di $\vec{x} \in A$, è definita la funzione
+	\begin{equation*}
+	D_{\vec{v}}f \colon U(\vec{x}) \to \mathbb{R}.
+	\end{equation*}
+Se $\vec{w} \in \mathbb{R}^n$ è un altro versore, è lecito chiedersi se esista $D_{\vec{w}} D_{\vec{v}} f(\vec{x})$, cioè la derivata seconda di $f$ lungo le direzioni $\vec{v}$ e $\vec{w}$ (nell'ordine), che si indica con $D_{\vec{w}\vec{v}}^2f(\vec{x})$. 
+
+Nel caso in cui $\vec{v} = \vec{e}_j$ e $\vec{w} = \vec{e}_k$ si ha la derivata parziale seconda rispetto a $x_j$ e $x_k$, indicata con uno dei seguenti simboli:
+	\begin{equation*}
+	\frac{\partial^2 f}{\partial x_k x_j}(\vec{x}), \quad f_{x_k x_j}(\vec{x}), \quad D_{x_k x_j}f(\vec{x}), \quad D_{kj}^2f(\vec{x}), \quad \partial_{x_kx_j}f(\vec{x}).
+	\end{equation*}
+Se $k\ne j$ le derivate si chiamano miste; se $k=j$ si chiamano pure e il primo simbolo si semplifica in 
+	\begin{equation*}
+	\frac{\partial^2 f}{\partial x_j^2}(\vec{x}).
+\end{equation*}
+
+In generale, non è vero che, per una funzione due volte derivabile lungo $\vec{v}$ e $\vec{w}$, $D^2_{\vec{w}\vec{v}}f = D^2_{\vec{v}\vec{w}}$; il prossimo teorema indica una condizione sufficiente per l'uguaglianza delle derivate miste. 
+
+	\begin{teor}[di Schwarz]
+	Se $f_{x_kx_j}$ e $f_{x_jx_k}$ esistono in un intorno di $\vec{x}$ e sono continue in $\vec{x}$ allora
+	\begin{equation*}
+	f_{x_kx_j}(\vec{x}) = f_{x_jx_k}(\vec{x}).
+\end{equation*}
+	\end{teor}
+
+\begin{oss}
+Il Teorema vale per le derivate direzionali seconde qualunque, non solo per le derivate seconde miste. Inoltre, si può dimostrare che se $f_{x_k}$, $f_{x_j}$, $f_{x_kx_j}$ esistono in un intorno di $\vec{x}$ e $f_{x_kx_j}$ è continua in $\vec{x}$, allora esiste anche $f_{x_jx_k}(\vec{x})$ ed è uguale a $f_{x_kx_j}(\vec{x})$.
+\end{oss}
+
+In maniera del tutto analoga, si possono considerare derivate di ordine superiore.
+
+Sia ora $f\colon \mathbb{R}^n \supseteq A \to \mathbb{R}$ differenziabile in $A$. Allora per ogni $\vec{x} \in A$ esistono le derivate parziali $f_{x_j}(\vec{x})$, $j = 1, \dots, n$; se queste derivate sono a loro volta differenziabili in $\vec{x}$ diremo che $f$ è due volte differenziabile in $\vec{x}$ e si chiama differenziale secondo di $f$ in $\vec{x}$ la forma quadratica nell'incremento $\vec{h} = (h_1, \dots, h_n)$ data da 
+	\begin{equation*}
+	d^2f(\vec{x}) \colon\! \vec{h} \mapsto \sum_{i,j = 1}^n f_{x_ix_j}(\vec{x})h_ih_j;
+	\end{equation*}
+in altri termini,
+	\begin{equation}
+	\label{eqn:diffsecondo}
+	d^2f(\vec{x}) \coloneqq \sum_{i,j=1}^n f_{x_ix_j}(\vec{x})dx_idx_j.
+	\end{equation}
+
+La matrice quadrata di ordine $n$ i cui elementi sono $f_{x_ix_j}(\vec{x})$ si chiama matrice hessiana di $f$ in $\vec{x}$ e si indica col simbolo $\mathbf{H}_f(\vec{x})$, cioè
+	\begin{equation*}
+	\mathbf{H}_f(\vec{x}) \coloneqq \begin{pmatrix} f_{x_1x_1}(\vec{x}) & f_{x_1x_2}(\vec{x}) & \dots & f_{x_1x_n}(\vec{x}) \\
+			f_{x_2x_1}(\vec{x}) & f_{x_2x2}(\vec{x}) & \dots & f_{x_2x_n}(\vec{x}) \\
+			\vdots & \vdots & \ddots & \vdots \\
+			f_{x_nx_1}(\vec{x}) & f_{x_nx_2}(\vec{x}) & \dots & f_{x_nx_n}(\vec{x}) 
+
+	\end{pmatrix}.
+	\end{equation*}
 
 
 
