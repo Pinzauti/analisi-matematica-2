@@ -264,12 +264,29 @@ La matrice quadrata di ordine $n$ i cui elementi sono $f_{x_ix_j}(\vec{x})$ si c
 			f_{x_2x_1}(\vec{x}) & f_{x_2x2}(\vec{x}) & \dots & f_{x_2x_n}(\vec{x}) \\
 			\vdots & \vdots & \ddots & \vdots \\
 			f_{x_nx_1}(\vec{x}) & f_{x_nx_2}(\vec{x}) & \dots & f_{x_nx_n}(\vec{x}) 
-
 	\end{pmatrix}.
 	\end{equation*}
 
+Si può dunque scrivere 
+	\begin{equation*}
+	d^2f(\vec{x}) = (\mathbf{H}_f(\vec{x})d\vec{x}, d\vec{x}).\footnote{$\mathbf{H}_f(\vec{x})d\vec{x}$ indica il prodotto righe per colonne della matrice hessiana per il vettore $d\vec{x}$.}
+	\end{equation*}
 
+Se $f$ è due volte differenziabile in $\vec{x}$ esistono le derivate $D_{\vec{v}\vec{w}}^2f(\vec{x})$ per ogni coppia di versori $\vec{v}, \vec{w} \in \mathbb{R}^n$; inoltre vale la formula 
+	
+	\begin{equation}
+	D_{\vec{v}\vec{w}}^2f(\vec{x}) = \sum_{i,j=1}^nf_{x_ix_j}(\vec{x})v_iv_j = (\mathbf{H}_f(\vec{x})\vec{w}, \vec{v}).
+\end{equation}
 
+\begin{teor}
+Se $f$ è due volte differenziabile in $\vec{x}$, l'ordine di derivazione delle derivate miste è invertibile.
+\end{teor}
+
+Terminiamo il paragrafo menzionando un importante operatore differenziale, l'operatore di Laplace (o \emph{laplaciana}):
+	\begin{equation*}
+	\Delta \colon \! f \mapsto \Delta f \coloneqq \frac{\partial^2 f}{\partial x_1^2} + \frac{\partial^2 f}{\partial x_2^2} + \dots + \frac{\partial^2 f}{\partial x_n^2}.
+	\end{equation*}
+Le funzioni $f \in C^2(A)$ tali che $\Delta f = 0$ in $A$ si dicono armoniche.
 
 
 \end{document}
