@@ -641,6 +641,291 @@ Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F
 \end{teor}
 
 
+\chapter{Ottimizzazione di funzioni di più variabili}
+\section{Generalità sull'ottimizzazione, estremi liberi}
+\subsection{Generalità sull'ottimizzazione}
+Sia $f\colon \mathbb{R}^n \supseteq X \to \mathbb{R}$.
+\begin{defn}
+Un punto $\vec{x}_0 \in X$ si dice di \emph{massimo} (\emph{minimo}) \emph{locale} per $f$ se esiste un intorno $B_r(\vec{x}_0)$ tale che
+	\begin{equation}
+	\label{eqn:defestremi}
+	f(\vec{x}) \le f(\vec{x}_0) 	\quad (f(\vec{x}) \ge f(\vec{x}_0))
+	\end{equation}per ogni $\vec{x} \in X \cap B_r(\vec{x}_0)$. Si dice di massimo (minimo) \emph{globale} se la~\eqref{eqn:defestremi} vale per ogni $\vec{x} \in X$.
+\end{defn}
+
+Inoltre, un punto si dice di massimo (minimo) \emph{forte} se nella~\eqref{eqn:defestremi} la disuguaglianza vale in senso stretto.
+
+Se $X$ è aperto gli estremi di $f$ (se esistono) si dicono \emph{liberi} e la loro ricerca consiste nell'individuare i punti di estremo interni al dominio $X$.
+
+Se siamo interessati a studiare gli estremi di $f$ in una sua restrizione $f_{|U}$, ove $U \subset X$, si parla di \emph{estremi vincolati}. Studieremo i casi in cui $U$ è l'intersezione di $X$ con un insieme definito da un insieme di uguaglianze del tipo
+	\begin{equation*}
+	g_j(\vec{x}) = 0,
+	\end{equation*}
+per $j = 1, 2, \dots, m$ e con $m < n$. 
+
+\subsection{Estremi liberi: condizioni necessarie}
+Siano $f \colon \mathbb{R}^n \supseteq X \to \mathbb{R}$, con $X$ aperto, e $\vec{x_0}$ un punto di estremo locale per $f$.
+\begin{teor}
+Fissata una direzione $\vec{v}$ in $\mathbb{R}^n$, se $\vec{x_0}$ è punto di estremo locale per $f$ e $D_{\vec{v}}f(\vec{x_0})$ esiste allora $D_{\vec{v}}f(\vec{x}_0) = 0$.
+\end{teor}
+
+\begin{cor}
+Se $f$ è differenziabile in $\vec{x}_0$, punto di estremo locale per $f$, allora $\nabla f(\vec{x}_0) = \vec{0}$ (ogni derivata direzionale in $\vec{x}_0$ è nulla).
+\end{cor}
+
+Si noti che tale condizione è solo \emph{necessaria}: possono esistere punti critici che non siano di massimo né di minimo. In particolare, un punto critico $\vec{x_0}$ si dice di \emph{sella} (o di \emph{colle}) se in ogni intorno di $\vec{x_0}$ esistono punti in cui $f$ è maggiore di $f(\vec{x_0})$ e punti in cui $f$ è minore di $f(\vec{x_0})$.
+
+Si noti che per le funzioni convesse e concave non occorrono ulteriori analisi:
+\begin{prop}
+Se $\vec{x}_0$ è un punto critico per una funzione $f$ convessa (concava) e differenziabile, allora $\vec{x}_0$ è punto di minimo (massimo) globale. Se $f$ è strettamente convessa (concava) allora $\vec{x}_0$ è punto di minimo (massimo) unico e forte.
+\end{prop}
+
+\subsection{Forme quadratiche}
+\label{subsec:formequadratiche}
+Una \emph{forma quadratica} in $\mathbb{R}^n$ è un polinomio omogeneo di secondo grado del tipo
+	\begin{equation}
+	\label{eqn:formaquadratica}
+	q(\vec{h}) = q(h_1, h_2, \dots, h_n) = \sum_{i,j=1}^na_{ij}h_ih_j,
+	\end{equation}
+dove gli $a_{ij}$ sono i numeri reali coefficienti della forma quadratica. Si può sempre supporre che una forma quadratica sia simmetrica; se così non fosse, basta sostituire per ogni $i \ne j$ i coefficienti $a_{ij}$ e $a_{ji}$ con la loro semisomma
+	\begin{equation*}
+	\frac{a_{ij} + a_{ji}}{2}.
+	\end{equation*}
+	
+A ogni forma quadratica $q(\vec{h})$ risulta associata una matrice simmetrica $A = (a_{ij})_{i,j = 1, \dots, n}$ con una corrispondenza biunivoca; una forma quadratica può anche essere scritta come prodotto scalare, $q(\vec{h}) = (A\vec{h}, \vec{h})$, o in notazione matriciale, $q(\vec{h}) = \vec{h}^tA\vec{h}$.
+
+\begin{defn}
+Una forma quadratica $q(\vec{h})$, $\vec{h} \in \mathbb{R}^n$, si dice:
+	\begin{enumerate}
+	\item \emph{definita positiva} (\emph{negativa}) se $\forall \vec{h} \ne 0$, $q(\vec{h}) > 0$ $(q(\vec{h}) < 0)$;
+	\item \emph{semidefinita positiva} (\emph{negativa}) se $\forall \vec{h} \ne 0$, $q(\vec{h}) \ge 0$ $(q(\vec{h}) \le 0)$;
+	\item \emph{indefinita} se esistono $\vec{h}_1, \vec{h}_2 \in \mathbb{R}^n$ tali che $q(\vec{h}_1) > 0$, $q(\vec{h}_2) < 0$.
+	\end{enumerate}
+\end{defn}
+
+Indichiamo con $A_k$, $k = 1, \dots, n$, le $n$ sottomatrici composte dalle prime $k$ righe e $k$ colonne di $A$:
+\begin{equation*}
+A_1 = (a_{11}), \ A_2 = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}, \ A_3 = \begin{pmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{pmatrix}, \dots, \ A_n = A.
+\end{equation*}
+
+\begin{teor}
+Sia 
+	\begin{equation*}
+	q(\vec{h}) = \sum_{i,j = 1}^n a_{ij}h_ih_j,
+	\end{equation*}
+$\vec{h} \in \mathbb{R}^n$. Allora:
+	\begin{enumerate}
+	\item q è definita positiva se e solo se $\det{A_k} > 0$ per ogni $k = 1, 2, \dots, n$;
+	\item q è definita negativa se e solo se $(-1)^k\det{A_k} > 0$ per ogni $k = 1, 2, \dots, n$.
+	\end{enumerate}
+\end{teor}
+
+Il Teorema vale più in generale per ogni catena di \emph{sottomatrici principali} (cioè simmetriche rispetto alla diagonale principale di $A$) ottenute partendo da un elemento $a_{jj}$ della diagonale e aggiungendo ogni volta una riga e una colonna.
+
+\begin{teor}
+Sia 
+	\begin{equation*}
+	q(\vec{h}) = \sum_{i,j = 1}^na_{ij}h_ih_j,
+	\end{equation*}
+$\vec{h} \in \mathbb{R}^n$. Allora:
+	\begin{enumerate}
+	\item $q$ è semidefinita positiva se e solo se ogni sottomatrice principale ha determinante non negativo;
+	\item $q$ è semidefinita negativa se e solo se ogni sottomatrice principale di ordine $k$ ha determinante non negativo se $k$ è pari, non positivo se $k$ è dispari.
+	\end{enumerate}
+\end{teor}
+In ogni altro caso $q(\vec{h})$ è indefinita.
+
+\begin{teor}
+Sia $q(\vec{h}) = \vec{h}^tA\vec{h}$, $\vec{h} \in \mathbb{R}^n$. Allora:
+	\begin{enumerate}
+	\item $q$ è definita positiva (negativa) se e solo se tutti gli autovalori sono positivi (negativi);
+	\item $q$ è semidefinita positiva (negativa) se e solo se tutti gli autovalori sono non negativi (non positivi) e almeno uno di essi è zero;
+	\item $q$ è indefinita se e solo se esistono due autovalori di segno opposto.
+	\end{enumerate}
+\end{teor}
+
+Si conclude con la seguente
+\begin{oss}
+Se $q = q(\vec{h})$ è una forma quadratica in $\mathbb{R}^n$, allora $q(\vec{0}) = 0$ e $\nabla q(\vec{0}) = \vec{0}$; la natura di $\vec{h} = \vec{0}$ dipende dal segno di $q$.
+
+Se $q$ è definita positiva (negativa), $\vec{h} = \vec{0}$ è punto di minimo (massimo) globale forte.
+
+Se $q$ è indefinita, $\vec{0}$ è di sella.
+
+Se $q$ (non nulla) è semidefinita positiva (negativa), $\vec{0}$ è punto di minimo (massimo) globale debole.
+\end{oss}
+
+\subsection{Condizioni sufficienti per estremi liberi}
+La matrice corrispondente a $d^2f(\vec{x}_0)$ è l'hessiana di $f$ in $\vec{x}_0$, ossia
+	\begin{equation*}
+	\mathbf{H}_f(\vec{x}_0) = (f_{x_ix_j}(\vec{x}_0))_{i,j = 1, \dots, n},
+	\end{equation*}
+che risulta simmetrica se $f_{x_ix_j}(\vec{x}_0) = f_{x_jx_i}(\vec{x}_0)$ per ogni $i,j = 1, 2, \dots, n$ (accade, per esempio, se $f \in C^2$).
+
+\begin{teor}
+Siano $f \in C^2(X)$ e $\vec{x}_0$ punto critico per $f$. Se $d^2f(\vec{x}_0)$ è:
+	\begin{enumerate}
+	\item definita positiva (negativa), $\vec{x}_0$ è punto di minimo (massimo) locale forte;
+	\item indefinita, $\vec{x}_0$ è punto di sella.
+	\end{enumerate}
+\end{teor}
+
+\begin{prop}
+Sia $f \in C^2(X)$. Se $\vec{x}_0$ è punto di massimo (minimo), allora $d^2f(\vec{x}_0)$ è definita o semidefinita negativa (positiva). In particolare, $f_{x_jx_i} \le 0$ $(\ge 0)$ per ogni $i,j = 1, 2, \dots, n$.
+\end{prop}
+
+Una formulazione equivalente della Proposizione è la seguente: se $d^2f(\vec{x}_0)$ non è nulla ed è semidefinita positiva (negativa), allora $\vec{x}_0$ non può essere punto di massimo (minimo).
+
+\begin{oss} Dalle considerazioni precedenti, si arriva alla seguente regola nel caso bidimensionale.
+
+Siano $f \in C^2(X)$, $X$ aperto di $\mathbb{R}^2$ e $(x_0, y_0)$ punto critico per $f$. L'hessiana di $f$ in $(x_0, y_0)$ è
+	\begin{equation*}
+	\mathbf{H}_f(x_0, y_0) = \begin{pmatrix} f_{xx}(x_0, y_0) & f_{yx}(x_0, y_0) \\ f_{xy}(x_0, y_0) & f_{yy}(x_0, y_0) \end{pmatrix};
+	\end{equation*}
+\begin{enumerate}
+\item se $\det{\mathbf{H}_f(x_0, y_0)} > 0$\footnote{Si noti che in questo caso $f_{xx}(x_0, y_0)$ e $f_{yy}(x_0, y_0)$ hanno lo stesso segno.} e 
+	\begin{itemize}
+	\item $f_{xx}(x_0, y_0) > 0$, allora $(x_0, y_0)$ è punto di minimo locale forte;
+	\item $f_{xx}(x_0, y_0) < 0$, allora $(x_0, y_0)$ è punto di massimo locale forte;
+	\end{itemize}
+\item se $\det{\mathbf{H}_f(x_0, y_0)} < 0$, allora $(x_0, y_0)$ è punto di sella;
+\item se $\det{\mathbf{H}_f(x_0, y_0)} = 0$ occorre uno studio più approfondito.
+\end{enumerate}
+Inoltre, se $\det{\mathbf{H}_f(x, y)} > 0$ per ogni $(x, y) \in X$ l'estremo è globale. Infine, se $\det{\mathbf{H}_f(x, y)} = 0$ e $f_{xx}(x,y) > 0$ ($< 0$) oppure $f_{yy}(x,y) > 0$ ($< 0$) in tutto $X$, allora $(x_0, y_0)$ è punto di minimo globale (massimo globale).
+\end{oss}
+
+\section{Estremi vincolati, vincoli di uguaglianza}
+\subsection{Funzioni di due variabili}
+Esaminiamo innanzitutto il caso più semplice.
+
+Date due funzioni di due variabili $f$ e $g$ di classe $C^1(X)$, $X$ aperto di $\mathbb{R}^2$, si vogliono determinare gli estremi di $f$ (\emph{funzione obiettivo}) ristretta all'insieme (\emph{vincolo})
+	\begin{equation*}
+	E_0 = \{ (x, y) \in \mathbb{R}^2 \colon g(x, y) = 0 \}.
+	\end{equation*}
+	
+La situazione più favorevole è quella in cui dall'equazione $g(x, y) = 0$ si può esplicitare $y = y(x)$ o $x = x(y)$ oppure, più in generale, quella in cui $E_0$ coincide con una curva $\gamma$ di equazioni parametriche $x = x(t)$ e $y = y(t)$, $t \in I$, con $I$ intervallo contenuto in $\mathbb{R}$.
+
+Il problema si riconduce alla ricerca degli estremi della funzione reale di variabile reale
+	\begin{equation*}
+	\phi (t) = f(x(t), y(t)),
+	\end{equation*}
+con $t \in I$.
+
+\begin{exmp}
+Si determinino gli estremi di $f(x, y) = x^2 + 3y$, con il vincolo
+	\begin{equation*}
+	g(x,y) = \frac{x^2}{4} + \frac{y^2}{9} - 1 = 0.
+	\end{equation*}
+Si nota facilmente che $E_0$ è un'ellisse che ha per equazioni parametriche $x(t) = 2 \cos{t}$, $y(t) = 3\sin{t}$, $t \in [0, 2 \pi]$, e pertanto basta determinare gli estremi di
+	\begin{equation*}
+	\phi(t) = 4(\cos{t})^2 + 9\sin{t}
+	\end{equation*} 
+nell'intervallo $[0, 2\pi]$. Con gli strumenti classici dell'analisi differenziale, si trova facilmente che $t= \pi/2$ è un punto di massimo locale e $t = 3\pi/2$ un punto di minimo locale (e $9$ e $-9$ sono rispettivamente massimo e minimo globali).
+\end{exmp}
+
+In generale, non si potrà ridurre a una dimensione il problema; vediamo dunque come procedere.
+
+Introduciamo innanzitutto il concetto di \emph{punto critico} (o \emph{stazionario}) \emph{vincolato}. Sia $(x_0, y_0)$ un punto \emph{regolare} di $E_0$, cioè
+	\begin{equation*}
+	g(x_0, y_0) = 0, \ \nabla g(x_0, y0) \ne \vec{0}.
+	\end{equation*}
+In tal caso, in un intorno di $(x_0, y_0)$ $E_0$ coincide con una curva $\gamma$ di equazioni parametriche $x = x(t)$ e $y = y(t)$; si può inoltre scegliere il parametro in modo che $t$ vari in un intorno $I_0$ di $t = 0$ e che $x(0) = x_0$, $y(0) = y_0$.
+
+Dunque, il vettore $(x'(0), y'(0))$ è tangente al vincolo nel punto $(x_0, y_0)$. Si può allora considerare la funzione $\phi(t) = f(x(t), y(t))$ e definire $(x_0, y_0)$ \emph{punto critico vincolato} se $t = 0$ è \emph{punto critico} per $\phi$, ovvero se $\phi'(0) = 0$.
+
+Essendo $f$ differenziabile, si ha
+	\begin{equation*}
+	\phi'(t) = f_x(x(t), y(t))x'(t) + f_y(x(t), y(t)) y'(t)
+	\end{equation*}
+e imponendo $\phi'(0) = 0$ si ha
+	\begin{equation}
+	\label{eqn:ptocritvinc}
+	f_x(x_0, y_0)x'(0) + f_y(x_0, y_0)y'(0) = 0.
+	\end{equation}
+In altre parole, la derivata di $f$ in direzione tangente al vincolo in $(x_0, y_0)$ è nulla.
+	
+\begin{defn}
+Siano $f, g \in C^1(X)$, $X$ aperto di $\mathbb{R}^2$. Un punto $(x_0, y_0) \in X$ si dice \emph{critico} o \emph{stazionario} condizionato al vincolo $g(x, y) = 0$ se:
+	\begin{enumerate}
+	\item $g(x_0, y_0) = 0$ e $\nabla g(x_0, y_0) \ne \vec{0}$, cioè $(x_0, y_0)$ è un punto regolare per $E_0$;
+	\item la derivata di $f$ in direzione tangente al vincolo si annulla in $(x_0, y_0)$, cioè vale la~\eqref{eqn:ptocritvinc}.
+	\end{enumerate} 
+\end{defn}
+
+\begin{teor}[Caratterizzazione dei punti critici vincolati]
+\label{teor:carcritvinc}
+Siano $f, g \in C^1(X)$, $X$ aperto di $\mathbb{R}^2$ e sia $(x_0, y_0)$ un punto regolare per $E_0 = \{ (x,y) \in \mathbb{R}^2 \colon g(x,y) = 0\}$. Allora $(x_0, y_0)$ è punto critico vincolato a $E_0$ se e solo se esiste un numero reale $\lambda_0$ tale che
+	\begin{equation}
+	\label{eqn:carcritvinc}
+	\nabla f(x_0, y_0) = \lambda_0 \nabla g(x_0, y_0).
+	\end{equation}
+\end{teor}
+
+\begin{teor}[Condizione necessaria per gli estremi vincolati]
+Nelle ipotesi del precedente Teorema, se $(x_0, y_0)$ è un punto di estremo vincolato (con vincolo $g(x, y) = 0)$, allora è punto critico vincolato. In particolare, esiste $\lambda_0$ tale che valda la~\eqref{eqn:carcritvinc}.
+\end{teor}
+
+\begin{oss}
+Il numero $\lambda_0$ la cui esistenza è asserita nel Teorema \ref{teor:carcritvinc} prende il nome di \emph{moltiplicatore di Lagrange}. 
+
+Introducendo la funzione $\mathcal{L} = \mathcal{L}(x, y, \lambda)$, detta \emph{lagrangiana}, definita da
+	\begin{equation*}
+	\mathcal{L}(x, y, \lambda) \coloneqq f(x,y) - \lambda g(x,y),
+	\end{equation*}
+il Teorema \ref{teor:carcritvinc} afferma che $(x_0, y_0)$ è punto di critico vincolato se e solo se esiste $\lambda_0$ tale che il punto $(x_0, y_0, \lambda_0)$ sia punto critico libero per $\mathcal{L}$. Infatti, i punti critici di $\mathcal{L}$ sono soluzioni del sistema
+	\begin{equation}
+	\label{eqn:moltiplicatorilagrange}
+	\begin{dcases}
+	\mathcal{L}_x = f_x - \lambda g_x = 0 \\
+	\mathcal{L}_y = f_y - \lambda g_y = 0 \\
+	\mathcal{L}_{\lambda} = -g = 0.
+	\end{dcases}
+	\end{equation}
+Si noti che le prime due equazioni coincidono con la~\eqref{eqn:carcritvinc}, mentre la terza esprime la condizione del vincolo.
+\end{oss}
+
+Abbiamo dunque sviluppato il seguente modo di procedere, detto \emph{metodo dei moltiplicatori di Lagrange}:
+\begin{enumerate}
+	\item si isolano gli eventuali punti non regolari di $E_0$, che vanno esaminati a parte;
+	\item si cercano i punti critici vincolati di $f$ o equivalentemente quelli liberi della lagrangiana, cioè le soluzioni del sistema~\eqref{eqn:moltiplicatorilagrange};
+	\item si determina la natura dei punti critici (si veda il prossimo paragrafo). 
+\end{enumerate}
+
+\subsection{Studio della natura dei punti critici vincolati}
+Ci limiteremo al caso di un solo vincolo ($m = 1$).
+
+Per lo studio della natura dei punti critici vincolati procederemo come nel caso dei punti critici liberi, studiando il differenziale secondo (rispetto a $\vec{x}$) della lagrangiana ristretto a incrementi tangenziali ai vincoli.
+
+Sia $\vec{x}_0 \in \mathbb{R}^n$ un punto critico per $f$ condizionato al vincolo $g(\vec{x}) = 0$ e sia $\lambda_0$ il corrispondente moltiplicatore di Lagrange. 
+
+Vale il seguente
+\begin{teor}
+Siano $f, g \colon X \to \mathbb{R}$, $X$ aperto di $\mathbb{R}^n$, di classe $C^2$. 
+
+Se la forma quadratica
+	\begin{equation}
+	\label{eqn:naturacritvinc}
+	\sum_{i,j=1}^n\bigl(f_{x_ix_j}(\vec{x}_0) - \lambda_0 g_{x_ix_j}(\vec{x}_0) \bigr) h_ih_j = \bigl( (\mathbf{H}_f(\vec{x}_0) - \lambda_0\mathbf{H}_g(\vec{x}_0))\vec{h}, \vec{h}\bigr),
+	\end{equation}
+ristretta all'insieme dei vettori $\vec{h} \in \mathbb{R}^n$ tangenziali al vincolo in $\vec{x}_0$ (cioè $(\nabla g(\vec{x_0}), \vec{h}) = 0$), è definita positiva (negativa), allora $\vec{x}_0$ è punto di massimo (minimo) locale forte vincolato.
+\end{teor}
+
+Può essere utile il seguente criterio di riconoscimento del segno di una forma quadratica soggetta a un vincolo lineare.
+
+\begin{lem}
+Sia $q(\vec{h}) = (A\vec{h}, \vec{h})$ una forma quadratica in $\mathbb{R}^n$ e sia $\vec{b} \in \mathbb{R}^n$, $\vec{b} = (b_1, b_2, \dots, b_n)$, $b_1 \ne 0$. Allora la forma quadratica $q(\vec{h})$ soggetta al vincolo lineare $(\vec{b}, \vec{h}) = 0$ è definita positiva se sono negativi tutti i minori principali di ``nord-ovest''\footnote{Sono chiamati così i determinanti delle sottomatrici principali di nord-ovest, quelle che nella sottosezione \ref{subsec:formequadratiche} abbiamo indicato con $A_k$.}, di ordine maggiore di 2, della matrice
+	\begin{equation}
+	\begin{pmatrix}
+	0 & b_1 & \dots & b_n  \\
+	b_1 \\
+	\vdots &  &A \\
+	b_n 
+	\end{pmatrix}.
+	\end{equation}
+È definita negativa se i suddetti minori si susseguono a segni alterni a partire dal primo (di ordine 3) positivo.
+\end{lem}
+
+Nel nostro caso, il lemma si applica con $A = \mathbf{H}_f(\vec{x}_0) - \lambda_0 \mathbf{H}_g(\vec{x}_0)$ e $\vec{b} = \nabla g(\vec{x}_0)$; poiché $\nabla g(\vec{x}_0) \ne \vec{0}$, si può supporre sempre che $D_{x_1}g(\vec{x}_0) \ne 0$.
 
 
 
