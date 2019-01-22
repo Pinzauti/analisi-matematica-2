@@ -28,6 +28,7 @@
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\arctg}{arctg}
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\rot}{rot}
 
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \numberwithin{equation}{section}
@@ -61,7 +62,7 @@
 \theoremstyle{definition}
 \newtheorem{defn}{Definizione}[section]
 \newtheorem{prop}{Proposizione}[section]
-\newtheorem{lem}{Lemma}[teor]
+\newtheorem{lem}{Lemma}[section]
 
 \theoremstyle{remark}
 \newtheorem{oss}{Osservazione}[section]
@@ -287,6 +288,381 @@ Terminiamo il paragrafo menzionando un importante operatore differenziale, l'ope
 	\Delta \colon \! f \mapsto \Delta f \coloneqq \frac{\partial^2 f}{\partial x_1^2} + \frac{\partial^2 f}{\partial x_2^2} + \dots + \frac{\partial^2 f}{\partial x_n^2}.
 	\end{equation*}
 Le funzioni $f \in C^2(A)$ tali che $\Delta f = 0$ in $A$ si dicono armoniche.
+
+
+
+
+
+
+
+
+
+\chapter{Curve e integrali curvilinei}
+
+\section{Curve in $\mathbb{R}^3$}
+\subsection{Definizioni principali}
+Sia $\gamma$ un sottoinsieme di $\mathbb{R}^3$ ed esista una funzione continua $\vec{r}\colon \!I \to \mathbb{R}^3$, dove $I \subseteq \mathbb{R}$ è un intervallo, di cui $\gamma$ è l'immagine; diremo che $\vec{r}$ è una parametrizzazione di $\gamma$.\footnote{È evidente che uno stesso insieme $\gamma$ può avere diverse parametrizzazioni.}
+
+\begin{defn}
+Si dice curva in $\mathbb{R}^3$ un insieme $\gamma \subseteq \mathbb{R}^3$ (detto sostegno della curva) con una sua parametrizzazione $\vec{r}(t)$, $t \in I \subseteq \mathbb{R}$.
+\end{defn}
+
+Più esplicitamente, una parametrizzazione è assegnata mediante l'equazione
+	\begin{equation*}
+	\vec{r}(t) = (x(t), y(t), z(t)),
+	\end{equation*}
+oppure, in forma vettoriale,
+	\begin{equation*}
+	\vec{r}(t) = x(t)\vec{i} + y(t)\vec{j} + z(t)\vec{k},
+	\end{equation*}
+con $t \in I$.
+
+Se $I = [a, b]$ e $\vec{r}(a) = \vec{r}(b)$ la curva si dice \emph{chiusa}; se $\vec{r}(t_1) \ne \vec{r}(t_2)$ per ogni $t_1, t_2 \in I$ con almeno uno fra $t_1$ e $t_2$ interni a $I$ la curva si dice \emph{semplice} (cioè una curva semplice non chiusa non ha autointersezioni). Se il sostegno $\gamma$ di una curva è contenuto in un piano la curva si dice \emph{piana}; si può assegnare una curva piana mediante una funzione continua $\vec{r} \colon \! I \to \mathbb{R}^2$.
+
+Le curve piane, semplici e chiuse si chiamano \emph{curve di Jordan}; un importante teorema afferma che il sostegno di una curva di Jordan è frontiera di due aperti nel piano, uno limitato (\emph{interno} della curva) e uno illimitato (\emph{esterno} della curva).
+
+Si noti che, dato che $t \in I \subseteq \mathbb{R}$, essendo $\mathbb{R}$ orientato è automaticamente assegnato su $\gamma$ un verso di percorrenza, ovvero un'orientazione della curva.
+
+\begin{exmp}
+Sia $f \colon I \to \mathbb{R}$ una funzione reale di variabile reale, continua. Il suo grafico definisce una curva piana semplice di equazione $\vec{r}(t) = (t, f(t))$, detta \emph{curva cartesiana}.
+\end{exmp}
+
+\begin{exmp}
+L'equazione $g(x, y) = 0$, con $g$ di classe $C^1$, definisce in un intorno di ogni punto $(x_0, y_0)$ non singolare per $g$ (in cui cioè $\nabla g \ne \vec{0}$) una curva piana. Infatti, per il teorema di Dini, se $g_x(x_0, y_0) \ne 0$ ($g_y(x_0, y_0) \ne 0$), l'equazione $g(x, y) = 0$ definisce implicitamente una funzione $x = f(y)$ ($y = f(x)$) in un intorno di $y_0$ ($x_0$).
+\end{exmp}
+
+\begin{exmp}
+L'equazione $\rho = f(\theta)$, $\theta \in [\theta_0, \theta_1]$, dove $\rho$ e $\theta$ sono coordinate polari nel piano ed $f$ è continua, definisce una curva piana (in generale non semplice) mediante le equazioni parametriche
+	\begin{equation*}
+	x(\theta) = f(\theta)\cos\theta, \quad y(\theta) = f(\theta)\sin(\theta).
+	\end{equation*}
+\end{exmp}
+
+\subsection{Curve regolari}
+\begin{defn}
+Una curva $\gamma$ di equazione $\vec{r} = \vec{r}(t)$ si dice regolare se $\vec{r} \in C^1(I)$ e se $\vec{r}'(t) \ne \vec{0}$ per ogni $t \in \overset{\circ}{I}$. Si dice regolare a tratti se $I$ si può suddividere nell'unione di un numero finito di intervalli su ciascuno dei quali $\gamma$ è regolare.
+\end{defn}
+
+Per una curva regolare è ben definito e diverso da $\vec{0}$ il vettore tangente
+	\begin{equation*}
+	\vec{r}'(t) = x'(t)\vec{i} + y'(t)\vec{j} + z'(t)\vec{k}.
+	\end{equation*}
+La retta di equazioni parametriche
+	\begin{equation*}
+		\begin{split}
+		\xi &= x(t_0) + \alpha x'(t_0) \\
+		\eta &= y(t_0) + \alpha y'(t_0) \\
+		\zeta &= z(t_0) + \alpha z'(t_0)
+		\end{split}
+		\quad \alpha \in \mathbb{R}
+	\end{equation*}
+o di equazione vettoriale
+	\begin{equation*}
+	\vec{\xi}(\alpha) = \vec{r}(t_0) + \alpha \vec{r}'(t_0)
+	\end{equation*}
+si chiama retta tangente alla curva nel punto $\vec{r}(t_0)$; per una curva piana cartesiana definita dalla funzione $y = f(x)$ le equazioni parametriche della retta tangente in un punto $(x_0, f(x_0))$ si riducono a 
+	\begin{equation*}
+		\begin{split}
+		x &= x_0 + \alpha \\
+		y &= f(x_0) + \alpha f'(x_0).
+		\end{split}
+	\end{equation*}
+
+Dal punto di vista cinematico, $\vec{r}'(t)$ rappresenta il vettore velocità, indicato anche con $\vec{v}(t)$. La velocità scalare $v(t)$ è definita come
+	\begin{equation*}
+	v(t) \coloneqq \norma{\vec{r}'(t)} = \sqrt{x'(t)^2 + y'(t)^2 + z'(t)^2}.
+	\end{equation*}
+Se la curva è regolare, $v(t) \ne 0$ per ogni $t \in I$. Risulta quindi ben definito il versore
+	\begin{equation*}
+	\vec{T}(t) \coloneqq \frac{\vec{r}'(t)}{\norma{\vec{r}'(t)}} = \frac{\vec{v}(t)}{v(t)},
+	\end{equation*}
+detto versore tangente. 
+
+\begin{exmp}
+Se $f \colon I \to \mathbb{R}$ è di classe $C^1$, la curva di equazione $\vec{r}(t) = t\vec{i} + f(t)\vec{j}$ è piana e regolare. Si ha:
+	\begin{equation*}
+	\vec{r}'(t) = \vec{i} + f'(t)\vec{j}, \quad v(t) = \sqrt{1 + f'(t)^2}.
+	\end{equation*}
+\end{exmp}
+
+\begin{exmp}
+La curva di equazione polare $\rho = f(\theta)$, $\theta \in [\theta_0, \theta_1]$ è regolare se $f$ è di classe $C^1$ e $f'(\theta)^2 + f(\theta)^2 \ne 0$ per ogni $\theta$.
+\end{exmp}
+
+\subsection{Curve equivalenti}
+Siano $(\gamma, \vec{r})$, $\vec{r} \colon \! I \to \mathbb{R}^3$ una curva regolare e $\phi \colon I_1 \to I$, con $I_1$ intervallo di $\mathbb{R}$, una funzione di classe $C^1(I_1)$ tale che $\phi'(\alpha) \ne 0$ per ogni $\alpha \in I_1$ e che realizzi una corrispondenza biunivoca tra $I_1$ e $I$. La funzione composta
+	\begin{equation*}
+	\vec{r}_1(\alpha) = \vec{r} \circ \phi(\alpha) \colon \! I_1 \to \mathbb{R}^3
+	\end{equation*}
+è una nuova parametrizzazione di $\gamma$.
+
+Poiché $\vec{r}_1'(\alpha) = \vec{r}'(\phi(\alpha))\,\phi'(\alpha)$, la coppia $(\gamma, \vec{r}_1)$ è ancora una curva regolare. 
+
+Passando da $\vec{r}$ a $\vec{r}_1 = \vec{r} \circ \phi$, l'orientazione non muta se $\phi'(\alpha) > 0$ per ogni $\alpha \in I_1$, è opposta se $\phi'(\alpha) < 0$; due curve si dicono \emph{equivalenti} se possono essere ottenute l'una dall'altra con un cambio di parametro che non muti l'orientazione. 
+
+\subsection{Curve rettificabili, lunghezza di una curva}
+
+Sia $\gamma$ una curva di equazione $\vec{r} \colon \! [a, b] \to \mathbb{R}^3$.
+
+Fissiamo una suddivisione $\mathcal{D} = \{t_0 = a, t_!, \dots, t_{n-1}, t_n = b\}$ di $[a, b]$ e poniamo, per $j = 0, \dots, n$, $\vec{r}(t_j) = \vec{p}_j$; tali punti individuano una poligonale inscritta nella curva. La lunghezza della poligonale è:
+	\begin{equation*}
+	l(\Gamma_{\mathcal{D}}) = \sum_{j= 0}^{n-1} \norma{\vec{p}_{j+1} - \vec{p}_j} = \sum_{j=0}^{n-1}\norma{\vec{r}(t_{j+1})-\vec{r}(t_j)}.
+	\end{equation*}
+Sia ora $L \coloneqq \sup l(\Gamma_{\mathcal{D}})$, dove l'estremo superiore è cercato al variare di tutte le possibili suddivisioni di $[a, b]$.
+
+\begin{defn}
+Se $L < +\infty$ si dice che la curva $(\gamma, \vec{r})$ è rettificabile e che $L$ è la sua lunghezza, indicata con $l(\gamma, \vec{r})$.
+\end{defn}
+
+\begin{teor}
+Se $\gamma$ è una curva regolare di equazione $\vec{r} \colon \![a, b] \to \mathbb{R}^3$, allora è rettificabile e vale la formula
+	\begin{equation}
+	\label{eqn:lunghezza}
+	L = l(\gamma, \vec{r}) = \int_a^b \norma{\vec{r}'(t)}\, dt.
+	\end{equation}
+\end{teor}
+
+\begin{exmp}
+Per le curve piane che sono grafico di una funzione $y = f(x)$, $x \in [a, b]$ la~\eqref{eqn:lunghezza} diventa
+	\begin{equation}
+	L = \int_a^b \sqrt{1 + f'(t)^2} \, dt.
+	\end{equation}
+\end{exmp}
+
+\begin{exmp}
+Per una curva piana regolare di equazione polare $\rho = f(\theta)$, $\theta \in [\theta_1, \theta_2]$ la lunghezza si trova con la formula
+	\begin{equation}
+	L = \int_{\theta_1}^{\theta_2} \sqrt{f'(\theta)^2 + f(\theta)^2}\, dt.
+	\end{equation}
+\end{exmp}
+
+È importante notare che la lunghezza è invariante per cambi di parametrizzazione; in particolare, è identica per curve equivalenti e non dipende dall'orientazione. 
+
+\begin{prop}
+Se le curve $\gamma_j$ per $j = 1, \dots, N$ sono rettificabili, anche $\gamma = \gamma_1 \cup \gamma_2 \cup \dots \cup \gamma_N$ è rettificabile e, se $\vec{r}$ è la parametrizzazione di $\gamma$,
+	\begin{equation}
+	l(\gamma, \vec{r}) = \sum_{j=1}^N l(\gamma_j, \vec{r}_j).
+	\end{equation}
+\end{prop}
+
+\subsection{Ascissa curvilinea}
+
+Sia $\vec{r} \colon \! [a, b] \to \mathbb{R}^3$ la parametrizzazione di una curva $\gamma$ regolare con lunghezza $L$. Per ogni $t \in [a, b]$ è definita la funzione 
+	\begin{equation*}
+	s(t) = \int_a^t v(u)\, du
+	\end{equation*}
+che rappresenta cinematicamente lo spazio percorso al tempo $t$ partendo da $\vec{r}(a)$.
+
+Per il teorema fondamentale del calcolo integrale, essendo $v$ continua in $[a, b]$, $s$ è derivabile e $s'(t) = v(t)$; poiché $v(t) \ne 0$ per ogni $t \in [a, b]$, $s$ risulta una funzione strettamente crescente e realizza una corrispondenza biunivoca tra $[a, b]$ e $[0, L]$. Anche la funzione inversa $t = t(s)$ è strettamente crescente e derivabile con derivata
+	\begin{equation*}
+	\frac{dt}{ds} = \frac{1}{v(t)}
+	\end{equation*}	
+continua in $[0, L]$. 
+
+Segue che le curve di equazione $\vec{r} = \vec{r}(t)$ e $\vec{r_1} = \vec{r}(t(s))$ sono equivalenti; il parametro $s$ si chiama ascissa curvilinea (o lunghezza d'arco) e individua un sistema di coordinate ``intrinseco'' alla curva.
+
+\section{Integrali curvilinei}
+\subsection{Integrali curvilinei di prima specie}
+
+Siano $f \colon \mathbb{R}^3 \supseteq E \to \mathbb{R}$, con $E$ aperto connesso, una funzione scalare e $\gamma \subset E$ una curva regolare a tratti di equazione $\vec{r} = \vec{r}(t)$, $t \in [a, b]$.
+
+	\begin{defn}
+	L'integrale di $f$ rispetto alla lunghezza d'arco lungo $\gamma$ è definito dalla formula
+		\begin{equation}
+		\label{eqn:intcurv1}
+		\int_{\gamma}f\, ds \coloneqq \int_a^b f \circ \vec{r}(t)s'(t)\, dt
+		\end{equation}
+	quando $f \circ \vec{r}(t)s'(t)$ è integrabile in $[a, b]$.
+	\end{defn}
+
+Più esplicitamente, se $\vec{r}(t) = (x(t), y(t), z(t))$:
+	\begin{equation*}
+	\int_{\gamma} f \, ds = \int_a^b f(x(t), y(t), z(t)) \sqrt{x'(t)^2 + y'(t)^2 + z'(t)^2} \, dt.
+	\end{equation*}
+
+L'integrale~\eqref{eqn:intcurv1} è utile nel calcolo di baricentri e momenti d'inerzia (rispetto a un asse) di fili composti da materiali di cui si conosca la densità lineare di massa $\delta = \delta(x, y, z)$. 
+
+Se il filo coincide con una curva $\gamma$ regolare a tratti di equazione $\vec{r} \colon\! [a, b] \to \mathbb{R}^3$, allora
+	\begin{equation*}
+	\int_{\gamma} \delta \, ds = m,
+	\end{equation*}
+ove $m$ è la massa totale del filo. Le coordinate del baricentro sono date dalle formule:
+	\begin{equation}
+	x_b = \frac{1}{m} \int_{\gamma}x\delta \, ds, \quad y_b = \frac{1}{m} \int_{\gamma} y\delta \, ds, \quad z_b = \frac{1}{m} \int_{\gamma} z\delta \, ds.
+	\end{equation}
+Il momento d'inerzia del filo rispetto a un asse è dato dalla formula
+	\begin{equation}
+	I = \int_{\gamma} d^2 \delta \, ds,
+	\end{equation}
+ove $d = d(x, y, z)$ indica la distanza del punto di coordinate $(x, y, z)$ dall'asse.
+
+\subsection{Forme differenziali lineari, integrali curvilinei di seconda specie}
+ Sia $\vec{F}(x, y, z) = F_1(x, y, z,)\vec{i} + F_2(x, y, z)\vec{j} + F_3(x, y, z)\vec{k}$ un campo vettoriale di classe $C^1(E)$, con $E$ aperto connesso di $\mathbb{R}^3$. Associamo a $\vec{F}$ l'espressione formale
+ 	\begin{equation}
+ 	\omega = F_1 dx + F_2dy + F_3dz,
+ 	\end{equation}
+detta \emph{forma differenziale lineare} con coefficienti $F_1, F_2, F_3$.
+
+Se pensiamo al vettore $d\vec{r} = dx\vec{i} + dy\vec{j} + dz\vec{k}$ come a un vettore ``spostamento infinitesimo'', $\omega = (\vec{F}, d\vec{r})$ rappresenta il lavoro effettuato da $\vec{F}$ in relazione a tale spostamento.
+
+\begin{defn}
+L'integrale curvilineo di $\omega$ lungo $\gamma$ è definito dalla formula
+	\begin{equation}
+	\begin{split}
+	\label{eqn:intcurv2}
+	\int_{\gamma}\omega \coloneqq &\int_a^b(F_1(x(t), y(t), z(t))x'(t) + F_2(x(t), y(t), z(t))y'(t)+  \\
+	&+ F_3(x(t), y(t), z(t))z'(t))\, dt.
+	\end{split}
+	\end{equation}
+\end{defn}
+
+Introducendo il vettore posizione $\vec{r}(t) = x(t)\vec{i} + y(t)\vec{j} + z(t)\vec{k}$ si ha
+	\begin{equation*}
+	\int_{\gamma} \omega = \int_a^b (\vec{F}, \vec{r}') \, dt
+	\end{equation*}
+e, moltiplicando e dividendo per $s'(t) = \norma{\vec{r}'(t)}$,
+	\begin{equation}
+	\int_{\gamma} \omega = \int_{\gamma} (\vec{F}, \vec{T})\, ds,
+	\end{equation}
+dove
+	\begin{equation*}
+	\vec{T} = \frac{\vec{r}'}{\norma{\vec{r}'}}.
+	\end{equation*}
+	
+\begin{defn}
+Se, data una forma differenziale $\omega$ di classe $C^1(E)$, esiste una funzione $U \colon \! E \to \mathbb{R}$ di classe $C^2(E)$ tale che $dU = \omega$ in $E$, allora $\omega$ si dice esatta e $U$ si chiama funzione potenziale. 
+\end{defn}
+
+Più esplicitamente, $dU = \omega$ significa che
+	\begin{equation}
+\label{eqn:potenziale}
+	\frac{\partial U}{\partial x} = F_1, \quad \frac{\partial U}{\partial y} = F_2, \quad \frac{\partial U}{\partial z} = F_3,
+	\end{equation}
+o più sinteticamente $\nabla U = \vec{F}$ in $E$. Se $U$ è una funzione potenziale per $\omega$ in $E$ lo è anche $U+c$, $c \in \mathbb{R}$. Essendo $E$ connesso, tutte le possibili funzioni potenziale per $\omega$ hanno questa forma.
+
+\begin{lem}
+Sia $\omega$ esatta in $E$ con funzione potenziale $U$. Sia $\gamma$ una curva regolare, contenuta in $E$, di equazione $\vec{r} = \vec{r}(t)$, $t \in [a, b]$. Allora
+	\begin{equation}
+	\int_{\gamma}\omega = U(\vec{r}(b) - \vec{r}(a)).
+	\end{equation}
+\end{lem}
+
+Se $\omega$ è esatta il campo associato è uguale, per la~\eqref{eqn:potenziale}, al gradiente di un potenziale. In tal caso il campo vettoriale si dice \emph{conservativo}. 
+
+\begin{teor}
+Sia $\omega = F_1dx + F_2dy + F_3dz$ una forma differenziale lineare di classe $C^1(E)$, $E$ aperto connesso di $\mathbb{R}^3$. Le seguenti affermazioni sono equivalenti:
+	\begin{enumerate}
+	\item per ogni coppia di curve regolari a tratti $\gamma_1, \gamma_2$ contenute in $E$ e aventi stessi punti iniziale e finale
+		\begin{equation*}
+		\int_{\gamma_1}\omega = \int_{\gamma_2}\omega;
+		\end{equation*}
+	\item per ogni curva chiusa $\gamma$ regolare a tratti contenuta in $E$,
+		\begin{equation*}
+		\oint_{\gamma} \omega = 0;
+		\end{equation*}
+	\item $\omega$ è esatta in $E$.
+	\end{enumerate}
+\end{teor}
+
+\subsection{Riconoscimento delle forme differenziali esatte. Costruzione della funzione potenziale}
+Sia data la forma differenziale
+	\begin{equation*}
+	\omega = F_1dx + F_2 dy + F_3dz,
+	\end{equation*}
+con coefficienti di classe $C^1(E)$, dove $E$ è un aperto connesso di $\mathbb{R}^3$.
+
+\begin{prop}
+Se $\omega$ è esatta in $E$ ed $\vec{F}$ è il campo vettoriale associato, allora $\rot{\vec{F}} = \vec{0}$ in $E$, ovvero $\vec{F}$ è irrotazionale in $E$.
+\end{prop}
+
+Più esplicitamente, si devono verificare in ogni punto di $E$ le relazioni
+	\begin{equation}
+	\label{eqn:irrot}
+	\frac{\partial F_3}{\partial y} = \frac{\partial F_2}{\partial z}, \quad \frac{\partial F_1}{\partial z} = \frac{\partial F_3}{\partial x}, \quad \frac{\partial F_2}{\partial x} = \frac{\partial F_1}{\partial y}.
+	\end{equation}
+
+In $\mathbb{R}^2$ le~\eqref{eqn:irrot} si riducono a
+	\begin{equation}
+	\frac{\partial F_2}{\partial x} = \frac{\partial F_1}{\partial y}.
+	\end{equation}
+
+Vi sono opportune condizioni topologiche su $E$ sotto le quali le~\eqref{eqn:irrot} diventano anche condizioni sufficienti; per adesso ci limitiamo a dare la seguente
+	\begin{defn}
+	Si dice che $E \subseteq \mathbb{R}^3$ è stellato se esiste un punto $\vec{p}_0 \in E$ tale che, per ogni punto $\vec{p} \in E$, il segmento di retta $[\vec{p}_0. \vec{p}]$ è tutto contenuto in $E$.
+	\end{defn}
+
+Ogni insieme convesso è stellato; un insieme stellato è ovviamente connesso per segmenti e perciò connesso. 
+
+\begin{teor}
+Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F_3\vec{k}$ con $\vec{F} \in C^1(E)$, dove $E$ è un aperto stellato in $\vec{R}^3$. Allora $\omega$ è esatta se e solo se $\rot{\vec{F}} = \vec{0}$ in $E$.
+\end{teor}
+
+La dimostrazione del Teorema fornisce una formula per la costruzione della funzione potenziale; supponendo che $E$ sia stellato rispetto all'origine (a meno di una traslazione degli assi), dato un punto $\vec{p} = (x, y, z) \in E$ indichiamo con $\Gamma$ la curva di equazioni parametriche
+	\begin{equation*}
+	x(t) = tx, \quad y(t) = ty, \quad z(t) = tz \quad t \in [0, 1]
+	\end{equation*}
+il cui sostegno è il segmento di retta $[\vec{0}, \vec{p}]$ che risulta pertanto contenuto in $E$. Poniamo:
+	\begin{equation}
+	\begin{split}
+	U(x, y, z) \coloneqq \int_{\Gamma}\omega = &\int_0^1 (F_1(tx, ty, tz)x + F_2(tx, ty, tz)y + \\
+ &+F_3(tx, ty, tz)z) dt.
+	\end{split}
+	\end{equation}
+
+Si dimostra che questa è una funzione potenziale; naturalmente, si può costruire $U$ come integrale di $\omega$ lungo una qualunque curva regolare a tratti con sostegno in $E$. 
+
+\subsection{Insiemi semplicementi connessi}
+Abbiamo visto che per gli insiemi stellati le~\eqref{eqn:irrot} sono necessarie e sufficienti per l'esattezza di una forma differenziale. Una condizione più generale è quella di \emph{semplice connessione}: un insieme $E \subseteq \mathbb{R}^2$ è semplicemente connesso se $E$ è connesso e ogni curva semplice e chiusa contenuta in $E$ è frontiera di un insieme limitato interamente contenuto in $E$. In generale, significa che due curve qualunque contenute in $E$ con gli stessi estremi sono ``deformabili con continuità''  l'una nell'altra senza uscire da $E$. Il concetto rigoroso è quello di \emph{omotopia} tra curve.
+
+Siano $\gamma_1$ e $\gamma_2$ curve contenute in un aperto connesso $E \subseteq \mathbb{R}^3$ di equazioni $\vec{r}_1 = \vec{r}_1(t)$, $\vec{r}_2 = \vec{r}_2(t)$, $t \in [a, b]$ e tali che $\vec{r}_1(a) = \vec{r}_2(a)=\vec{p}_a$, $\vec{r}_1(b) = \vec{r}_2(b) = \vec{p}_b$.
+
+	\begin{defn}
+	Le due curve $\gamma_1$ e $\gamma_2$ si dicono omotope in $E$ se esiste una funzione continua $\vec{\phi} = \vec{\phi}(t, \lambda)$, $(t, \lambda) \in [a, b] \times [0, 1]$ tale che
+	\begin{enumerate}
+	\item $\vec{\phi}(t, 0) = \vec{r}_1(t), \quad \vec{\phi}(t, 1) = \vec{r}_2(t) \quad \forall t \in [a, b]$;
+	\item $\vec{\phi}(a, \lambda) = \vec{p}_a, \quad \vec{\phi}(b, \lambda) = \vec{p}_b \quad \forall \lambda \in [0, 1] $,
+	\end{enumerate}
+e infine che per ogni $\lambda \in [0, 1]$ la curva $\gamma_{\lambda}$ di equazione $\vec{\phi} = \vec{\phi}(t, \lambda)$ sia contenuta in $E$. Se $\gamma_1$ e $\gamma_2$ sono chiuse, la $2.$ è sostituita dalla condizione
+	\begin{equation*}
+	\vec{\phi}(a, \lambda) = \vec{\phi}(b, \lambda) \quad \forall \lambda \in [0, 1].
+	\end{equation*}
+	\end{defn}
+
+\begin{defn}
+Un aperto connesso $E \subseteq \mathbb{R}^3$ si dice semplicemente connesso se due curve qualsiasi contenute in $E$ aventi gli stessi estremi sono omotope.
+\end{defn}
+
+La definizione si può dare in termini di curve chiuse: un aperto connesso $E$ è semplicemente connesso se ogni curva chiusa contenuta in $E$ è omotopa a una curva costante (cioè che si riduce a un solo punto).
+
+Gli insiemi convessi e quelli stellati sono semplicemente connessi; non lo sono, ad esempio, una corona circolare o il piano privato di un punto (in $\mathbb{R}^2$) o una sfera privata di un diametro o l'interno di un toro (in $\mathbb{R}^3$). 
+
+\begin{teor}
+Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F_3\vec{k}$ con $\vec{F} \in C^1(E)$, dove $E$ è un aperto semplicemente connesso in $\vec{R}^3$. Allora $\omega$ è esatta se e solo se $\rot{\vec{F}} = \vec{0}$ in $E$.
+\end{teor}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
