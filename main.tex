@@ -100,18 +100,18 @@
 \chapter{Funzioni di più variabili}
 
 	\section{Funzioni da $\mathbb{R}^n$ in $\mathbb{R}$}
-		
+
 		\subsection{Derivate direzionali e parziali}
-		
+
 		Siano $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto di $\mathbb{R}^n$, $\vec{x} \in A$; introduciamo una \emph{direzione}, cioè un versore $\vec{v} \in \mathbb{R}^n$ tale che $\norma{\vec{v}} = 1$. Consideriamo, per ogni $t \in \mathbb{R}$ tale che $\vec{x} + t\vec{v} \in A$, il \emph{rapporto incrementale di $f$ nella direzione $\vec{v}$}:
-			
+
 			\begin{equation*}
 			\frac{f(\vec{x} + t\vec{v}) - f(\vec{x})}{t}.
 			\end{equation*}
-			
+
 		\begin{defn}
 		Quando esiste finito, il
-			
+
 			\begin{equation}
 			\lim_{t \to 0}\frac{f(\vec{x} + t\vec{v} - f(\vec{x})}{t}
 			\end{equation}
@@ -119,32 +119,32 @@
 		\end{defn}
 
 Le derivate lungo i versori della base canonica $\vec{e}_1, \vec{e}_2, \dots, \vec{e}_n$ si chiamano \emph{derivate parziali} e si indicano con i simboli
-		
+
 		\begin{equation*}
 		\frac{\partial f}{\partial x_j}, \quad D_j f, \quad D_{x_j} f, \quad \partial_{x_j} f, \quad f_{x_j}.
 		\end{equation*}
-		
-Nella derivata parziale rispetto a $x_j$ viene incrementata solo quella variabile; dunque per il calcolo di $f_{x_j}$ si può pensare alle altre variabili come costanti e utilizzare le classiche regole di derivazioni per funzioni di una variabile. 
+
+Nella derivata parziale rispetto a $x_j$ viene incrementata solo quella variabile; dunque per il calcolo di $f_{x_j}$ si può pensare alle altre variabili come costanti e utilizzare le classiche regole di derivazioni per funzioni di una variabile.
 
 Se una funzione $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$ ammette $n$ derivate parziali in un punto $\vec{x} \in A$ è definito il vettore \emph{gradiente} di $f$ in $\vec{x}$, le cui componenti sono le $n$ derivate parziali di $f$ in $\vec{x}$ e che si indica con $\nabla f(\vec{x})$:
 	\begin{equation*}
 	\nabla f(\vec{x}) \coloneqq (f_{x_1}(\vec{x}), f_{x_2}(\vec{x}), \dots, f_{x_n}(\vec{x})).
 	\end{equation*}
 
-È importante notare che l'esistenza di tutte le derivate direzionali in un punto non implica la continuità in quel punto, in dimensione maggiore di $1$; è quindi necessario introdurre un concetto più forte di quello di derivabilità. 
+È importante notare che l'esistenza di tutte le derivate direzionali in un punto non implica la continuità in quel punto, in dimensione maggiore di $1$; è quindi necessario introdurre un concetto più forte di quello di derivabilità.
 
 	\subsection{Differenziale}
-	
+
 L'idea è quella di approssimare l'incremento $\Delta f = f(\vec{x} + \vec{h}) - f(\vec{x})$ con una funzione lineare in $\vec{h}$ a meno di infinitesimi di ordine superiore a $\norma{\vec{h}}$.
 
-Ricordiamo che ogni funzione lineare $L \colon \mathbb{R}^n \to \mathbb{R}$ è identificata da un unico vettore $\vec{a} \in \mathbb{R}^n$, nel senso che 
+Ricordiamo che ogni funzione lineare $L \colon \mathbb{R}^n \to \mathbb{R}$ è identificata da un unico vettore $\vec{a} \in \mathbb{R}^n$, nel senso che
 	\begin{equation*}
 	L(\vec{x}) = (\vec{a}, \vec{h})
 	\end{equation*}
 per ogni $\vec{h} \in \mathbb{R}^n$.
 
 \begin{defn}
-Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto; $f$ si dice differenziabile in $\vec{x} \in A$ se esiste un vettore $\vec{a} \in \mathbb{R}^n$ tale che 
+Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto; $f$ si dice differenziabile in $\vec{x} \in A$ se esiste un vettore $\vec{a} \in \mathbb{R}^n$ tale che
 	\begin{equation}
 	\label{eqn:diff}
 	f(\vec{x} + \vec{h}) - f(\vec{x}) = (\vec{a}, \vec{h}) + o(\norma{h})
@@ -184,7 +184,7 @@ ove $\beta$ è l'angolo formato dai vettori $\vec{v}$ e $\nabla f(\vec{x})$; ci�
 	\begin{equation*}
 	\vec{v}_\textup{max} =\frac{\nabla f(\vec{x})}{\norma{\nabla f(\vec{x})}}, \quad \vec{v}_\textup{min} =- \frac{\nabla f(\vec{x})}{\norma{\nabla f(\vec{x})}};
 	\end{equation*}
-in conclusione,	
+in conclusione,
 	\begin{equation*}
 	\max_{\norma{\vec{v}} = 1} D_{\vec{v}} f(\vec{x}) = \norma{\nabla f(\vec{x})}, \quad \min_{\norma{\vec{v}} = 1} D_{\vec{v}} f(\vec{x}) = - \norma{\nabla f(\vec{x})}.
 	\end{equation*}
@@ -195,14 +195,14 @@ Sia $f$ differenziabile in un punto $\vec{x}_0$; ponendo $\vec{h} = \vec{x} - \v
 	\label{eqn:iperpiano}
 	f(\vec{x}) = f(\vec{x}_0) + (\nabla f(\vec{x}_0), \vec{x} - \vec{x}_0) + o(\norma{\vec{x} - \vec{x}_0}).
 	\end{equation}
-La funzione $z =  f(\vec{x}_0) + (\nabla f(\vec{x}_0), \vec{x} - \vec{x}_0)$ ha come grafico un iperpiano e la~\eqref{eqn:iperpiano} equivale ad affermare che essa è la funzione lineare (affine) che meglio approssima $f$ in un intorno di $\vec{x}_0$; tale piano si chiama piano tangente. 
+La funzione $z =  f(\vec{x}_0) + (\nabla f(\vec{x}_0), \vec{x} - \vec{x}_0)$ ha come grafico un iperpiano e la~\eqref{eqn:iperpiano} equivale ad affermare che essa è la funzione lineare (affine) che meglio approssima $f$ in un intorno di $\vec{x}_0$; tale piano si chiama piano tangente.
 
 In dimensione $2$, se $\vec{x}_0 = (x_0, y_0)$, $\vec{x} = (x, y)$ e $z_0 = f(x_0, y_0)$, la sua equazione si scrive esplicitamente come
 	\begin{equation}
 	\label{eqn:pianotangente}
 	z - z_0 - f_x(x_0, y_0)(x - x_0) - f_y(x_0, y_0)(y - y_0) = 0.
 	\end{equation}
-La~\eqref{eqn:pianotangente} indica che il vettore $\vec{n} = (-f_x(x_0, y_0), -f_y(x_0, y_0)) \in \mathbb{R}^3$ è un vettore normale al piano tangente nel punto $P_0$ di coordinate $(x_0, y_0, z_0)$, dunque, per definizione, normale al grafico di $f$ nello stesso punto. 
+La~\eqref{eqn:pianotangente} indica che il vettore $\vec{n} = (-f_x(x_0, y_0), -f_y(x_0, y_0)) \in \mathbb{R}^3$ è un vettore normale al piano tangente nel punto $P_0$ di coordinate $(x_0, y_0, z_0)$, dunque, per definizione, normale al grafico di $f$ nello stesso punto.
 
 \begin{teor}
 Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto; se in un intorno di $\vec{x} \in A$ esistono tutte le derivate parziali di $f$ ed esse sono continue in $\vec{x}$ allora $f$ è differenziabile in $\vec{x}$.
@@ -210,7 +210,7 @@ Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto; se in un int
 
 La condizione è solo sufficiente: esistono funzioni differenziabili con derivata non continua, ad esempio
 	\begin{equation*}
-	f(x) = \begin{dcases*} 
+	f(x) = \begin{dcases*}
 	x^2 \sin{\frac{1}{x}} &se $x \ne 0$, \\
 	0 &se $x = 0$.
 	\end{dcases*}
@@ -223,18 +223,18 @@ Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto. Se, fissata 
 	\begin{equation*}
 	D_{\vec{v}}f \colon U(\vec{x}) \to \mathbb{R}.
 	\end{equation*}
-Se $\vec{w} \in \mathbb{R}^n$ è un altro versore, è lecito chiedersi se esista $D_{\vec{w}} D_{\vec{v}} f(\vec{x})$, cioè la derivata seconda di $f$ lungo le direzioni $\vec{v}$ e $\vec{w}$ (nell'ordine), che si indica con $D_{\vec{w}\vec{v}}^2f(\vec{x})$. 
+Se $\vec{w} \in \mathbb{R}^n$ è un altro versore, è lecito chiedersi se esista $D_{\vec{w}} D_{\vec{v}} f(\vec{x})$, cioè la derivata seconda di $f$ lungo le direzioni $\vec{v}$ e $\vec{w}$ (nell'ordine), che si indica con $D_{\vec{w}\vec{v}}^2f(\vec{x})$.
 
 Nel caso in cui $\vec{v} = \vec{e}_j$ e $\vec{w} = \vec{e}_k$ si ha la derivata parziale seconda rispetto a $x_j$ e $x_k$, indicata con uno dei seguenti simboli:
 	\begin{equation*}
 	\frac{\partial^2 f}{\partial x_k x_j}(\vec{x}), \quad f_{x_k x_j}(\vec{x}), \quad D_{x_k x_j}f(\vec{x}), \quad D_{kj}^2f(\vec{x}), \quad \partial_{x_kx_j}f(\vec{x}).
 	\end{equation*}
-Se $k\ne j$ le derivate si chiamano miste; se $k=j$ si chiamano pure e il primo simbolo si semplifica in 
+Se $k\ne j$ le derivate si chiamano miste; se $k=j$ si chiamano pure e il primo simbolo si semplifica in
 	\begin{equation*}
 	\frac{\partial^2 f}{\partial x_j^2}(\vec{x}).
 \end{equation*}
 
-In generale, non è vero che, per una funzione due volte derivabile lungo $\vec{v}$ e $\vec{w}$, $D^2_{\vec{w}\vec{v}}f = D^2_{\vec{v}\vec{w}}$; il prossimo teorema indica una condizione sufficiente per l'uguaglianza delle derivate miste. 
+In generale, non è vero che, per una funzione due volte derivabile lungo $\vec{v}$ e $\vec{w}$, $D^2_{\vec{w}\vec{v}}f = D^2_{\vec{v}\vec{w}}$; il prossimo teorema indica una condizione sufficiente per l'uguaglianza delle derivate miste.
 
 	\begin{teor}[di Schwarz]
 	Se $f_{x_kx_j}$ e $f_{x_jx_k}$ esistono in un intorno di $\vec{x}$ e sono continue in $\vec{x}$ allora
@@ -249,7 +249,7 @@ Il Teorema vale per le derivate direzionali seconde qualunque, non solo per le d
 
 In maniera del tutto analoga, si possono considerare derivate di ordine superiore.
 
-Sia ora $f\colon \mathbb{R}^n \supseteq A \to \mathbb{R}$ differenziabile in $A$. Allora per ogni $\vec{x} \in A$ esistono le derivate parziali $f_{x_j}(\vec{x})$, $j = 1, \dots, n$; se queste derivate sono a loro volta differenziabili in $\vec{x}$ diremo che $f$ è due volte differenziabile in $\vec{x}$ e si chiama differenziale secondo di $f$ in $\vec{x}$ la forma quadratica nell'incremento $\vec{h} = (h_1, \dots, h_n)$ data da 
+Sia ora $f\colon \mathbb{R}^n \supseteq A \to \mathbb{R}$ differenziabile in $A$. Allora per ogni $\vec{x} \in A$ esistono le derivate parziali $f_{x_j}(\vec{x})$, $j = 1, \dots, n$; se queste derivate sono a loro volta differenziabili in $\vec{x}$ diremo che $f$ è due volte differenziabile in $\vec{x}$ e si chiama differenziale secondo di $f$ in $\vec{x}$ la forma quadratica nell'incremento $\vec{h} = (h_1, \dots, h_n)$ data da
 	\begin{equation*}
 	d^2f(\vec{x}) \colon\! \vec{h} \mapsto \sum_{i,j = 1}^n f_{x_ix_j}(\vec{x})h_ih_j;
 	\end{equation*}
@@ -264,17 +264,17 @@ La matrice quadrata di ordine $n$ i cui elementi sono $f_{x_ix_j}(\vec{x})$ si c
 	\mathbf{H}_f(\vec{x}) \coloneqq \begin{pmatrix} f_{x_1x_1}(\vec{x}) & f_{x_1x_2}(\vec{x}) & \dots & f_{x_1x_n}(\vec{x}) \\
 			f_{x_2x_1}(\vec{x}) & f_{x_2x2}(\vec{x}) & \dots & f_{x_2x_n}(\vec{x}) \\
 			\vdots & \vdots & \ddots & \vdots \\
-			f_{x_nx_1}(\vec{x}) & f_{x_nx_2}(\vec{x}) & \dots & f_{x_nx_n}(\vec{x}) 
+			f_{x_nx_1}(\vec{x}) & f_{x_nx_2}(\vec{x}) & \dots & f_{x_nx_n}(\vec{x})
 	\end{pmatrix}.
 	\end{equation*}
 
-Si può dunque scrivere 
+Si può dunque scrivere
 	\begin{equation*}
 	d^2f(\vec{x}) = (\mathbf{H}_f(\vec{x})d\vec{x}, d\vec{x}).\footnote{$\mathbf{H}_f(\vec{x})d\vec{x}$ indica il prodotto righe per colonne della matrice hessiana per il vettore $d\vec{x}$.}
 	\end{equation*}
 
-Se $f$ è due volte differenziabile in $\vec{x}$ esistono le derivate $D_{\vec{v}\vec{w}}^2f(\vec{x})$ per ogni coppia di versori $\vec{v}, \vec{w} \in \mathbb{R}^n$; inoltre vale la formula 
-	
+Se $f$ è due volte differenziabile in $\vec{x}$ esistono le derivate $D_{\vec{v}\vec{w}}^2f(\vec{x})$ per ogni coppia di versori $\vec{v}, \vec{w} \in \mathbb{R}^n$; inoltre vale la formula
+
 	\begin{equation}
 	D_{\vec{v}\vec{w}}^2f(\vec{x}) = \sum_{i,j=1}^nf_{x_ix_j}(\vec{x})v_iv_j = (\mathbf{H}_f(\vec{x})\vec{w}, \vec{v}).
 \end{equation}
@@ -360,7 +360,7 @@ o di equazione vettoriale
 	\begin{equation*}
 	\vec{\xi}(\alpha) = \vec{r}(t_0) + \alpha \vec{r}'(t_0)
 	\end{equation*}
-si chiama retta tangente alla curva nel punto $\vec{r}(t_0)$; per una curva piana cartesiana definita dalla funzione $y = f(x)$ le equazioni parametriche della retta tangente in un punto $(x_0, f(x_0))$ si riducono a 
+si chiama retta tangente alla curva nel punto $\vec{r}(t_0)$; per una curva piana cartesiana definita dalla funzione $y = f(x)$ le equazioni parametriche della retta tangente in un punto $(x_0, f(x_0))$ si riducono a
 	\begin{equation*}
 		\begin{split}
 		x &= x_0 + \alpha \\
@@ -376,7 +376,7 @@ Se la curva è regolare, $v(t) \ne 0$ per ogni $t \in I$. Risulta quindi ben def
 	\begin{equation*}
 	\vec{T}(t) \coloneqq \frac{\vec{r}'(t)}{\norma{\vec{r}'(t)}} = \frac{\vec{v}(t)}{v(t)},
 	\end{equation*}
-detto versore tangente. 
+detto versore tangente.
 
 \begin{exmp}
 Se $f \colon I \to \mathbb{R}$ è di classe $C^1$, la curva di equazione $\vec{r}(t) = t\vec{i} + f(t)\vec{j}$ è piana e regolare. Si ha:
@@ -396,9 +396,9 @@ Siano $(\gamma, \vec{r})$, $\vec{r} \colon \! I \to \mathbb{R}^3$ una curva rego
 	\end{equation*}
 è una nuova parametrizzazione di $\gamma$.
 
-Poiché $\vec{r}_1'(\alpha) = \vec{r}'(\phi(\alpha))\,\phi'(\alpha)$, la coppia $(\gamma, \vec{r}_1)$ è ancora una curva regolare. 
+Poiché $\vec{r}_1'(\alpha) = \vec{r}'(\phi(\alpha))\,\phi'(\alpha)$, la coppia $(\gamma, \vec{r}_1)$ è ancora una curva regolare.
 
-Passando da $\vec{r}$ a $\vec{r}_1 = \vec{r} \circ \phi$, l'orientazione non muta se $\phi'(\alpha) > 0$ per ogni $\alpha \in I_1$, è opposta se $\phi'(\alpha) < 0$; due curve si dicono \emph{equivalenti} se possono essere ottenute l'una dall'altra con un cambio di parametro che non muti l'orientazione. 
+Passando da $\vec{r}$ a $\vec{r}_1 = \vec{r} \circ \phi$, l'orientazione non muta se $\phi'(\alpha) > 0$ per ogni $\alpha \in I_1$, è opposta se $\phi'(\alpha) < 0$; due curve si dicono \emph{equivalenti} se possono essere ottenute l'una dall'altra con un cambio di parametro che non muti l'orientazione.
 
 \subsection{Curve rettificabili, lunghezza di una curva}
 
@@ -436,7 +436,7 @@ Per una curva piana regolare di equazione polare $\rho = f(\theta)$, $\theta \in
 	\end{equation}
 \end{exmp}
 
-È importante notare che la lunghezza è invariante per cambi di parametrizzazione; in particolare, è identica per curve equivalenti e non dipende dall'orientazione. 
+È importante notare che la lunghezza è invariante per cambi di parametrizzazione; in particolare, è identica per curve equivalenti e non dipende dall'orientazione.
 
 \begin{prop}
 Se le curve $\gamma_j$ per $j = 1, \dots, N$ sono rettificabili, anche $\gamma = \gamma_1 \cup \gamma_2 \cup \dots \cup \gamma_N$ è rettificabile e, se $\vec{r}$ è la parametrizzazione di $\gamma$,
@@ -447,7 +447,7 @@ Se le curve $\gamma_j$ per $j = 1, \dots, N$ sono rettificabili, anche $\gamma =
 
 \subsection{Ascissa curvilinea}
 
-Sia $\vec{r} \colon \! [a, b] \to \mathbb{R}^3$ la parametrizzazione di una curva $\gamma$ regolare con lunghezza $L$. Per ogni $t \in [a, b]$ è definita la funzione 
+Sia $\vec{r} \colon \! [a, b] \to \mathbb{R}^3$ la parametrizzazione di una curva $\gamma$ regolare con lunghezza $L$. Per ogni $t \in [a, b]$ è definita la funzione
 	\begin{equation*}
 	s(t) = \int_a^t v(u)\, du
 	\end{equation*}
@@ -456,8 +456,8 @@ che rappresenta cinematicamente lo spazio percorso al tempo $t$ partendo da $\ve
 Per il teorema fondamentale del calcolo integrale, essendo $v$ continua in $[a, b]$, $s$ è derivabile e $s'(t) = v(t)$; poiché $v(t) \ne 0$ per ogni $t \in [a, b]$, $s$ risulta una funzione strettamente crescente e realizza una corrispondenza biunivoca tra $[a, b]$ e $[0, L]$. Anche la funzione inversa $t = t(s)$ è strettamente crescente e derivabile con derivata
 	\begin{equation*}
 	\frac{dt}{ds} = \frac{1}{v(t)}
-	\end{equation*}	
-continua in $[0, L]$. 
+	\end{equation*}
+continua in $[0, L]$.
 
 Segue che le curve di equazione $\vec{r} = \vec{r}(t)$ e $\vec{r_1} = \vec{r}(t(s))$ sono equivalenti; il parametro $s$ si chiama ascissa curvilinea (o lunghezza d'arco) e individua un sistema di coordinate ``intrinseco'' alla curva.
 
@@ -480,7 +480,7 @@ Più esplicitamente, se $\vec{r}(t) = (x(t), y(t), z(t))$:
 	\int_{\gamma} f \, ds = \int_a^b f(x(t), y(t), z(t)) \sqrt{x'(t)^2 + y'(t)^2 + z'(t)^2} \, dt.
 	\end{equation*}
 
-L'integrale~\eqref{eqn:intcurv1} è utile nel calcolo di baricentri e momenti d'inerzia (rispetto a un asse) di fili composti da materiali di cui si conosca la densità lineare di massa $\delta = \delta(x, y, z)$. 
+L'integrale~\eqref{eqn:intcurv1} è utile nel calcolo di baricentri e momenti d'inerzia (rispetto a un asse) di fili composti da materiali di cui si conosca la densità lineare di massa $\delta = \delta(x, y, z)$.
 
 Se il filo coincide con una curva $\gamma$ regolare a tratti di equazione $\vec{r} \colon\! [a, b] \to \mathbb{R}^3$, allora
 	\begin{equation*}
@@ -528,9 +528,9 @@ dove
 	\begin{equation*}
 	\vec{T} = \frac{\vec{r}'}{\norma{\vec{r}'}}.
 	\end{equation*}
-	
+
 \begin{defn}
-Se, data una forma differenziale $\omega$ di classe $C^1(E)$, esiste una funzione $U \colon \! E \to \mathbb{R}$ di classe $C^2(E)$ tale che $dU = \omega$ in $E$, allora $\omega$ si dice esatta e $U$ si chiama funzione potenziale. 
+Se, data una forma differenziale $\omega$ di classe $C^1(E)$, esiste una funzione $U \colon \! E \to \mathbb{R}$ di classe $C^2(E)$ tale che $dU = \omega$ in $E$, allora $\omega$ si dice esatta e $U$ si chiama funzione potenziale.
 \end{defn}
 
 Più esplicitamente, $dU = \omega$ significa che
@@ -547,7 +547,7 @@ Sia $\omega$ esatta in $E$ con funzione potenziale $U$. Sia $\gamma$ una curva r
 	\end{equation}
 \end{lem}
 
-Se $\omega$ è esatta il campo associato è uguale, per la~\eqref{eqn:potenziale}, al gradiente di un potenziale. In tal caso il campo vettoriale si dice \emph{conservativo}. 
+Se $\omega$ è esatta il campo associato è uguale, per la~\eqref{eqn:potenziale}, al gradiente di un potenziale. In tal caso il campo vettoriale si dice \emph{conservativo}.
 
 \begin{teor}
 Sia $\omega = F_1dx + F_2dy + F_3dz$ una forma differenziale lineare di classe $C^1(E)$, $E$ aperto connesso di $\mathbb{R}^3$. Le seguenti affermazioni sono equivalenti:
@@ -591,7 +591,7 @@ Vi sono opportune condizioni topologiche su $E$ sotto le quali le~\eqref{eqn:irr
 	Si dice che $E \subseteq \mathbb{R}^3$ è stellato se esiste un punto $\vec{p}_0 \in E$ tale che, per ogni punto $\vec{p} \in E$, il segmento di retta $[\vec{p}_0. \vec{p}]$ è tutto contenuto in $E$.
 	\end{defn}
 
-Ogni insieme convesso è stellato; un insieme stellato è ovviamente connesso per segmenti e perciò connesso. 
+Ogni insieme convesso è stellato; un insieme stellato è ovviamente connesso per segmenti e perciò connesso.
 
 \begin{teor}
 Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F_3\vec{k}$ con $\vec{F} \in C^1(E)$, dove $E$ è un aperto stellato in $\vec{R}^3$. Allora $\omega$ è esatta se e solo se $\rot{\vec{F}} = \vec{0}$ in $E$.
@@ -609,7 +609,7 @@ il cui sostegno è il segmento di retta $[\vec{0}, \vec{p}]$ che risulta pertant
 	\end{split}
 	\end{equation}
 
-Si dimostra che questa è una funzione potenziale; naturalmente, si può costruire $U$ come integrale di $\omega$ lungo una qualunque curva regolare a tratti con sostegno in $E$. 
+Si dimostra che questa è una funzione potenziale; naturalmente, si può costruire $U$ come integrale di $\omega$ lungo una qualunque curva regolare a tratti con sostegno in $E$.
 
 \subsection{Insiemi semplicementi connessi}
 Abbiamo visto che per gli insiemi stellati le~\eqref{eqn:irrot} sono necessarie e sufficienti per l'esattezza di una forma differenziale. Una condizione più generale è quella di \emph{semplice connessione}: un insieme $E \subseteq \mathbb{R}^2$ è semplicemente connesso se $E$ è connesso e ogni curva semplice e chiusa contenuta in $E$ è frontiera di un insieme limitato interamente contenuto in $E$. In generale, significa che due curve qualunque contenute in $E$ con gli stessi estremi sono ``deformabili con continuità''  l'una nell'altra senza uscire da $E$. Il concetto rigoroso è quello di \emph{omotopia} tra curve.
@@ -634,7 +634,7 @@ Un aperto connesso $E \subseteq \mathbb{R}^3$ si dice semplicemente connesso se 
 
 La definizione si può dare in termini di curve chiuse: un aperto connesso $E$ è semplicemente connesso se ogni curva chiusa contenuta in $E$ è omotopa a una curva costante (cioè che si riduce a un solo punto).
 
-Gli insiemi convessi e quelli stellati sono semplicemente connessi; non lo sono, ad esempio, una corona circolare o il piano privato di un punto (in $\mathbb{R}^2$) o una sfera privata di un diametro o l'interno di un toro (in $\mathbb{R}^3$). 
+Gli insiemi convessi e quelli stellati sono semplicemente connessi; non lo sono, ad esempio, una corona circolare o il piano privato di un punto (in $\mathbb{R}^2$) o una sfera privata di un diametro o l'interno di un toro (in $\mathbb{R}^3$).
 
 \begin{teor}
 Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F_3\vec{k}$ con $\vec{F} \in C^1(E)$, dove $E$ è un aperto semplicemente connesso in $\vec{R}^3$. Allora $\omega$ è esatta se e solo se $\rot{\vec{F}} = \vec{0}$ in $E$.
@@ -661,7 +661,7 @@ Se siamo interessati a studiare gli estremi di $f$ in una sua restrizione $f_{|U
 	\begin{equation*}
 	g_j(\vec{x}) = 0,
 	\end{equation*}
-per $j = 1, 2, \dots, m$ e con $m < n$. 
+per $j = 1, 2, \dots, m$ e con $m < n$.
 
 \subsection{Estremi liberi: condizioni necessarie}
 Siano $f \colon \mathbb{R}^n \supseteq X \to \mathbb{R}$, con $X$ aperto, e $\vec{x_0}$ un punto di estremo locale per $f$.
@@ -691,7 +691,7 @@ dove gli $a_{ij}$ sono i numeri reali coefficienti della forma quadratica. Si pu
 	\begin{equation*}
 	\frac{a_{ij} + a_{ji}}{2}.
 	\end{equation*}
-	
+
 A ogni forma quadratica $q(\vec{h})$ risulta associata una matrice simmetrica $A = (a_{ij})_{i,j = 1, \dots, n}$ con una corrispondenza biunivoca; una forma quadratica può anche essere scritta come prodotto scalare, $q(\vec{h}) = (A\vec{h}, \vec{h})$, o in notazione matriciale, $q(\vec{h}) = \vec{h}^tA\vec{h}$.
 
 \begin{defn}
@@ -709,7 +709,7 @@ A_1 = (a_{11}), \ A_2 = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{
 \end{equation*}
 
 \begin{teor}
-Sia 
+Sia
 	\begin{equation*}
 	q(\vec{h}) = \sum_{i,j = 1}^n a_{ij}h_ih_j,
 	\end{equation*}
@@ -723,7 +723,7 @@ $\vec{h} \in \mathbb{R}^n$. Allora:
 Il Teorema vale più in generale per ogni catena di \emph{sottomatrici principali} (cioè simmetriche rispetto alla diagonale principale di $A$) ottenute partendo da un elemento $a_{jj}$ della diagonale e aggiungendo ogni volta una riga e una colonna.
 
 \begin{teor}
-Sia 
+Sia
 	\begin{equation*}
 	q(\vec{h}) = \sum_{i,j = 1}^na_{ij}h_ih_j,
 	\end{equation*}
@@ -783,7 +783,7 @@ Siano $f \in C^2(X)$, $X$ aperto di $\mathbb{R}^2$ e $(x_0, y_0)$ punto critico 
 	\mathbf{H}_f(x_0, y_0) = \begin{pmatrix} f_{xx}(x_0, y_0) & f_{yx}(x_0, y_0) \\ f_{xy}(x_0, y_0) & f_{yy}(x_0, y_0) \end{pmatrix};
 	\end{equation*}
 \begin{enumerate}
-\item se $\det{\mathbf{H}_f(x_0, y_0)} > 0$\footnote{Si noti che in questo caso $f_{xx}(x_0, y_0)$ e $f_{yy}(x_0, y_0)$ hanno lo stesso segno.} e 
+\item se $\det{\mathbf{H}_f(x_0, y_0)} > 0$\footnote{Si noti che in questo caso $f_{xx}(x_0, y_0)$ e $f_{yy}(x_0, y_0)$ hanno lo stesso segno.} e
 	\begin{itemize}
 	\item $f_{xx}(x_0, y_0) > 0$, allora $(x_0, y_0)$ è punto di minimo locale forte;
 	\item $f_{xx}(x_0, y_0) < 0$, allora $(x_0, y_0)$ è punto di massimo locale forte;
@@ -802,7 +802,7 @@ Date due funzioni di due variabili $f$ e $g$ di classe $C^1(X)$, $X$ aperto di $
 	\begin{equation*}
 	E_0 = \{ (x, y) \in \mathbb{R}^2 \colon g(x, y) = 0 \}.
 	\end{equation*}
-	
+
 La situazione più favorevole è quella in cui dall'equazione $g(x, y) = 0$ si può esplicitare $y = y(x)$ o $x = x(y)$ oppure, più in generale, quella in cui $E_0$ coincide con una curva $\gamma$ di equazioni parametriche $x = x(t)$ e $y = y(t)$, $t \in I$, con $I$ intervallo contenuto in $\mathbb{R}$.
 
 Il problema si riconduce alla ricerca degli estremi della funzione reale di variabile reale
@@ -819,7 +819,7 @@ Si determinino gli estremi di $f(x, y) = x^2 + 3y$, con il vincolo
 Si nota facilmente che $E_0$ è un'ellisse che ha per equazioni parametriche $x(t) = 2 \cos{t}$, $y(t) = 3\sin{t}$, $t \in [0, 2 \pi]$, e pertanto basta determinare gli estremi di
 	\begin{equation*}
 	\phi(t) = 4(\cos{t})^2 + 9\sin{t}
-	\end{equation*} 
+	\end{equation*}
 nell'intervallo $[0, 2\pi]$. Con gli strumenti classici dell'analisi differenziale, si trova facilmente che $t= \pi/2$ è un punto di massimo locale e $t = 3\pi/2$ un punto di minimo locale (e $9$ e $-9$ sono rispettivamente massimo e minimo globali).
 \end{exmp}
 
@@ -843,13 +843,13 @@ e imponendo $\phi'(0) = 0$ si ha
 	f_x(x_0, y_0)x'(0) + f_y(x_0, y_0)y'(0) = 0.
 	\end{equation}
 In altre parole, la derivata di $f$ in direzione tangente al vincolo in $(x_0, y_0)$ è nulla.
-	
+
 \begin{defn}
 Siano $f, g \in C^1(X)$, $X$ aperto di $\mathbb{R}^2$. Un punto $(x_0, y_0) \in X$ si dice \emph{critico} o \emph{stazionario} condizionato al vincolo $g(x, y) = 0$ se:
 	\begin{enumerate}
 	\item $g(x_0, y_0) = 0$ e $\nabla g(x_0, y_0) \ne \vec{0}$, cioè $(x_0, y_0)$ è un punto regolare per $E_0$;
 	\item la derivata di $f$ in direzione tangente al vincolo si annulla in $(x_0, y_0)$, cioè vale la~\eqref{eqn:ptocritvinc}.
-	\end{enumerate} 
+	\end{enumerate}
 \end{defn}
 
 \begin{teor}[Caratterizzazione dei punti critici vincolati]
@@ -866,7 +866,7 @@ Nelle ipotesi del precedente Teorema, se $(x_0, y_0)$ è un punto di estremo vin
 \end{teor}
 
 \begin{oss}
-Il numero $\lambda_0$ la cui esistenza è asserita nel Teorema \ref{teor:carcritvinc} prende il nome di \emph{moltiplicatore di Lagrange}. 
+Il numero $\lambda_0$ la cui esistenza è asserita nel Teorema \ref{teor:carcritvinc} prende il nome di \emph{moltiplicatore di Lagrange}.
 
 Introducendo la funzione $\mathcal{L} = \mathcal{L}(x, y, \lambda)$, detta \emph{lagrangiana}, definita da
 	\begin{equation*}
@@ -888,7 +888,7 @@ Abbiamo dunque sviluppato il seguente modo di procedere, detto \emph{metodo dei 
 \begin{enumerate}
 	\item si isolano gli eventuali punti non regolari di $E_0$, che vanno esaminati a parte;
 	\item si cercano i punti critici vincolati di $f$ o equivalentemente quelli liberi della lagrangiana, cioè le soluzioni del sistema~\eqref{eqn:moltiplicatorilagrange};
-	\item si determina la natura dei punti critici (si veda il prossimo paragrafo). 
+	\item si determina la natura dei punti critici (si veda il prossimo paragrafo).
 \end{enumerate}
 
 \subsection{Studio della natura dei punti critici vincolati}
@@ -896,11 +896,11 @@ Ci limiteremo al caso di un solo vincolo ($m = 1$).
 
 Per lo studio della natura dei punti critici vincolati procederemo come nel caso dei punti critici liberi, studiando il differenziale secondo (rispetto a $\vec{x}$) della lagrangiana ristretto a incrementi tangenziali ai vincoli.
 
-Sia $\vec{x}_0 \in \mathbb{R}^n$ un punto critico per $f$ condizionato al vincolo $g(\vec{x}) = 0$ e sia $\lambda_0$ il corrispondente moltiplicatore di Lagrange. 
+Sia $\vec{x}_0 \in \mathbb{R}^n$ un punto critico per $f$ condizionato al vincolo $g(\vec{x}) = 0$ e sia $\lambda_0$ il corrispondente moltiplicatore di Lagrange.
 
 Vale il seguente
 \begin{teor}
-Siano $f, g \colon X \to \mathbb{R}$, $X$ aperto di $\mathbb{R}^n$, di classe $C^2$. 
+Siano $f, g \colon X \to \mathbb{R}$, $X$ aperto di $\mathbb{R}^n$, di classe $C^2$.
 
 Se la forma quadratica
 	\begin{equation}
@@ -919,7 +919,7 @@ Sia $q(\vec{h}) = (A\vec{h}, \vec{h})$ una forma quadratica in $\mathbb{R}^n$ e 
 	0 & b_1 & \dots & b_n  \\
 	b_1 \\
 	\vdots &  &A \\
-	b_n 
+	b_n
 	\end{pmatrix}.
 	\end{equation}
 È definita negativa se i suddetti minori si susseguono a segni alterni a partire dal primo (di ordine 3) positivo.
@@ -928,15 +928,130 @@ Sia $q(\vec{h}) = (A\vec{h}, \vec{h})$ una forma quadratica in $\mathbb{R}^n$ e 
 Nel nostro caso, il lemma si applica con $A = \mathbf{H}_f(\vec{x}_0) - \lambda_0 \mathbf{H}_g(\vec{x}_0)$ e $\vec{b} = \nabla g(\vec{x}_0)$; poiché $\nabla g(\vec{x}_0) \ne \vec{0}$, si può supporre sempre che $D_{x_1}g(\vec{x}_0) \ne 0$.
 
 
+\chapter{Superfici e integrali di superficie}
 
+\section{Superfici in $\mathbb{R}^3$}
 
+\subsection{Definizioni principali, superfici regolari}
 
+Sia $A$ un aperto connesso di $\mathbb{R}^2$ e sia $T$ un insieme tale
+\begin{equation*}
+A \subseteq T \subseteq \overline{A}.
+\end{equation*}
+Sia $\vec{r}\colon T \to \mathbb{R}^3$ una funzione continua; indichiamo con $\Sigma$ l'immagine di $T$: $\Sigma = \vec{r}(T)$. La funzione $\vec{r}$ si chiama parametrizzazione di $\Sigma$.
+	\begin{defn}
+		Si dice superficie in $\mathbb{R}^3$ una coppia $(\Sigma, \vec{r})$ dove $\Sigma$ è un insieme di $\mathbb{R}^3$ ed $\vec{r}$ una sua parametrizzazione.
+	\end{defn}
 
+	Esplicitamente una parametrizzazione è assegnata mediante l'equazione
+		\begin{equation*}
+			\vec{r}(u, v) = (x(u, v), y(u, v), z(u,v)) \quad (u, v) \in T,
+		\end{equation*}
+	oppure, in forma vettoriale,
+		\begin{equation*}
+			\vec{r}(u, v) = x(u,v)\vec{i}+y(u,v)\vec{j} + z(u,v)\vec{k}.
+		\end{equation*}
 
+	Si noti che nella definizione di superficie rientrano igrafici di funzioni $f \colon T \to \mathbb{R}$, $f \in C^1(T)$, detti \emph{superfici cartesiane}; se, per esempio, $\Sigma$ è il grafico di una funzione del tipo $z = f(x, y)$, una parametrizzazione è assegnata dall'equazione
+		\begin{equation}
+			\label{eqn:supcart}
+			\vec{r}(x, y) = x\vec{i} + y\vec{j}+ f(x, y)\vec{k}, \quad (x, y) \in T.
+		\end{equation}
 
+\begin{defn}
+Sia $\Sigma$ una superficie di classe $C^1$ di equazione $\vec{r} = \vec{r}(u,v)$, $(u, v) \in T$. Un punto $\vec{p} = \vec{r}(u_0, v_0)$, dove $(u_0, v_0)$ è interno a $T$, si dice regolare se la matrice
+\begin{equation}
+	\label{eqn:matrsup}
+	\begin{pmatrix}
+		x_u(u_0, v_0) & y_u(u_0, v_0) & z_u(u_0, v_0) \\
+		x_v(u_0, v_0) & y_v(u_0, v_0) & z_v(u_0, v_0)
+	\end{pmatrix}
+\end{equation}
+ha rango $2$; in caso contrario il punto si dirà singolare. $\Sigma$ si dirà regolare se, per ogni $(u, v)$ interno a $T$, $\vec{r}(u, v)$ è un punto regolare.
+\end{defn}
 
+Una superficie cartesiana è regolare se la funzione $f$ che la definisce è di classe $C^1$; se l'equazione della superficie è la~\eqref{eqn:supcart} la matrice~\eqref{eqn:matrsup} prende la forma
+	\begin{equation*}
+		\begin{pmatrix}
+			1 & 0 & f_x \\
+			0 & 1 & f_y
+		\end{pmatrix}
+	\end{equation*}
+che ha sempre rango 2.
 
+Passiamo al significato geometrico della regolarità: se $\vec{p}$ è un punto regolare, allora in un intorno di $\vec{p}$ la superficie ammette una rappresentazione cartesiana. Sia infatti $\Sigma$ una superficie di equazione $\vec{r} = \vec{r}(u, v)$ e sia $\vec{p} = \vec{r}(u_0, v_0)$ un suo punto di regolarità; allora almeno uno dei tre determinanti seguenti è diverso da $0$ in $(u_0, v_0)$:
+	\begin{gather*}
+		\frac{\partial (y,z)}{\partial (u,v)} = y_uz_v - y_vz_u \\
+		\frac{\partial (z, x)}{\partial (u,v)} = z_ux_v  z_vx_u \\
+		\frac{\partial (x, y)}{\partial (u, v)} = x_uy_v - x_vy_u.
+	\end{gather*}
+	Per fissare le idee, supponiamo che il terzo sia non nullo. Per il teorema d'inversione locale, dalle equazioni
+	\begin{equation*}
+		\begin{dcases}
+			x = x(u, v) \\
+			y = y(u,v)
+		\end{dcases}
+	\end{equation*}
+si possono ricavare, in un intorno di $\vec{p}$, $u = u(x, y)$ e $v = v(x, y)$, che sostituite in $z = z(u, v)$ forniscono l'equazione cartesiana di $\Sigma$:
+	\begin{equation*}
+		z = z(u(x, y), v(x, y)) \coloneqq f(x, y).
+	\end{equation*}
 
+	Oltre a superfici definite mediante equazioni parametriche e cartesiane, è utile considerare le superfici definite come insiemi di livello di funzioni di tre variabili. Precisamente, sia $F \colon A \to \mathbb{R}$, $A$ aperto di $\mathbb{R}^3$, $F \in C^1(A)$, e consideriamo l'insieme di livello $E_0$ di equazione
+		\begin{equation}
+F(x, y, z) = 0.
+		\end{equation}
+
+	Diremo che $E_0$ definisce una superficie $\Sigma$ se $\nabla F(x, y, z) \ne \vec{0}$ in ogni punto di $E_0$, tranne al più in un numero finito di punti.
+
+	\subsection{Bordo di una superficie, superfici regolari a pezzi}
+	Se $\Sigma$ è una superficie di equazione vettoriale $\vec{r} = \vec{r}(u, v)$ e $\vec{p}_1, \vec{p}_2 \in T$, $\vec{p}_1 \ne \vec{p}_2$ con almeno uno dei due interno a $T$ implica $\vec{r}(\vec{p}_1) \ne \vec{r}(\vec{p}_2)$, la superficie si dice semplice.
+
+	Introduciamo le nozioni di bordo di una superficie e di superficie chiusa; limitiamoci a superfici $\Sigma$ di equazione $\vec{r} = \vec{r}(u, v) \in C^1(T)$, ove $T$ è aperto. Si dice bordo di $\Sigma$ l'insieme
+		\begin{equation*}
+			\partial \Sigma \coloneqq \overline{\Sigma}\setminus \Sigma.
+		\end{equation*}
+
+		Le superfici senza bordo (cioè con $\partial \Sigma = \emptyset$) e limitate in $\mathbb{R}^3$ si dicono chiuse.
+
+		\begin{defn}
+			Diremo che $\Sigma \in \mathbb{R}^3$ rappresenta una superficie $C^1$ a pezzi se esistono un numero finito di curve regolari a tratti (dette spigoli) $\gamma_1, \dots, \gamma_N$, contenute in $\Sigma$, che suddividono $\Sigma$ in un numero finito $N_0$ di superfici di classe $C^1$ (dette facce).
+		\end{defn}
+
+	Più precisamente dev'essere
+		\begin{equation*}
+			\Sigma \setminus \bigcup_{j=1}^N \gamma_j = \bigcup_{i = 1}^N \Sigma_i
+		\end{equation*}
+dove ogni $\Sigma_i$ ammette una parametrizzazione $\vec{r}\colon T_i \to \mathbb{R}^3$, $\vec{r} \in C^1(T_i)$, $T_i$ aperto in $\mathbb{R}^2$ e dove ogni $\gamma_j$ non può essere parte del bordo di più di due facce.
+
+Il bordo di $\Sigma$ in questo caso è l'unione dei bordi delle $\Sigma_j$ con esclusione degli spigoli che appartengono al bordo di due facce adiacenti.
+
+\subsection{Linee coordinate, coordinate locali, cambiamento di parametri}
+Per una superficie regolare di equazione $\vec{r} = \vec{r}(u, v)$ introduciamo le curve di equazione
+	\begin{equation}
+		\label{eqn:lineecoordinate}
+		u \mapsto \vec{r}(u, \overline{v}), \quad v \mapsto \vec{r}(\overline{u}, v)
+	\end{equation}
+
+che si ottengono considerando rispettivamente $v = \overline{v}$ costante e $u = \overline{u}$ costante.
+
+Le~\eqref{eqn:lineecoordinate} si chiamano linee coordinate sulla superficie; $u$ e $v$ si chiamano coordinate locali dei punti sulla superficie.
+
+I vettori tangenti alle linee coordinate sono assegnati dalle formule
+	\begin{gather*}
+		\vec{r}_u(u, v) = x_u(u, v) \vec{i}+ y_u(u, v)\vec{j} + z_u(u, v)\vec{k} \\
+		\vec{r}_v(u, v) = x_v(u,v)\vec{i}+y_v(u,v)\vec{j}+z_v(u,v)\vec{k}.
+	\end{gather*}
+
+Eseguendo il prodotto vettoriale tra $\vec{r}_u$ e $\vec{r}_v$ si ottiene
+	\begin{equation*}
+		\vec{r}_u \times \vec{r}_v = \det \begin{pmatrix}
+		\vec{i} & \vec{j} & \vec{k} \\
+		x_u & y_u & z_u \\
+		x_v & y_v & z_v
+	\end{pmatrix} = \frac{\partial (y, z)}{\partial (u, v)}\vec{i} + \frac{\partial(z, x)}{\partial (u,v)}\vec{j} + \frac{\partial (x, y)}{\partial (u, v)}\vec{k};
+	\end{equation*}
+	quindi $\vec{r}(u, v)$ è regolare se e solo se $\vec{r}_u \times \vec{r}_v \ne \vec{0}$, ovvero se $\vec{r}_u$ e $\vec{r}_v$ sono linearmente indipendenti.
 
 
 
