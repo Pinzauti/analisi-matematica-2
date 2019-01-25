@@ -29,6 +29,10 @@
 \DeclareMathOperator{\arctg}{arctg}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\rot}{rot}
+\DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\divg}{div}
+
+
 
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \numberwithin{equation}{section}
@@ -37,6 +41,7 @@
 \renewcommand{\theta}{\vartheta}
 \renewcommand{\rho}{\varrho}
 \renewcommand{\phi}{\varphi}
+\renewcommand{\ni}{\nu}
 
 \pagestyle{plain}
 
@@ -979,11 +984,11 @@ Una superficie cartesiana è regolare se la funzione $f$ che la definisce è di 
 che ha sempre rango 2.
 
 Passiamo al significato geometrico della regolarità: se $\vec{p}$ è un punto regolare, allora in un intorno di $\vec{p}$ la superficie ammette una rappresentazione cartesiana. Sia infatti $\Sigma$ una superficie di equazione $\vec{r} = \vec{r}(u, v)$ e sia $\vec{p} = \vec{r}(u_0, v_0)$ un suo punto di regolarità; allora almeno uno dei tre determinanti seguenti è diverso da $0$ in $(u_0, v_0)$:
-	\begin{gather*}
-		\frac{\partial (y,z)}{\partial (u,v)} = y_uz_v - y_vz_u \\
-		\frac{\partial (z, x)}{\partial (u,v)} = z_ux_v  z_vx_u \\
-		\frac{\partial (x, y)}{\partial (u, v)} = x_uy_v - x_vy_u.
-	\end{gather*}
+	\begin{align*}
+		\frac{\partial (y,z)}{\partial (u,v)} &= y_uz_v - y_vz_u \\
+		\frac{\partial (z, x)}{\partial (u,v)} &= z_ux_v  z_vx_u \\
+		\frac{\partial (x, y)}{\partial (u, v)} &= x_uy_v - x_vy_u.
+	\end{align*}
 	Per fissare le idee, supponiamo che il terzo sia non nullo. Per il teorema d'inversione locale, dalle equazioni
 	\begin{equation*}
 		\begin{dcases}
@@ -1154,20 +1159,21 @@ Tale area è intuitivamente pari a $\vec{\xi} \times \vec{\eta}$, dove
 
 È quindi ragionevole chiamare \emph{elemento d'area} l'espressione simbolica
 	\begin{equation}
-		d\sigma \coloneqq \norma{\vec{r}_u \times \vec{r}_v} dudv
+		d\sigma \coloneqq \norma{\vec{r}_u \times \vec{r}_v} du\,dv
 	\end{equation}
 e dare la seguente
 
 	\begin{defn}
 		L'area di $\Sigma$ è assegnata dalla formula
 			\begin{equation}
-				a(\Sigma) = \iint_{\Sigma} d\sigma \coloneqq \iint_{T} \norma{\vec{r}_u \times \vec{r}_v} \, du dv.
+				a(\Sigma) = \iint_{\Sigma} d\sigma \coloneqq \iint_{T} \norma{\vec{r}_u \times \vec{r}_v} \, du \,dv.
 			\end{equation}
 	\end{defn}
 
 Per una superficie data in forma implicita $F(x, y, z) = 0$, con $F_z \ne 0$, si ha localmente $z = f(x, y)$ e pertanto l'elemento d'area in termini di $F$ è dato dalla formula
 	\begin{equation}
-		d\sigma = \sqrt{1 + \biggl(\frac{F_x}{F_z} \biggr)^2 + \biggl( \frac{F_y}{F_z} \biggr)^2} dx dy = \frac{\norma{\nabla F}}{\norma{F_z}} dx dy.
+		\label{eqn:areasupimp}
+		d\sigma = \sqrt{1 + \biggl(\frac{F_x}{F_z} \biggr)^2 + \biggl( \frac{F_y}{F_z} \biggr)^2} dx \, dy = \frac{\norma{\nabla F}}{\norma{F_z}} dx \,dy.
 	\end{equation}
 
 Passiamo alla definizione di \emph{integrale di superficie}.
@@ -1175,13 +1181,285 @@ Passiamo alla definizione di \emph{integrale di superficie}.
 Se $h = h(x, y, z)$ è una funzione reale definita su $\Sigma$, si definisce l'integrale di $h$ su $\Sigma$ mediante la formula
 	\begin{equation}
 		\label{eqn:intsup}
-		\iint_{\Sigma} h d\sigma \coloneqq \iint_T h(\vec{r}(u, v)) \norma{\vec{r}_u \times \vec{r}_v} \, dudv,
+		\iint_{\Sigma} h \, d\sigma \coloneqq \iint_T h(\vec{r}(u, v)) \norma{\vec{r}_u \times \vec{r}_v} \, du\,dv,
 	\end{equation}
 quando l'integrale a destra della~\eqref{eqn:intsup} è ben definito. È facile mostrare che l'integrale~\eqref{eqn:intsup} (e quindi l'area di $\Sigma$) non dipendono dall'orientazione; le nozioni di area e integrale di superfici si estendono senza difficoltà al caso di superfici regolari a tratti.
 
 \subsection{Alcune applicazioni fisiche e geometriche}
 
+\subsubsection*{Calcolo di baricentri e momenti d'inerzia}
 
+Sia $\Sigma$ una superficie regolare e semplice e $\delta = \delta(x, y, z)$ definita su $\Sigma$. Se $\delta$ s'interpreta come \emph{densità superficiale} di una massa distribuita su $\Sigma$, l'integrale
+	\begin{equation*}
+		m = \int_{\Sigma} \delta \, d\sigma
+	\end{equation*}
+rappresenta la massa totale.
+
+In questo caso, gli integrali
+	\begin{equation*}
+		x_b = \frac{1}{m}\iint_{\Sigma}x\delta \,d\sigma, \quad y_b = \frac{1}{m}\iint_{\Sigma}y\delta\, d\sigma, \quad z_b = \frac{1}{m}\iint_{\Sigma}z\delta\, d\sigma
+	\end{equation*}
+rappresentano le coordinate del baricentro della distribuzione di massa.
+
+\subsubsection*{Flussi}
+
+Consideriamo un campo vettoriale $\vec{F} = F_1\vec{i} + F_2\vec{j}+F_3\vec{k}$ definito in una regione $U$ dello spazio contenente una superficie regolare e orientabile $\Sigma$. Se $\vec{n}$ è il versore normale alla superficie, l'integrale del campo vettoriale $\vec{F}$ su $\Sigma$ si chiama \emph{flusso} di $\vec{F}$ attraverso $\Sigma$ nella direzione $\vec{n}$ ed è dato dalla formula
+	\begin{equation}
+		\iint_{\Sigma}(\vec{F}, \vec{n}) \, d\sigma = \iint_{\Sigma} (F_1(\vec{n}, \vec{i}), F_2(\vec{n}, \vec{j}), F_3(\vec{n},\vec{k}))\,d\sigma.
+	\end{equation}
+
+Si noti che il flusso è invariante per cambi di parametrizzazione equivalenti, ma cambia segno se cambia il verso di $\vec{n}$, ovvero l'orientazione di $\Sigma$.
+
+\subsubsection{Formula di coarea}
+
+Consideriamo una famiglia di superfici regolari $\Sigma_t$ di equazione
+	\begin{equation}
+		\phi (x, y, z) = t
+	\end{equation}
+dove $t \in [t_1, t_2]$ ha il ruolo di parametro. Essendo $\Sigma_t$ regolare per ogni $t$ avremo $\nabla \phi \ne \vec{0}$ in ogni punto; ricordiamo che il vettore
+	\begin{equation*}
+		\vec{\ni} = \frac{\nabla \phi}{\norma{\nabla \phi}}
+	\end{equation*}
+è ortogonale alla superficie ed è diretto nel verso delle $t$ crescenti. Se interpretiamo $t$ come tempo, possiamo pensare a una superficie che si muove nello spazio.
+
+Al variare di $t$ da $t_1$ a $t_2$, $\Sigma_t$ descrive una regione $D \in \mathbb{R}^3$,
+	\begin{equation*}
+		D = \{(x, y, z) \in \mathbb{R}^3 \colon t_1 \le \phi(x, y, z) \le t_2 \}.
+	\end{equation*}
+Supponiamo che ogni punto di $D$ appartenga a una e una sola delle superfici $\Sigma_t$: come si calcola il volume di $D$ in termini delle aree delle superfici $\Sigma_t$? Si ha evidentemente
+	\begin{equation*}
+		\Vol(D) = \iiint_D dx \,dy\, dz.
+	\end{equation*}
+
+Eseguiamo il cambiamento di variabili
+	\begin{equation*}
+		\xi = x, \quad \eta = y, \quad t = \phi(x, y, z);
+	\end{equation*}
+lo jacobiano della trasformazione (si verifica facilmente) è $\phi_z$, pertanto
+	\begin{equation*}
+		\iiint_D dx \, dy \, dz = \int_{t_1}^{t_2} dt \iint_{\Sigma_t} \frac{1}{\norma{\phi_z}} \, d\xi \, d\eta.
+	\end{equation*}
+
+	Dalla~\eqref{eqn:areasupimp} discende la formula seguente, detta \emph{formula di coarea}:
+		\begin{equation}
+			\label{eqn:coarea}
+				\Vol(D) = \int_{t_1}^{t_2} dt \iint_{\Sigma_t} \frac{1}{\norma{\nabla \phi}} \, d\sigma.
+		\end{equation}
+
+La~\eqref{eqn:coarea} diventa più interessante dal punto di vista cinematico facendo intervenire la velocità con cui si spostano le $\Sigma_t$; pensiamo $\Sigma_t$ composta da particelle puntiformi la cui traiettoria nello spazio è descritta dal vettore posizione $(x(t), y(t), z(t))$. Poiché, per ogni $t$, $(x(t), y(t), z(t)) \in \Sigma_t$, avremo
+	\begin{equation*}
+			\label{eqn:coareapos}
+		\phi(x(t), y(t), z(t)) = t, \quad t \in [t_1, t_2].
+	\end{equation*}
+Derivando, otteniamo
+	\begin{equation*}
+		x'\phi_x + y'\phi_y + z'\phi_z = 1.
+	\end{equation*}
+Ponendo $\vec{v}(t) = (x'(t), y'(t), z'(t))$ e dividendo per $\norma{\nabla \phi}$, si deduce l'equazione
+	\begin{equation}
+		(\vec{v}, \vec{\ni}) = \frac{1}{\norma{\nabla \phi}},
+	\end{equation}
+che indica che l'integranda in~\eqref{eqn:coareapos}, calcolata in $\vec{p} \in \Sigma_t$, ha il significato di \emph{componente normale} della velocità con la quale $\vec{p}$ si muove nello spazio. Indicando con $c_{\vec{\ni}}$ tale componente si ha dunque
+	\begin{equation}
+		\Vol(D) = \int_{t_1}^{t_2} dt \iint_{\Sigma_t} c_{\vec{\ni}} \, d\sigma.
+	\end{equation}
+
+\section{I teoremi di Green, Gauss e Stokes}
+	\subsection{La formula di Gauss-Green nel piano}
+
+In questo paragrafo studieremo la relazione tra integrali doppi e integrali curvilinei di forme differenziali.
+
+Ricordiamo che, se $D$ è un dominio limitato in $\mathbb{R}^2$, la cui frontiera $\partial D$ sia una curva di Jordan regolare a tratti, si dice che $\partial D$ è orientata positivamente se è orientata in senso antiorario; lo indicheremo con il simbolo $\partial^+ D$. In tal caso, si lasciano i punti di $D$ a sinistra.
+
+Cominciamo considerando domini $D$ semplici rispetto agli assi e un campo vettoriale $\vec{F}(x, y) = P(x, y) \vec{i} + Q(x, y)\vec{j}$ definito sulla chiusura di $D$, $\overline{D} = D \cup \partial D$. Vale il seguente
+	\begin{lem}
+		Sia $\vec{F} \in C^1(D)$.
+			\begin{enumerate}
+				\item Se $D = \{ (x, y) \in \mathbb{R}^2 \colon a < x < b, \phi_1(x) < y < \phi_2(x) \}$, con $\phi_1, \phi_2$ regolari a tratti, allora
+					\begin{equation}
+						\iint_D P_y \, dx \, dy = - \int_{\partial^+ D} P \, dx.
+					\end{equation}
+
+					\item Se $D = \{ (x, y) \in \mathbb{R}^2 \colon c < y < d, \psi_1(y) < x < \psi_2(y) \}$, con $\psi_1, \psi_2$ regolari a tratti, allora
+						\begin{equation}
+							\iint_D Q_x \, dx \, dy = \int_{\partial^+ D} Q \, dy.
+						\end{equation}
+			\end{enumerate}
+	\end{lem}
+
+\begin{teor}[di Gauss-Green I]
+	\label{gaussgreen1}
+	Sia $D$ un dominio limitato in $\mathbb{R}^2$ la cui frontiera sia una curva di Jordan regolare a tratti e che sia semplice rispetto a entrambi gli assi. Se $\vec{F} = P\vec{i} + Q\vec{j} \in C^1(\overline{D})$, allora vale la formula
+		\begin{equation}
+				\label{eqn:gaussgreen1}
+			\iint_D (Q_x - P_y) \, dx \, dy  = \int_{\partial^+ D} P \, dx + \int_{\partial^+ D} Q \, dy.
+		\end{equation}
+\end{teor}
+
+La~\eqref{eqn:gaussgreen1} vale per domini molto più generali di quelli considerati finora; chiameremo \emph{ammissibili} i domini per cui è valido il teorema di Gauss-Green.
+
+In questa classe rientrano domini $D$ la cui frontiera è unione disgiunta di un numero finito di curve di Jordan regolari a tratti e che siano decomponibili in un numero finito di sottodomini $D_1, D_2, \dots, D_k$ semplici rispetto a entrambi gli assi, cioè
+	\begin{equation*}
+		D = \bigcup_{j=1}^k D_j, \quad \overset{\circ}{D_i} \cap \overset{\circ}{D_j} = \emptyset, \quad i \ne j.
+	\end{equation*}
+
+Chiameremo questi domini s-decomponibili; un dominio s-decomponibile può non essere semplicemente connesso.
+
+L'orientazione positiva di $\partial D$ si ottiene orientando le singole curve che la compongono in modo tale che percorrendole si lasci il dominio alla propria sinistra.
+
+\begin{prop}
+Se $D$ è s-decomponibile e $\vec{F} \in C^1(\overline{D})$, allora vale la~\eqref{eqn:gaussgreen1}.
+\end{prop}
+
+\subsection{Applicazioni}
+
+\subsubsection*{Calcolo di aree mediante integrali curvilinei}
+Le formule precedenti si possono usare per calcolare l'area di un dominio $D$, ammissibile per il Teorema~\ref{gaussgreen1}, mediante un integrale curvilineo esteso a $\partial D$.
+
+Si ha infatti
+	\begin{equation}
+		a(D) = \frac{1}{2} \biggl( \int_{\partial^+D}x dy - \int_{\partial^+D}y dx \biggr).
+	\end{equation}
+
+	\subsubsection*{Significati fisici}
+	Introducendo il vettore $\vec{k} = (0, 0, 1)$ e ricordando che per il vettore piano $\vec{F}$ si ha $\rot \vec{F} = (Q_x - P_y) \vec{k}$, si ha al primo membro della~\eqref{eqn:gaussgreen1}, ponendo $\rot_z \vec{F} = (\rot \vec{F}, \vec{k})$,
+		\begin{equation}
+			\iint_D (Q_x - P_y)\,dx \,dy = \iint_D \rot_z \vec{F} \,dx \, dy.
+		\end{equation}
+L'integrale curvilineo a destra nella~\eqref{eqn:gaussgreen1} si può scrivere come
+	\begin{equation*}
+		\int_{\partial^+D} (\vec{F}, \vec{T}) \, ds
+	\end{equation*}
+dove $\vec{T}$ è il versore tangente di $\partial^+ D$ e $ds$ è il differenziale della lunghezza d'arco. Si arriva così alla seguente versione del teorema di Gauss-Green:
+	\begin{teor}[di Gauss-Green II]
+		Se $D$ è un dominio ammissibile per il Teorema~\ref{gaussgreen1} e $\vec{F} \in C^1(\overline{D})$, allora
+			\begin{equation}
+				\label{eqn:stokespiano}
+				\iint_D \rot_z \vec{F} \, dx \, dy = \int_{\partial^+D} (\vec{F}, \vec{T}) \, ds.
+			\end{equation}
+	\end{teor}
+
+	La~\eqref{eqn:stokespiano} si chiama \emph{formula di Stokes} nel piano; il suo significato fisico è che il flusso del vettore $\rot\vec{F}$ attraverso $D$ nella direzione e verso di $\vec{k}$ uguaglia la circuitazione di $\vec{F}$ lungo $\partial^+D$.
+
+	Si può ottenere una terza versione del Teorema~\ref{gaussgreen1} ponendo nella~\eqref{eqn:gaussgreen1} $P$ al posto di $Q$ e $-Q$ al posto di $P$; la formula diventa
+		\begin{equation}
+			\iint_D (P_x - Q_y) \, dx \, dy = \int_{\partial^+ D} P \, dy - \int_{\partial^+ D} Q \, dx.
+		\end{equation}
+
+		L'integranda al primo membro è $\divg \vec{F}$, mentre introducendo il versore normale esterno a $\partial^+ D$,
+			\begin{equation*}
+				\vec{n}_e = \frac{dy}{ds}\vec{i} - \frac{dx}{ds}\vec{j},
+			\end{equation*}
+		si può scrivere
+			\begin{equation*}
+				\int_{\partial ^+ D}P \, dy - \int_{\partial^+D}Q \, dx = \int_{\partial^+D}\biggl( P\frac{dy}{ds} - Q\frac{dx}{ds} \biggr) \, ds = \int_{\partial D}(\vec{F}, \vec{n}_e)\, ds.
+			\end{equation*}
+
+Si arriva quindi al seguente
+	\begin{teor}[di Gauss-Green III]
+		Se $D$ è un dominio ammissibile per il Teorema~\ref{gaussgreen1}, allora
+			\begin{equation}
+				\label{eqn:div1}
+				\iint_D \divg \vec{F} \, dx \, dy = \int_{\partial D} (\vec{F}, \vec{n}_e)\, ds.
+			\end{equation}
+	\end{teor}
+
+La~\eqref{eqn:div1} si chiama \emph{formula della divergenza} nel piano. Il suo significato fisico è che il flusso di $\vec{F}$ uscente da $\partial D$ uguaglia l'integrale della divergenza in $D$.
+
+\subsection{Il teorema di Stokes nello spazio}
+Esaminiamo ora la relazione tra integrali su una superficie orientabile e integrali curvilinei estesi al bordo della superficie.
+
+Sia $\Sigma$ una superficie semplice, regolare, orientabile e con bordo $\partial \Sigma$ costituito da una curva chiusa regolare a tratti; scegliendo un verso per la normale $\vec{n}$ si determinano su $\Sigma$ due lati che chiameremo convenzionalmente \emph{positivo} (quello verso il quale punta $\vec{n}$) e \emph{negativo}.
+
+Diremo che $\partial \Sigma$ è orientata positivamente rispetto a $\Sigma$ se percorrendo $\partial \Sigma$ mantenendosi sul lato positivo di $\Sigma$ si lasciano i punti di $\Sigma$ sulla sinistra; scriveremo in tal caso $\partial^+ \Sigma$.
+
+Frequentemente $\Sigma$ ha una parametrizzazione
+	\begin{equation*}
+		\vec{r}\colon\!\overline{T} \to \mathbb{R}^3,
+	\end{equation*}
+dove $T$ è l'interno di una curva di Jordan regolare a tratti in $\mathbb{R}^2$, biunivoca fra $\overline{T}$ e $\Sigma$.
+
+In tal caso $\vec{r}(\partial T) = \partial \Sigma$; se inoltre $(u(t), v(t))$, $t \in [a, b]$ è una parametrizzazione di $\partial^+ T$, allora $\vec{r}(u(t), v(t))$, con la scelta del versore normale
+	\begin{equation*}
+		\vec{n} = \frac{\vec{r}_u \times \vec{r}_v}{\norma{\vec{r}_u \times \vec{r}_v}},
+	\end{equation*}
+è automaticamente un'orientazione positiva di $\partial \Sigma$.
+
+Generalizzando, introduciamo la seguente classe di superfici:
+	\begin{defn}
+		Indichiamo con $\mathcal{S}$ la classe delle superfici $\Sigma$ che ammettono una parametrizzazione $\vec{r} \colon \! \overline{T} \to \mathbb{R}^3$ con le seguenti proprietà:
+			\begin{enumerate}
+				\item T è un dominio s-decomponibile la cui frontiera è unione di un numero finito di curve di Jordan regolari a tratti $\gamma_1, \dots, \gamma_k$;
+				\item $\vec{r} \in C^2(\overline{T})$ e $\vec{r}$ è biunivoca fra $\overline{T}$ e $\Sigma$.
+			\end{enumerate}
+	\end{defn}
+
+	Il bordo di una superficie $\Sigma \in \mathcal{S}$ consiste di un numero finito di curve chiuse $\Gamma_j$ immagini delle $\gamma_j$. Scelto un verso per la normale a $\Sigma$, si orienta positivamente $\partial \Sigma$ scegliendo il verso di percorrenza su ciascuna delle $\Gamma_j$ in modo da lasciare i punti di $\Sigma$ a sinistra.
+
+		\begin{teor}[di Stokes]
+			Sia $\Sigma$ una superficie appartenente a $\mathcal{S}$, contenuta in un aperto $A \subseteq \mathbb{R}^3$. Sia $\vec{F} = P\vec{i} + Q\vec{j} + R\vec{k}$ un campo vettoriale di classe $C^1(A)$. Vale la formula
+				\begin{equation}
+					\label{eqn:stokespazio}
+					\iint_{\Sigma} (\rot \vec{F}, \vec{n}) \, d\sigma = \int_{\partial^+\Sigma} (\vec{F}, \vec{T})\, ds,
+				\end{equation}
+				dove $\vec{T}$ indica il versore tangente a $\partial^+ \Sigma$.
+		\end{teor}
+
+		Il significato fisico è che il flusso del rotore di $\vec{F}$ attraverso $\Sigma$ nella direzione $\vec{n}$ eguaglia la circuitazione di $\vec{F}$ lungo $\partial^+ \Sigma$.
+
+		Il teorema di Stokes vale per superfici più generali di quelle appartenenti a $\mathcal{S}$; chiameremo ammissibili le superfici a cui si può applicare la~\eqref{eqn:stokespazio}.
+
+		Sono ammissibili, ad esempio, superfici $\Sigma$ orientabili, anche regolari a tratti, che si possano decomporre nell'unione di un numero finito di superfici $\Sigma_j \in \mathcal{S}$, tali che
+			\begin{equation*}
+				\overset{\circ}{\Sigma_i} \cap \overset{\circ}{\Sigma_j} \ne \emptyset, \quad i \ne j.
+			\end{equation*}
+
+\subsection{Il teorema della divergenza}
+Sia $D \subseteq \mathbb{R}^3$ un dominio limitato la cui frontiera $\partial D$ sia una superficie chiusa, regolare e orientabile. Indichiamo con $\vec{n}_e$ il versore normale esterno a $\partial D$.
+Cominciamo enunciando il seguente lemma, valido in un dominio $D$ semplice rispetto all'asse $z$, ovvero
+	\begin{equation*}
+		D = \{(x, y, z) \in \mathbb{R}^3 \colon \phi_1(x, y) < z < \phi_2(x, y), (x, y) \in B \subset \mathbb{R}^2\},
+	\end{equation*}
+dove $B$ è un aperto semplicemente connesso del piano e $\phi_1, \phi_2$ sono funzioni di classe $C^1(\overline{B})$.
+
+\begin{lem}
+	Sia $\vec{F} = P\vec{i} + Q\vec{j} + R\vec{k} \in C^1(\overline{D})$. Vale la formula
+		\begin{equation}
+			\iiint_D R_z \,dx\,dy\,dz = \iint_{\partial D}R(\vec{n}_e, \vec{k})\,d\sigma.
+		\end{equation}
+\end{lem}
+
+Analogamente, si ha che se $D$ è semplice rispetto all'asse $y$, allora
+	\begin{equation}
+		\iiint_D Q_y \,dx \,dy\,dz = \iint_{\partial D}Q(\vec{n}_e, \vec{j}) \, d\sigma;
+	\end{equation}
+	se $D$ è semplice rispetto all'asse $x$, allora
+		\begin{equation}
+			\iiint_D P_x\,dx\,dy\,dz = \iint_{\partial D} P (\vec{n}_e, \vec{i})\, d\sigma.
+		\end{equation}
+
+\begin{teor}[della divergenza]
+	\label{divergenza}
+	Sia $D$ un dominio semplice rispetto a tutti e tre gli assi cartesiani. Sia $\vec{F} = P\vec{i} + Q\vec{j} + R\vec{k}$ un campo vettoriale di classe $C^1(\overline{D})$. Allora vale la formula
+		\begin{equation}
+			\label{eqn:divergenza}
+			\iiint_D \divg \vec{F} \, dx \, dy \, dz = \iint_{\partial D} (\vec{F}, \vec{n}_e)\, d \sigma.
+		\end{equation}
+\end{teor}
+
+La~\eqref{eqn:divergenza} significa che il flusso di $\vec{F}$ uscente da $\partial D$ uguaglia l'integrale della divergenza di $\vec{F}$ in $D$. Più esplicitamente, la~\eqref{eqn:divergenza} si può scrivere nella forma
+	\begin{equation*}
+		\begin{split}
+			&\iiint_D(P_x + Q_y + R_z)\,dx\,dy\,dz = \\
+			&= \iint_{\partial D}(P(\vec{n}_e, \vec{i}) + Q(\vec{n}_e, \vec{j}) + R(\vec{n}_e, \vec{k})\,d\sigma.)
+		\end{split}
+	\end{equation*}
+
+	Il Teorema~\ref{divergenza} è valido per una classe di domini (detti ammissibili) molto più vasta; si può estendere ad esempio a domini $D$ limitati, la cui frontiera è costituita dall'unione di un numero finito di superfici $\Sigma_j$ chiuse, regolari, orientabili e disgiunte e che siano decomponibili in un numero finito di sottodomini semplici rispetto ai tre assi; cioè esiste un numero finito di domini $D_1, \dots, D_k$ tali che
+		\begin{equation*}
+			D=\bigcup_{j=1}^k D_j, \quad \overset{\circ}{D_i}\cap\overset{\circ}{D_j} = \emptyset, \quad i \ne j.
+		\end{equation*}
+		Si può anche richiedere che le $\Sigma_j$ siano solo regolari a pezzi.
 
 
 
