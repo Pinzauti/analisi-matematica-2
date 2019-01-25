@@ -604,8 +604,7 @@ La dimostrazione del Teorema fornisce una formula per la costruzione della funzi
 il cui sostegno è il segmento di retta $[\vec{0}, \vec{p}]$ che risulta pertanto contenuto in $E$. Poniamo:
 	\begin{equation}
 	\begin{split}
-	U(x, y, z) \coloneqq \int_{\Gamma}\omega = &\int_0^1 (F_1(tx, ty, tz)x + F_2(tx, ty, tz)y + \\
- &+F_3(tx, ty, tz)z) dt.
+	U(x, y, z) \coloneqq \int_{\Gamma}\omega = &\int_0^1 (F_1(tx, ty, tz)x + F_2(tx, ty, tz)y + \\ &+ F_3(tx, ty, tz)z) dt.
 	\end{split}
 	\end{equation}
 
@@ -952,7 +951,7 @@ Sia $\vec{r}\colon T \to \mathbb{R}^3$ una funzione continua; indichiamo con $\S
 			\vec{r}(u, v) = x(u,v)\vec{i}+y(u,v)\vec{j} + z(u,v)\vec{k}.
 		\end{equation*}
 
-	Si noti che nella definizione di superficie rientrano igrafici di funzioni $f \colon T \to \mathbb{R}$, $f \in C^1(T)$, detti \emph{superfici cartesiane}; se, per esempio, $\Sigma$ è il grafico di una funzione del tipo $z = f(x, y)$, una parametrizzazione è assegnata dall'equazione
+	Si noti che nella definizione di superficie rientrano i grafici di funzioni $f \colon T \to \mathbb{R}$, $f \in C^1(T)$, detti \emph{superfici cartesiane}; se, per esempio, $\Sigma$ è il grafico di una funzione del tipo $z = f(x, y)$, una parametrizzazione è assegnata dall'equazione
 		\begin{equation}
 			\label{eqn:supcart}
 			\vec{r}(x, y) = x\vec{i} + y\vec{j}+ f(x, y)\vec{k}, \quad (x, y) \in T.
@@ -1024,7 +1023,7 @@ F(x, y, z) = 0.
 		\end{equation*}
 dove ogni $\Sigma_i$ ammette una parametrizzazione $\vec{r}\colon T_i \to \mathbb{R}^3$, $\vec{r} \in C^1(T_i)$, $T_i$ aperto in $\mathbb{R}^2$ e dove ogni $\gamma_j$ non può essere parte del bordo di più di due facce.
 
-Il bordo di $\Sigma$ in questo caso è l'unione dei bordi delle $\Sigma_j$ con esclusione degli spigoli che appartengono al bordo di due facce adiacenti.
+Il bordo di $\Sigma$ in questo caso è l'unione dei bordi delle $\Sigma_i$ con esclusione degli spigoli che appartengono al bordo di due facce adiacenti.
 
 \subsection{Linee coordinate, coordinate locali, cambiamento di parametri}
 Per una superficie regolare di equazione $\vec{r} = \vec{r}(u, v)$ introduciamo le curve di equazione
@@ -1053,10 +1052,134 @@ Eseguendo il prodotto vettoriale tra $\vec{r}_u$ e $\vec{r}_v$ si ottiene
 	\end{equation*}
 	quindi $\vec{r}(u, v)$ è regolare se e solo se $\vec{r}_u \times \vec{r}_v \ne \vec{0}$, ovvero se $\vec{r}_u$ e $\vec{r}_v$ sono linearmente indipendenti.
 
+	Sia $\Sigma$ una superficie regolare di equazione $\vec{r}(u, v) = x(u, v)\vec{i} + y(u,v)\vec{j} + z(u,v)\vec{k}$, $(u ,v) \in T \subseteq \mathbb{R}^2$. Introduciamo il cambio di parametri definito dalle equazioni
+		\begin{equation}
+			\label{eqn:parsup}
+			u = \phi(s, t), \quad v = \psi(s, t),
+		\end{equation}
+	dove $(s, t) \in S \subseteq \mathbb{R}^2$ e $\phi, \psi \in C(S)$. Supponiamo che $\phi, \psi \in C^1(S)$, che
+		\begin{equation*}
+			\frac{\partial (\phi, \psi)}{\partial (s, t)} \ne 0 \quad \forall (s, t) \in \overset{\circ}{S}
+		\end{equation*}
+	e che le~\eqref{eqn:parsup} realizzino una corrispondenza biunivoca tra $S$ e $T$; se valgono tali ipotesi, il cambiamento di variabile si dirà regolare. La superficie è descritta dall'equazione
+		\begin{equation*}
+			\bar{\vec{r}}(s, t) = \bar{x}(s, t)\vec{i}+\bar{y}(s, t)\vec{j}+\bar{z}(s, t)\vec{k},
+		\end{equation*}
+	dove
+		\begin{gather*}
+			\bar{x}(s, t) = x(\phi(s, t), \psi(s, t)) \\
+			\bar{y}(s, t) = y(\phi(s, t), \psi(s, t)) \\
+			\bar{z}(s, t) = z(\phi(s, t), \psi(s, t)).
+		\end{gather*}
 
+	Si prova facilmente che la regolarità dei punti non cambia operando una trasformazione regolare di parametri e che le coppie di vettori $\vec{r}_u, \vec{r}_v$ e $\bar{\vec{r}}_s$, $\bar{\vec{r}}_t$ individuano lo stesso piano, detto piano tangente alla superficie.
 
+	Le due parametrizzazioni si dicono equivalenti se sono legate da un cambiamento regolare di parametri con determinante jacobiano positivo; in tal caso, i vettori $\bar{\vec{r}}_s \times \bar{\vec{r}}_t$ e $\vec{r}_u \times \vec{r}_v$ hanno stessa direzione e stesso verso.
 
+	\begin{exmp}
+Facendo ruotare una curva piana $\gamma$ intorno a una retta giacente nel piano della curva si ottiene una \emph{superficie di rivoluzione}; $\gamma$ si chiama \emph{generatrice}. Se il piano ha equazione $x= 0$, la retta è l'asse $z$ e la curva ha equazioni parametriche
+	\begin{equation*}
+		y = f(t), \quad z = g(t), \quad t \in I \subseteq \mathbb{R},
+	\end{equation*}
+la corrispondente superficie di rivoluzione ha equazione vettoriale
+	\begin{equation}
+		\vec{r}(\theta, t) = f(t)\cos\theta \vec{i}+f(t)\sin\theta\vec{j} + g(t) \vec{k},
+	\end{equation}
+dove $(\theta, t) \in [0, 2\pi] \times I$.
+	\end{exmp} Se la curva è di classe $C^k(I)$, la superficie sarà della stessa classe; se la curva è chiusa, anche la superficie risulterà chiusa.
 
+	Le linee coordinate per $\theta$ costante corrispondono alle diverse posizioni assunte dalla generatrice (linee meridiane) mentre quelle corrispondenti a $t$ costante sono cerchi (paralleli).
+
+	\subsection{Vettore normale, piano tangente, orientazione}
+
+	Supporremo d'ora in poi $T$ aperto.
+
+	Sia $\vec{r} = \vec{r}(u ,v)$, $(u, v) \in T \subseteq \mathbb{R}^2$ l'equazione di una superficie $\Sigma$ regolare. I due vettori $\vec{r}_u$ e $\vec{r}_v$ sono pertanto linearmente indipendenti per ogni $(u, v) \in T$.
+
+	Sia ora $\gamma$ una curva regolare contenuta in $T$ di equazioni parametriche $u = u(t)$, $v = v(t)$, $t \in I \subseteq \mathbb{R}$. La curva di equazione
+		\begin{equation}
+			\label{eqn:curva}
+			\bar{\vec{r}}(t) = \vec{r}(u(t), v(t))
+		\end{equation}
+	è una curva regolare giacente sulla superficie con vettore tangente
+		\begin{equation}
+			\label{eqn:vettang}
+			\bar{\vec{r}}'(t) = \vec{r}(u(t), v(t))u'(t) + \vec{r}_v(u(t), v(t))v'(t).
+		\end{equation}
+	La~\eqref{eqn:vettang} indica che $\bar{\vec{r}}'$ è contenuto nel piano dei vettori $\vec{r}_u$ e $\vec{r}_v$.
+
+	D'altra parte, fissato $\vec{p}_0 = \vec{r}(u_0, v_0)$. ogni curva regolare passante per $\vec{p}_0$ e giacente su $\Sigma$ si può rappresentare localmente nella forma~\eqref{eqn:curva} e quindi il suo vettore tangente è contenuto nel piano dei vettori $\vec{r}_u$ e $\vec{r}_v$. Il piano parallelo a questo e passante per $\vec{p}_0$ contiene dunque tutte le rette tangenti a ogni curva regolare passante per $\vec{p}_0$ e giacente sulla superficie; perciò è chiamato \emph{piano tangente} a $\Sigma$ nel punto $\vec{p_0} = \vec{r}(u_0, v_0)$; tale piano è invariante per cambi di parametrizzazione regolari. La sua equazione è la seguente:
+		\begin{equation}
+			(\vec{\xi} - \vec{r}(u_0, v_0), \vec{r}_u(u_0, v_0) \times \vec{r}_v(u_0, v_0)) = 0,
+		\end{equation}
+	dove $\vec{\xi} = x \vec{i} + y \vec{j} + z \vec{k}$ è il punto corrente sul piano.
+
+	Il vettore $\vec{r}_u \times \vec{r}_v$ è un vettore normale alla superficie; il versore corrispondente è
+		\begin{equation}
+			\vec{n} = \frac{\vec{r}_u \times \vec{r}_v}{\norma{\vec{r}_u \times \vec{r}_v}}.
+		\end{equation}
+
+\begin{exmp}
+Sia $z = f(x,y)$ l'equzione di una superficie, con $f \in C^1(T)$, $T$ aperto connesso di $\mathbb{R}^2$. Si trova facilmente che
+	\begin{equation*}
+		\vec{n} = \frac{1}{\sqrt{1 + \norma{\nabla f}^2}}(-f_x \vec{i} - f_y\vec{j} + \vec{k}),
+	\end{equation*}
+mentre il piano tangente alla superficie nel punto $(x_0, y_0, f(x_0, y_0))$ ha equazione
+	\begin{equation*}
+		(x - x_0)f_x(x_0, y_0) + (y-y_0)f_y(x_0, y_0) - (z-z_0) = 0,
+	\end{equation*}
+ove $z_0 = f(x_0, y_0)$.
+\end{exmp}
+
+Fra $\vec{n}$ e $-\vec{n}$ convenzionalmente chiameremo versore normale $\vec{n}$; tale scelta è legata al concetto di \emph{orientazione} di una superficie. Sia $\Sigma$ una superficie regolare; supponiamo che sia possibile scegliere il versore normale in modo che, partendo da un punto $\vec{p}_0 \in \Sigma$ e seguendo una qualunque curva regolare e chiusa (che dunque ritorni in $\vec{p}_0$) sulla superficie, il versore normale vari con continuità e ritorni nella posizione iniziale; in tal caso diremo che la superficie è \emph{orientabile} e che la scelta del versore normale determina l'orientazione.
+
+Una superficie regolare semplice con dominio base $T$ aperto è orientabile, come si verifica facilmente, essendo $\vec{n} = \vec{n}(u, v)$ un vettore continuo su $T$.
+
+Effettuando un cambio di parametri regolare, il piano tangente rimane invariato; il versore normale cambia verso se lo jacobiano della trasformazione è negativo, rimane invariato se è positivo. Ciò significa che se una superficie $\Sigma$ è orientabile, l'orientazione rimane inalterata rispetto a parametrizzazioni equivalenti.
+
+\subsection{Area di una superficie, integrali superficiali}
+
+Se $\vec{\xi}$ e $\vec{\eta}$ sono due vettori di $\mathbb{R}^3$ linearmente indipendenti, allora $\norma{\vec{\xi} \times \vec{\eta}}$ rappresenta l'area del parallelogramma $\bar{R}$ che essi individuano; se si vuole ottenere l'area della sua proiezione $R$ sul piano $xy$, basta moltiplicare $\norma{\vec{\xi} \times \vec{\eta}}$ per $\cos \alpha$, dove $\alpha$, $-\pi/2 < \alpha < \pi/2$, è l'angolo tra i vettori $\vec{\xi} \times \vec{\eta}$ e $\vec{k}$. Vale cioè la formula
+	\begin{equation}
+		a(R)=a(\bar{R})\cos\alpha.
+	\end{equation}
+Applichiamo queste considerazioni a una superficie semplice e regolare $\Sigma$ di equazione $\vec{r} = \vec{r}(u, v)$, $(u, v) \in T \subset \mathbb{R}^2$, $T$ aperto limitato.
+
+Consideriamo una porzione (\emph{parallelogramma curvilineo}) di $\Sigma$ individuata da due coppie di linee coordinate, definite da $u = \bar{u}$, $u = \bar{u} + du$ e da $v = \bar{v}$, $v = \bar{v} + dv$, con $du >0$, $dv > 0$.  I due vettori $\vec{r}_udu = \vec{r}_u(u, \bar{v})$ e $\vec{r}_vdv = \vec{r}_v(\bar{u}, v) dv$ individuano un parallelogramma la cui area $\norma{\vec{r}_u \times \vec{r}_v}du dv$ intuitivamente coincide (a meno di infinitesimi di ordine superiore a $du^2 + dv^2$) con quella del parallelogramma curvilineo.
+Tale area è intuitivamente pari a $\vec{\xi} \times \vec{\eta}$, dove
+	\begin{gather*}
+		\vec{\xi} = \vec{r}( u + du, v) - \vec{r}(u, v) = \vec{r}_udu + o(du) \\
+		\vec{\eta} = \vec{r}(u, v+dv) - \vec{r}(u, v) = \vec{r}_vdv + o(dv).
+	\end{gather*}
+
+È quindi ragionevole chiamare \emph{elemento d'area} l'espressione simbolica
+	\begin{equation}
+		d\sigma \coloneqq \norma{\vec{r}_u \times \vec{r}_v} dudv
+	\end{equation}
+e dare la seguente
+
+	\begin{defn}
+		L'area di $\Sigma$ è assegnata dalla formula
+			\begin{equation}
+				a(\Sigma) = \iint_{\Sigma} d\sigma \coloneqq \iint_{T} \norma{\vec{r}_u \times \vec{r}_v} \, du dv.
+			\end{equation}
+	\end{defn}
+
+Per una superficie data in forma implicita $F(x, y, z) = 0$, con $F_z \ne 0$, si ha localmente $z = f(x, y)$ e pertanto l'elemento d'area in termini di $F$ è dato dalla formula
+	\begin{equation}
+		d\sigma = \sqrt{1 + \biggl(\frac{F_x}{F_z} \biggr)^2 + \biggl( \frac{F_y}{F_z} \biggr)^2} dx dy = \frac{\norma{\nabla F}}{\norma{F_z}} dx dy.
+	\end{equation}
+
+Passiamo alla definizione di \emph{integrale di superficie}.
+
+Se $h = h(x, y, z)$ è una funzione reale definita su $\Sigma$, si definisce l'integrale di $h$ su $\Sigma$ mediante la formula
+	\begin{equation}
+		\label{eqn:intsup}
+		\iint_{\Sigma} h d\sigma \coloneqq \iint_T h(\vec{r}(u, v)) \norma{\vec{r}_u \times \vec{r}_v} \, dudv,
+	\end{equation}
+quando l'integrale a destra della~\eqref{eqn:intsup} è ben definito. È facile mostrare che l'integrale~\eqref{eqn:intsup} (e quindi l'area di $\Sigma$) non dipendono dall'orientazione; le nozioni di area e integrale di superfici si estendono senza difficoltà al caso di superfici regolari a tratti.
+
+\subsection{Alcune applicazioni fisiche e geometriche}
 
 
 
