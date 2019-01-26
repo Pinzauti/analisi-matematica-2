@@ -42,6 +42,8 @@
 \renewcommand{\rho}{\varrho}
 \renewcommand{\phi}{\varphi}
 \renewcommand{\ni}{\nu}
+\renewcommand{\mi}{\mu}
+
 
 \pagestyle{plain}
 
@@ -1362,6 +1364,148 @@ ove $S$ è un sottoinsieme misurabile in $\Omega$ e $f \in C(\vec{T}(S))$.
 		\end{equation*}
 
 	\end{exmp}
+
+	\subsection{Alcune applicazioni}
+	Integrali doppi e tripli si possono usare per il calcolo di baricentri e momenti di inerzia per distirbuzioni continue di massa bidimensionali o tridimensionali.
+
+	Se $m_1, m_2, \dots, m_k$ sono masse dislocate rispettivamente in punti $\vec{p}_1, \vec{p}_2, \dots, \vec{p}_k$ il \emph{baricentro} della loro distribuzione è definito dal punto
+		\begin{equation*}
+			\vec{b} \coloneqq \frac{1}{m}\sum_{j = 1}^k m_j\vec{p}_j,
+		\end{equation*}
+ove
+	\begin{equation*}
+		m = \sum_{j=1}^km_j
+	\end{equation*}
+è la massa totale. Il \emph{momento d'inerzia} rispetto a una retta $r$ o a un polo $\vec{p}$ è dato dalla formula
+	\begin{equation*}
+		I \coloneqq \sum_{j=1}^k d_k^2m_k
+	\end{equation*}
+dove $d_k$ indica la distanza di $\vec{p}_k$ dalla retta o dal polo.
+
+Supponiamo ora che un corpo occupi una regione piana $\Omega$. Se $\mi = \mi(x, y)$ indica la densità superficiale di massa, la massa totale $m$ del corpo è data dall'integrale
+	\begin{equation*}
+		m = \iint_{\Omega} \mi(x, y)\,dx\,dy.
+	\end{equation*}
+
+Le coordinate del baricentro sono assegnate dalle formule
+	\begin{equation}
+		x_{\vec{b}} \coloneqq \frac{1}{m}\iint_{\Omega}x\mi(x, y)\,dx\,dy, \quad y_{\vec{b}} \coloneqq \frac{1}{m}\iint_{\Omega}y\mi(x, y)\,dx\,dy.
+	\end{equation}
+
+Se la densità è costante, $\mi = k$ (corpo omogeneo), il baricentro si chiama anche \emph{centroide} ed essendo $m = k\cdot(\Omega)$ le formule precedneti diventano
+	\begin{equation}
+		x_{\vec{b}} = \frac{1}{a(\Omega)} \iint_{\Omega}x\,dx\,dy, \quad y_{\vec{b}} = \frac{1}{a(\Omega)}\iint_{\Omega}y \, dx\,dy.
+	\end{equation}
+
+	Il momento d'inerzia rispetto a una retta $r$ o un polo $\vec{p}$ giacenti nel piano di $\Omega$ è assegnato dalla formula
+		\begin{equation}
+			I \coloneqq \iint_{\Omega}(\delta(x,y))^2\mi(x,y)\,dx\,dy,
+		\end{equation}
+	dove $\delta = \delta(x, y)$ indica la distanza del punto $(x, y)$ dalla retta o dal polo. Per esempio, per i momenti d'inerzia rispetto agli assi coordinati si ha
+		\begin{equation*}
+			I_x = \iint_{\Omega}y^2\mi(x, y)\,dx\,dy, \quad I_y = \iint_{\Omega}x^2 \mi(x, y)\,dx\,dy,
+		\end{equation*}
+mentre per quello rispetto all'origine
+	\begin{equation*}
+		I_{\vec{0}} = \iint_{\Omega}(x^2+y^2)\mi(x, y)\,dx\,dy = I_x + I_y.
+	\end{equation*}
+
+	Le formule precedenti si estendono a una distribuzione tridimensionale di massa con densità $\mi = \mi(x, y, z)$, $(x, y, z) \in V$.
+
+	Per il baricentro si avrà
+		\begin{gather*}
+			x_{\vec{b}} \coloneqq \frac{1}{m} \iint_V x\mi(x, y, z)\,dx\,dy\,dz, \\
+			y_{\vec{b}} \coloneqq \frac{1]{m}}\iint_V y\mi(x, y, z)\,dx\,dy\,dz, \\
+			z_{\vec{b}} \coloneqq \frac{1]{m}}\iint_V z\mi(x, y, z)\,dx\,dy\,dz,
+		\end{gather*}
+	con
+		\begin{equation*}
+			m = \iiint_V \mi\,dx\,dy\,dz
+		\end{equation*}
+	massa totale, mentre per il momento d'inerzia
+		\begin{equation*}
+			I \coloneqq \iiint_V (\delta(x, y, z))^2\mi(x, y, z)\,dx\,dy\,dz.
+		\end{equation*}
+
+\subsection{Cenni agli integrali multipli generalizzati}
+Quando la funzione integranda o il dominio d'integrazione (o entrambi) non sono limitati si parla di integrale generalizzato o improprio.
+
+Consideriamo il caso in cui la funzione integranda non è limitata ma il dominio $\Omega$ d'integrazione resta limitato; nella maggioranza dei casi concreti, le funzioni che si integrano sono funzioni continue, illimitate in un intorno di insiemi di misura nulla (per esempio nell'intorno di un numero finito di punti isolati).
+
+L'idea è quella di togliere dalla regione $\Omega$ un insieme $S$ di misura piccola con i punti problematici, integrare su $\Omega \setminus S$ e calcolare il limite facendo tendere a zero la misura di $S$. Se il limite esiste, si chiamerà integrale improprio o generalizzato di $f$ in $\Omega$.
+
+Ci limitiamo alla situazione più semplice in cui esiste non solo l'integrale improprio di $f$, ma anche quello di $\abs{f}$ (cioè la funzione è \emph{assolutamente integrabile} in senso generalizzato).
+
+Siano $\Omega$ una regione misurabile e limitata di $\mathbb{R}^n$ ed $f \colon \Omega \to \mathbb{R}$. Supponiamo di poter trovare una successione $\{\Omega_j \}_{j \ge 1}$ di sottoinsiemi di $\Omega$ con le seguenti proprietà:
+	\begin{enumerate}
+		\item $\Omega_j \subset \Omega_{j+1}$ per $j \ge 1$;
+		\item ogni $\Omega_j$ è misurabile e $\abs{\Omega}_j \to \abs{\Omega}$ se $j \to +\infty$;
+		\item $f \in \mathcal{R}(\Omega_j)$ (e quindi anche $\abs{f} \in \mathcal{R}(\Omega_j)$) e
+			\begin{equation*}
+				\lim_{j\to+\infty}\int_{\Omega_j}\abs{f}
+			\end{equation*}
+		esiste finito.
+	\end{enumerate}
+
+	Allora si può dimostrare che anche
+		\begin{equation}
+			\label{eqn:intimp1}
+			I = \lim_{j\to+\infty}\int_{\Omega_j}f
+		\end{equation}
+	esiste finito e che non dipende dalla particolare scelta della successione $\{ \Omega_j\}$ che approssima $\Omega$; $I$ si chiama integrale generalizzato o improprio di $f$ su $\Omega$.
+
+	Consideriamo ora l'integrale di una funzione su un dominio illimitato; il procedimento è sostanzialmente lo stesso considerato in precedenta.
+
+	Siamo $\Omega$ misurabile e illimitato in $\mathbb{R}^n$ ed $f \colon \Omega \to \mathbb{R}$. Suponiamo di poter trovare una successione $\{\Omega_j \}$ di sottoinsiemi limitati e misurabili di $\Omega$ per cui valgano le proprietà 1. e 3. precedenti e la seguente:
+		\begin{enumerate}[label=\arabic*'.]
+			\setcounter{enumi}{1}
+			\item per ogni $K$ compatto e contenuto in $\Omega$ esiste $j$ tale che $K \subset \Omega_j$.
+		\end{enumerate}
+
+		Valgono allora le stesse considerazioni fatte nel caso precedente e analogamente si può definire
+			\begin{equation}
+				\int_{\Omega} f \coloneqq \lim_{j\to +\infty} \int_{\Omega_j} f.
+			\end{equation}
+
+\begin{exmp}
+Tramite gli integrali doppi generalizzati si può calcolare
+	\begin{equation*}
+		I = \int_{-\infty}^{+\infty}e^{-x^2}\,dx.
+	\end{equation*}
+
+Consideriamo infatti
+	\begin{equation*}
+		\iint_{\mathbb{R}^2}e^{-x^2-y^2}\,dx\,dy.
+	\end{equation*}
+Scegliendo $\Omega_j = B_j =$ cerchio con centro in $(0,0)$ e raggio $j$, le ipotesi 1. e 2'. sono derificate; notiamo inoltre che $e^{-x^2-y^2} > 0$ in $\mathbb{R}^2$.
+
+Si ha, usando le coordinate polari,
+	\begin{equation*}
+		\iint_{B_j} e^{-x^2-y^2}\,dx\,dy = \int_0^{2\pi}d\theta \int_0^j\rho e^{-\rho^2}\,d\rho = \pi(1-e^{-j^2})\to \pi
+	\end{equation*}
+se $j \to +\infty$. Pertanto
+	\begin{equation}
+		\iint_{\mathbb{R}^2} e^{-x^2-y^2}\,dx\,dy = \pi.
+	\end{equation}
+
+	D'altra parte, si deve ottenere lo stesso risultato scegliendo
+		\begin{equation*}
+			\Omega_j = Q_j = \{(x,y) \in \mathbb{R}^2 \colon \abs{x} < j, \abs{y} < k \}.
+		\end{equation*}
+Si ha
+	\begin{equation*}
+		\iint_{Q_j}e^{-x^2-y^2}\,dx\,dy = \int_{-j}^{j}e^{-x^2}\,dx\int_{-j}^{j}e^{-y^2}\,dy \to \biggl(\int_{-\infty}^{+\infty}e^{-t^2}\,dt \biggr)^2 = I^2,
+	\end{equation*}
+per $j \to +\infty$.
+
+Quindi $I^2 = \pi$ e perciò
+	\begin{equation}
+		\int_{-\infty}^{+\infty}e^{-x^2}\,dx = \sqrt{\pi}.
+	\end{equation}
+
+\end{exmp}
+
+
 
 
 
