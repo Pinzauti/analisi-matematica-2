@@ -931,6 +931,439 @@ Sia $q(\vec{h}) = (A\vec{h}, \vec{h})$ una forma quadratica in $\mathbb{R}^n$ e 
 
 Nel nostro caso, il lemma si applica con $A = \mathbf{H}_f(\vec{x}_0) - \lambda_0 \mathbf{H}_g(\vec{x}_0)$ e $\vec{b} = \nabla g(\vec{x}_0)$; poiché $\nabla g(\vec{x}_0) \ne \vec{0}$, si può supporre sempre che $D_{x_1}g(\vec{x}_0) \ne 0$.
 
+\chapter{Misura e integrazione}
+\section{Integrale multiplo secondo Riemann}
+\subsection{Integrale doppio per funzioni definite su un rettangolo}
+Sia $Q = [a, b] \times [c, d]$ un rettangolo e siano
+	\begin{align*}
+	\mathcal{D}_1 &= \{ x_0 = a, x_1, \dots, x_{r-1}, x_r = b\} \\
+	\mathcal{D}_2 &= \{ y_0 = c, y_1, \dots, y_{s-1}, y_s = d \}
+	\end{align*}
+due suddivisioni di $[a, b]$ e $[c, d]$ rispettivamente. Il prodotto cartesiano $\mathcal{D} = \mathcal{D}_1 \times \mathcal{D}_2$ è chiamato \emph{suddivisione} o \emph{partizione} di $Q$; si pone
+	\begin{align*}
+	I_k = [x_{k-1}, x_k], \quad \Delta x_k = x_k - x_{k-1}, \quad k = 1, 2, \dots, r \\
+	J_h = [y_{h-1}, y_h], \quad \Delta y_h = y_h - y_{h-1}, \quad h = 1, 2, \dots, s.
+	\end{align*}
+
+Il rettangolo $Q$ è decomposto nell'unione degli $rs$ rettangoli $Q_{jh} = I_k \times J_h$; consideriamo adesso una funzione $f \colon Q \to \mathbb{R}$ limitata:
+	\begin{equation}
+	\label{eqn:flimitata}
+	m \le f(x, y) \le M,
+	\end{equation}
+per ogni $(x, y) \in Q$.
+Per $k = 1, 2, \dots, r$ e $h = 1, 2, \dots, s$ poniamo
+	\begin{equation}
+	m_{kh} = \inf_{Q_{kh}}f, \quad M_{kh} = \sup_{Q_{kh}} f.
+	\end{equation}
+
+Definiamo la somma inferiore e la somma superiore di $f$ relativamente a $\mathcal{D}$ come, rispettivamente,
+	\begin{align*}
+	s &= s(\mathcal{D}, f) = \sum_{k=1}^r\sum_{h=1}^s m_{kh}\Delta x_k \Delta y_h, \\
+	S &= S(\mathcal{D}, f) = \sum_{k=1}^r \sum_{h=1}^s M_{kh} \Delta x_k \Delta y_h.
+	\end{align*}
+
+Per la~\eqref{eqn:flimitata} risulta, per ogni suddivisione $\mathcal{D}$ di $Q$,
+	\begin{equation*}
+	m(b -a )(c-d) \le s(\mathcal{D}, f) \le S(\mathcal{D}, f) \le M(b-a)(c-d),
+	\end{equation*}
+e sono perciò ben definite le quantità
+	\begin{equation*}
+	\inf_{\mathcal{D}}S(\mathcal{D}, f), \quad \sup_{\mathcal{D}}s(\mathcal{D}, f),
+	\end{equation*}
+ove i due estremi sono cercati al variare di tutte le possibili suddivisioni di $Q$.
+
+Come nel caso unidimensionale, si può mostrare che
+	\begin{equation*}
+	\sup_{\mathcal{D}} s(\mathcal{D}, f) \le \inf_{\mathcal{D}} S(\mathcal{D}, f).
+	\end{equation*}
+
+\begin{defn}
+Una funzione $f \colon Q \to \mathbb{R}$ limitata si dice \emph{integrabile} secondo Riemann se
+	\begin{equation*}
+	\sup_{\mathcal{D}} s(\mathcal{D}, f) = \inf_{\mathcal{D}} S(\mathcal{D}, f).
+	\end{equation*}
+\end{defn}
+
+Il valore comune dei due estremi si chiama \emph{integrale} di Riemann di $f$ in $Q$ e si denota con i simboli
+	\begin{equation*}
+	\mathcal{I}(Q, f), \quad \int_Q f, \quad \iint_Q f(x,y)\, dxdy, \quad \int_a^b \int_c^d f(x,y) \, dxdy.
+	\end{equation*}
+$Q$ è detto dominio d'integrazione ed $f$ funzione integranda: si noti che le variabili $x$ e $y$, come nel caso unidimensionale, sono mute e si può utilizzare una qualsiasi altra coppia di variabili senza modificare il valore dell'integrale.
+
+La classe delle funzioni limitate integrabili secondo Riemann su $Q$ si indica con il simbolo $\mathcal{R}(Q)$.
+
+\begin{teor}
+Sia $f \colon Q \to \mathbb{R}$ limitata. Allora $f \in \mathcal{R}(Q)$ se e solo se, per ogni $\epsilon > 0$, esiste una suddivisione $\mathcal{D}_{\epsilon}$ di $Q$ tale che
+	\begin{equation}
+	S(\mathcal{D}_{\epsilon}, f) - s(\mathcal{D}_{\epsilon}, f) < \epsilon.
+	\end{equation}
+\end{teor}
+
+\begin{teor}
+Se $f$ è continua in $Q$, allora è integrabile in $Q$.
+\end{teor}
+\subsection{Calcolo di un integrale doppio mediante due integrazioni semplici}
+\begin{teor}[di riduzione]
+Sia $f \in \mathcal{R}(Q)$, $Q = [a, b] \times [c, d]$.
+	\begin{enumerate}
+	\item Se, per ogni $y \in [c, d]$, esiste l'integrale
+		\begin{equation*}
+		\int_a^b f(x, y) \, dx,
+		\end{equation*}
+	allora la funzione $y \mapsto G(y)$ è integrabile in $[c, d]$ e vale la formula
+		\begin{equation}
+		\label{eqn:iteratox}
+		\iint_Q f = \int_c^d G(y)\, dy = \int_c^d \biggl( \int_a^b f(x, y) \, dx \biggr) \, dy.
+		\end{equation}
+
+	\item Se, per ogni $x \in [a, b]$, esiste l'integrale
+		\begin{equation*}
+		\int_c^d f(x,y) \, dy,
+		\end{equation*}
+	allora la funzione $x \mapsto H(x)$ è integrabile in $[a, b]$ e vale la formula
+		\begin{equation}
+		\label{eqn:iteratoy}
+		\iint_Q f = \int_a^b H(x) \, dx = \int_a^b \biggl( \int_c^d f(x,y) \, dy \biggr) \, dx.
+		\end{equation}
+	\end{enumerate}
+\end{teor}
+
+\begin{oss}
+Le formule~\eqref{eqn:iteratox} e~\eqref{eqn:iteratoy} prendono il nome di \emph{formule di riduzione}; gli integrali a destra si dicono \emph{integrali iterati}. Se possono essere applicate entrambe le formule, si ottiene
+	\begin{equation}
+	\int_c^d \biggl( \int_a^b f(x,y) \, dx \biggr) \, dy = \int_a^b \biggl( \int_c^d f(x,y) \,dy \biggr) \, dx,
+	\end{equation}
+detta \emph{formula di scambio dell'ordine d'integrazione}.
+\end{oss}
+
+Si noti che l'esistenza dell'integrale doppio \emph{non} implica l'esistenza degli integrali iterati, che dev'essere provata prima di applicare le formule di riduzione.
+
+Se però $f$ è continua in $Q$ (e perciò ivi integrabile), per ogni $y \in [c,d]$ la funzione $x \mapsto f(x, y)$ è continua in $[a, b]$ e perciò integrabile; esiste cioè per ogni $y \in [c, d]$ l'integrale
+	\begin{equation*}
+	\int_a^b f(x,y) \, dx.
+	\end{equation*}
+Analogamente, esiste l'integrale
+	\begin{equation*}
+	\int_c^d f(x,y) \, dy
+	\end{equation*}
+per ogni $x \in [a, b]$. Le ipotesi del teorema sono così verificate ed è possibile utilizzare entrambe le formule~\eqref{eqn:iteratox} e~\eqref{eqn:iteratoy}.
+
+\begin{oss}
+Un caso particolare si presenta quando $f(x,y) = g(x)h(y)$ (si dice che le variabili sono separate). Se $g \in \mathcal{R}(a,b)$ e $h \in \mathcal{R}(c, d)$, allora $f \in \mathcal{R}(Q)$ e la formula di riduzione vale nella forma
+	\begin{equation}
+	\iint_Q f = \int_a^b g(x) \, dx \int_c^d h(y)\,dy.
+	\end{equation}
+\end{oss}
+
+\subsection{Integrali su regioni più generali, misura di Peano-Jordan}
+Consideriamo regioni $\Omega$ del piano limitate e funzioni $f \colon \Omega \to \mathbb{R}$ limitate.
+
+Racchiudiamo $\Omega$ in un rettangolo $Q$ e definiamo una nuove funzione $\tilde{f}$ come segue:
+	\begin{equation}
+	\tilde{f}(x, y) = \begin{dcases*}
+	f(x,y) &se $(x, y) \in \Omega$ \\
+	0 &se $(x, y) \in Q\setminus \Omega$.
+	\end{dcases*}
+	\end{equation}
+
+\begin{defn}
+Si dice che $f$ è integrabile in $\Omega$ (secondo Riemann) se $\tilde{f}$ è integrabile in $Q$ e si pone
+	\begin{equation*}
+	\iint_{\Omega} f \coloneqq \iint_Q \tilde{f}.
+	\end{equation*}
+\end{defn}
+
+Dato $\Omega \subset \mathbb{R}^2$ limitato, la sua \emph{funzione caratteristica} è definita come
+	\begin{equation*}
+	\mathbf{1}_{\Omega}(x, y) = \begin{dcases*}
+	1 &se $(x, y) \in \Omega$ \\
+	0 &se $(x, y) \notin \Omega$.
+	\end{dcases*}
+	\end{equation*}
+
+\begin{defn}
+Un sottoinsieme $\Omega \subset \mathbb{R}^2$ limitato si dice \emph{misurabile} (secondo Peano-Jordan) se $\mathbf{1}_{\Omega} \in \mathcal{R}(\Omega)$. Chiameremo \emph{area} o \emph{misura} di $\Omega$ il numero non negativo
+\begin{equation}
+\abs{\Omega} \coloneqq \mathcal{I}(\mathbf{1}_{\Omega}) =  \iint_{\Omega} dxdy.
+\end{equation}
+\end{defn}
+
+Un insieme $Z$ ha \emph{misura nulla} se $\mathbf{1}_Z$ è integrabile e
+	\begin{equation*}
+	\iint_Z dxdy = 0.
+	\end{equation*}
+
+\begin{prop}[Caratterizzazione degli insiemi di misura nulla]
+Un insieme $Z \subset \mathbb{R}^2$ è di misura nulla se e solo se per ogni $\epsilon > 0$ esiste un numero finito $N_{\epsilon}$ di rettangoli, $Q_1, Q_2, \dots, Q_{N_\epsilon}$ tali che:
+	\begin{equation*}
+	Z \subset \bigcup_{j=1}^{N_{\epsilon}} Q_j, \quad
+	\sum_{j=1} ^{N_{\epsilon}} \abs{Q_j} < \epsilon.
+	\end{equation*}
+\end{prop}
+
+\begin{prop}[Caratterizzazione degli insiemi secondo Peano-Jordan]
+Un insieme $\Omega \subset \mathbb{R}^2$ limitato è misurabile secondo Peano-Jordan se e solo se $\partial \Omega$ è misurabile e $\abs{\partial \Omega} = 0$.
+\end{prop}
+
+\begin{exmp}
+I seguenti insiemi di $\mathbb{R}^2$ sono di misura nulla.
+	\begin{enumerate}
+	\item Un insieme costituito da un numero finito di punti.
+	\item Un segmento di retta.
+	\item Se $Z_1$ è misurabile, $Z_1 \subset Z$ e $Z$ ha misura nulla, allora anche $Z_1$ ha misura nulla.
+	\item L'unione di un numero finito di insiemi di misura nulla (in particolare, il bordo di un poligono di $m$ lati).
+	\end{enumerate}
+\end{exmp}
+
+\begin{prop}
+Sia $g \colon [a, b] \to \mathbb{R}$ limitata e integrabile. Allora il suo grafico ha misura nulla.
+\end{prop}
+
+\begin{oss}
+La precedente Proposizione si estende alle curve regolari $\gamma \colon [a, b] \to \mathbb{R}^3$: i sostegni di tali curve, come insieme di punti in $\mathbb{R}^3$ (in $\mathbb{R}^2$ se la curva è piana) hanno misura nulla (misura che non va confusa con la lunghezza della curva, sempre positiva).
+\end{oss}
+
+Inoltre, il grafico di una funzione \emph{continua} su un intervallo $[a, b]$ ha misura nulla e risultano misurabili regioni del tipo
+	\begin{equation}
+	\{(x,y) \in \mathbb{R}^2  \colon x \in [a, b], \ g_1 (x) \le y \le g_2(x)\},
+	\end{equation}
+con $g_1$ e $g_2$ continue, e
+	\begin{equation}
+	\{(x,y) \in \mathbb{R}^2 \colon y \in [c,d], \ h_1(y) \le x \le h_2(y) \},
+	\end{equation}
+con $h_1$ e $h_2$ continue. Tali insiemi si dicono $semplici$ rispetto all'asse $y$ e all'asse $x$ rispettivamente.
+
+\subsection{Funzioni generalmente continue}
+\begin{defn}
+Siano $Q$ un rettangolo, $f \colon Q \to \mathbb{R}$ limitata. Si dice che $f$ è \emph{generalmente continua} se l'insieme dei suoi punti di discontinuità ha misura nulla.
+\end{defn}
+
+\begin{teor}
+Sia $f \colon Q \to \mathbb{R}$ limitata. Se $f$ è generalmente continua, allora è integrabile.
+\end{teor}
+
+Si ricava subito che:
+\begin{enumerate}
+\item le funzioni continue su un compatto $\Omega$ misurabile sono integrabili in $\Omega$;
+\item le funzioni limitate e continue su un aperto $\Omega$ misurabile sono integrabili in $\Omega$.
+\end{enumerate}
+
+\begin{prop}
+Sia $\Omega$ una regione semplice rispetto a uno dei due assi (eventualmente a entrambi). Se $f \colon \Omega \to \mathbb{R}$ è limitata e continua in $\overset{\circ}{\Omega}$, allora è integrabile in $\Omega$ e valgono le seguenti formule:
+	\begin{align}
+	\iint_{\Omega} f = \int_a^b \biggl( \int_{g_1(x)}^{g_2(x)} f(x, y) \, dy \biggr) \, dx \quad \text{($\Omega$ semplice rispetto all'asse $y$)} \\
+	\iint_{\Omega} f = \int_c^d \biggl(\int_{h_1(y)}^{h_2(y)} f(x,y) \, dx \biggr) \, dy \quad \text{($\Omega$ semplice rispetto all'asse $x$)}
+	\end{align}
+\end{prop}
+
+\subsection{Proprietà dell'integrale}
+\begin{teor}
+Siano $\Omega$ limitato in $\mathbb{R}^2$, $f, g \in \mathcal{R}(\Omega)$, $\alpha, \beta \in \mathbb{R}$.
+	\begin{enumerate}
+	\item Linearità: $\alpha f + \beta g \in \mathcal{R}(\Omega)$ e
+		\begin{equation*}
+		\iint_{\Omega} (\alpha f + \beta g) = \alpha \iint_{\Omega} f + \beta \iint_{\Omega} g.
+		\end{equation*}
+	\item Monotonia:
+		\begin{enumerate}
+		\item se $f \ge g$, allora
+			\begin{equation*}
+			\iint_{\Omega} f \ge \iint_{\Omega} g.
+			\end{equation*}
+		\item $\abs{f} \in \mathcal{R}(\Omega)$ e si ha
+			\begin{equation*}
+			\abs{\iint_{\Omega} f} \le \iint_{\Omega} \abs{f}.
+			\end{equation*}
+		\end{enumerate}
+		In particolare, se $\Omega$ è misurabile e $M_1 = \sup_{\Omega} \abs{f}$,
+				\begin{equation}
+				\abs{\iint_{\Omega} f} \le M_1 \abs{\Omega}.
+				\end{equation}
+		\item Teorema della media:
+			\begin{enumerate}
+			\item Se $\Omega$ è misurabile e $m =\sup_{\Omega} f$, si ha:
+				\begin{equation*}
+				m \le \frac{1}{\abs{\Omega}} \iint_{\Omega} f \le M.
+				\end{equation*}
+			\item Se $\Omega$ è misurabile, compatto e connesso e se $f \in C(\Omega)$, allora esiste $(x_0, y_0) \in \Omega$ tale che
+				\begin{equation*}
+				\frac{1}{\abs{\Omega}} \iint_{\Omega} f = f(x_0, y_0).
+				\end{equation*}
+			\end{enumerate}
+	\end{enumerate}
+\end{teor}
+
+\subsection{Cambiamento delle variabili d'integrazione}
+Consideriamo nel piano un aperto limitato $\Omega$ e una trasformazione biunivoca $\mathbf{T} \colon \Omega \leftrightarrow \mathbf{T}(\Omega) \subset \mathbb{R}^2$ assegnata dalle formule
+	\begin{equation}
+	\label{eqn:trasfvar}
+		\begin{dcases}
+		x = \phi(u, v) \\
+		y = \psi(u, v)
+		\end{dcases}
+	\end{equation}
+o, in forma compatta,
+	\begin{equation*}
+	\mathbf{T}(u, v) = (\phi(u, v), \psi(u, v)).
+	\end{equation*}
+
+Siano $A$ un aperto misurabile, tale che $\overline{A} \subset \mathbf{T}(\Omega)$ e $f\colon \overline{A} \to \mathbb{R}$ una funzione continua. Come si trasforma l'integrale
+	\begin{equation}
+	\iint_A f(x, y) \,dxdy
+	\end{equation}
+operando la trasformazione di variabili~\eqref{eqn:trasfvar}?
+
+Se valgono le seguenti ipotesi su $\mathbf{T}$\footnote{Si osserva facilmente che in tal caso $\mathbf{T}^{-1}$ ha le stesse proprietà.}:
+	\begin{enumerate}
+	\item $\mathbf{T} \in C^1(\Omega)$ (cioè $\phi$ e $\psi$ sono differenziabili con continuità in $\Omega$);
+	\item lo jacobiano della trasformazione non si annulla in $\Omega$, cioè
+		\begin{equation*}
+		\det \mathbf{J} = \frac{\partial(\phi, \psi)}{\partial (u, v)} = \det{\begin{pmatrix} \phi_u & \phi_v \\ \psi_u & \psi_v  \end{pmatrix}} \ne 0
+		\end{equation*}
+	in $\Omega$,
+	\end{enumerate}
+allora si può enunciare il seguente\footnote{Nel nostro caso studieremo solo (imponendo una condizione più forte) i diffeomorfismi; dati $X \subset \mathbb{R}^n$, $Y \subset \mathbb{R}^m$, $\mathbf{T} \colon X \to \mathbb{R}^m$, si dice che $\mathbf{T}$ è un diffeomorfismo da $X$ su $Y$ se:
+	\begin{enumerate}
+	\item $\mathbf{T}$ è una biiezione da $X$ in $Y$;
+	\item $\mathbf{T}$ è estendibile a un'applicazione $C^1$ in un aperto $A \supset X$;
+	\item $\mathbf{T}^{-1}$ è estendibile a un'applicazione $C^1$ in un aperto $B \supset Y$.
+	\end{enumerate}
+Ovviamente. $\mathbf{T}$ è un diffeomorfismo se e solo se lo è $\mathbf{T}^{-1}$.
+}
+\begin{teor}
+	\label{cambiovariabili}
+Sia $\mathbf{T} \colon \Omega \to \mathbf{T}(\Omega)$, con $\Omega$ aperto di $\mathbb{R}^2$, un'applicazione biunivoca soddisfacente le proprietà sopra enunciate. Sia $S$ un insieme tale che $S \subset \Omega$. Allora:
+	\begin{enumerate}
+	\item $S$ è misurabile se e solo se $\mathbf{T}(S)$ è misurabile;
+	\item se $S$ è misurabile e $f \in C(\mathbf{T}(S))$, vale la formula
+		\begin{equation}
+			\label{eqn:cambiovariabili}
+		\iint_{\mathbf{T}(S)} f(x,y) \, dxdy = \iint_S \overline{f}(u, v) \abs{\frac{\partial(\phi, \psi)}{\partial(u, v)}} \, dudv.
+		\end{equation}
+	\end{enumerate}
+\end{teor}
+
+\begin{exmp}[Coordinate polari] Sia $\vec{T} = \vec{T](\rho, \theta)}$ definita dalle equazioni
+		\begin{gather*}
+			x(\rho, \theta) = \rho\cos\theta
+			y(\rho, \theta) = \rho\sin\theta.
+		\end{gather*}
+	Se $\Omega = (0, +\infty) \times (0, 2\pi)$ allora $\vec{T}(\Omega)$ coincide con il piano privato del semiasse $y = 0, x \ge 0$. Poiché
+		\begin{equation*}
+			\frac{\partial (x, y)}{\partial (\rho, \theta)} = \rho,
+		\end{equation*}
+	$\vec{T}$ soddisfa le ipotesi del Teorema~\ref{cambiovariabili}. Se $A \subset \vec{T}(\Omega)$ è misurabile e limitato ed $f$ è continua e limitata su $A$ si ha dunque
+		\begin{equation}
+			\iint_A f(x, y) \, dx \, dy = \iint_{\vec{T}^{-1}(A)}f(\rho\cos\theta, \rho\sin\theta) \rho \, d\rho\,d\theta
+		\end{equation}
+\end{exmp}
+
+\subsection{Integrali multipli}
+La teoria degli integrali doppi si può estendere senza problemi a dimensioni $n \ge 3$; ci limitiamo a enunciare i principali risultati, dando per scontate le ovvie differenze dovute alla dimensione maggiore.
+
+Gli insiemi semplici rispetto a un asse (ad esempio l'asse $z$) in $\mathbb{R}^3$ sono della forma
+	\begin{equation*}
+		E = \{ (x, y, z) \in \mathbb{R}^3 \colon g_1(x, y) < z < g_2(x, y), (x, y) \in \Omega \}
+	\end{equation*}
+dove $g_1, g_2$ sono continue in $\overline{\Omega}$ e $\Omega$ è misurabile.
+
+Per quanto riguarda le formule di riduzione, nel caso $n$-dimensionale esistono molti modi di ordinare e raggruppare le variabili; a ciascuno di essi corrisponde una formula di riduzione.
+
+Nel caso $n = 3$, al raggruppamento $\xi = x$ e $\vec{\eta} = (y, z)$ corrisponde la formula
+	\begin{equation}
+		\iiint_Q f = \int_{a_1}^{b_1} dx \iint_{[a_2, b_2]\times[a_3, b_3]} f(x, y, z)\,dy\,dz
+	\end{equation}
+(integrazione \emph{per strati}); al raggruppamento $\vec{\xi} = (x, y)$, $\eta = z$ corrisponde la formula
+	\begin{equation}
+		\label{eqn:fili}
+		\iiint_Q f = \int_{[a_1, b_1]\times[a_2, b_2]} dx \, dy \int_{a_3}^{b_3}f(x, y, z)\,dz
+	\end{equation}
+(integrazione \emph{per fili}).
+
+Nel caso di funzioni definite su domini $E$ semplici rispetto all'asse $z$ la formula~\eqref{eqn:fili} prende la forma
+	\begin{equation}
+		\iiint_E f = \iint_{\Omega} dx \, dy \int_{g_1(x, y)}^{g_2(x, y)}f(x, y, z)\, dz.
+	\end{equation}
+	Si noti che $\Omega$ coincide con la proiezione di $E$ sul piano $x, y$.
+
+	\begin{exmp}[Volume dei solidi di rotazione]
+Sia $V$ un solido ottenuto ruotando attorno all'asse $z$ il trapezioide corrispondente alla funzione $y = \phi(z)$, $a \le z \le b$, $\phi$ continua; calcoliamone il volume.
+
+Fissato $\bar{z} \in [a, b]$, sia $a(\bar{z})$ l'area della sezione di $V$ con il piano $z = \bar{z}$.
+
+Integrando per strati si trova
+	\begin{equation*}
+		\Vol(V) = \int_a^b a(z)\,dz.
+	\end{equation*}
+Essendo poi $a(z) = \pi(\phi(z))^2$ si ottiene
+	\begin{equation*}
+		\Vol(V) = \pi \int_a^b (\phi(z))^2\,dz.
+	\end{equation*}
+	\end{exmp}
+
+Passiamo ai cambi di coordinate: siano $\Omega$ un aperto di $\mathbb{R}^n$ e $\vec{T}\colon\Omega \to \vec{T}(\Omega) \subseteq \mathbb{R}^n$ una trasformazione biunivoca assegnata dalle formule
+	\begin{gather*}
+		x_1 = \phi_1(u_1, \dots, u_n) \\
+		x_2 = \phi_2(u_1, \dots, u_n) \\
+		\vdots \\
+		x_ n = \phi_n(u_n, \dots, u_n).
+	\end{gather*}
+
+Se $\vec{T} \in C^1(\Omega)$ e
+	\begin{equation*}
+		\frac{\partial(x_1, \dots, x_n)}{\partial (u_1, \dots, u_n)} \ne 0
+	\end{equation*}
+in $\Omega$, allora il Teorema~\ref{cambiovariabili} si estende direttamente al caso multi-dimensionale. La formula~\eqref{eqn:cambiovariabili} diviene
+	\begin{equation}
+		\label{eqn:cambiovariabilimult}
+		\begin{split}
+		&\int_{\vec{T}(S)}f(x_1, \dots, x_n)\,dx_1,\dots,dx_n
+ = \\ = &\int_S \bar{f}(u_1,\dots, u_n)\abs{\frac{\partial (x_1, \dots, x_n)}{\partial(u_1, \dots, u_n)}}\,du_1, \dots, du_n
+\end{split}
+\end{equation}
+ove $S$ è un sottoinsieme misurabile in $\Omega$ e $f \in C(\vec{T}(S))$.
+\begin{exmp}[Coordinate cilindriche in $\mathbb{R}^3$ rispetto all'asse $z$] $\vec{T}$ è definita dalle equazioni
+		\begin{equation}
+			\begin{dcases}
+				x = \rho \cos \theta \\
+				y = \rho \sin \theta \\
+				z = z;
+			\end{dcases}
+		\end{equation}
+		si lascia cioè $z$ invariato e si introducono le coordinate polari nel piano $x, y$.
+
+		Se $(\rho, \theta, z) \in (0, +\infty)\times(0, 2 \pi) \times \mathbb{R}= \Omega$, $\vec{T}$ realizza una corrispondenza biunivoca tra $\Omega$ e lo spazio $\mathbb{R}^3$ con esclusione del semipiano $\{(x, y, z) \in \mathbb{R}^3 \colon y = 0, z \ge 0 \}$. Si ha che
+			\begin{equation*}
+				\frac{\partial (x, y, z)}{\partial (\rho, \theta, z)} = \rho,
+			\end{equation*}
+			perciò la~\eqref{eqn:cambiovariabilimult} diventa
+				\begin{equation*}
+					\iiint_{\vec{T}(S)}f(x, y, z)\,dx\,dy\,dz = \iiint_S f(\rho\cos\theta, \rho\sin\theta, z)\rho \,d\rho\,d\theta\,dz.
+				\end{equation*}
+	\end{exmp}
+
+	\begin{exmp}[Coordinate sferiche o polari in $\mathbb{R}^3$] $\vec{T}$ è definita dalle equazioni
+			\begin{equation}
+				\begin{dcases}
+					x = \rho\sin\psi\cos\theta \\
+					y = \rho\sin\psi\sin\theta \\
+					z = \rho\cos\psi.
+				\end{dcases}
+			\end{equation}
+	Se $(\rho, \psi, \theta) \in \Omega = (0, +\infty) \times (0, \pi) \times (0, 2\pi)$, $\vec{T}$ realizza una corrispondenza biunivoca tra $\Omega$ e lo spazio $\mathbb{R}^3$ privato del semipiano $\{(x, y, z) \in \mathbb{R}^3 \colon y = 0, x \ge 0\}$.
+
+	Si trova che
+		\begin{equation*}
+			\frac{\partial (x, y, z)}{\partial (\rho, \psi, \theta)} = \rho^2\sin\psi \ne 0
+		\end{equation*}
+	in $\Omega$, perciò la~\eqref{eqn:cambiovariabilimult} diventa
+		\begin{equation*}
+			\iiint_{\vec{T}(S)}f(x, y, z)\,dx\,dy\,dz = \iiint_S \bar{f}(\rho, \psi, \theta)\rho^2\sin\psi\,d\rho\,d\psi\,d\theta.
+		\end{equation*}
+
+	\end{exmp}
+
+
 
 \chapter{Superfici e integrali di superficie}
 
