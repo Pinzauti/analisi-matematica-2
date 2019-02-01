@@ -28,6 +28,8 @@
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\arctg}{arctg}
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Epi}{Epi}
+
 
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \numberwithin{equation}{section}
@@ -36,6 +38,8 @@
 \renewcommand{\theta}{\vartheta}
 \renewcommand{\rho}{\varrho}
 \renewcommand{\phi}{\varphi}
+\renewcommand{\mi}{\mu}
+
 
 \pagestyle{plain}
 
@@ -99,18 +103,18 @@
 \chapter{Funzioni di più variabili}
 
 	\section{Funzioni da $\mathbb{R}^n$ in $\mathbb{R}$}
-		
+
 		\subsection{Derivate direzionali e parziali}
-		
+
 		Siano $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto di $\mathbb{R}^n$, $\vec{x} \in A$; introduciamo una \emph{direzione}, cioè un versore $\vec{v} \in \mathbb{R}^n$ tale che $\norma{\vec{v}} = 1$. Consideriamo, per ogni $t \in \mathbb{R}$ tale che $\vec{x} + t\vec{v} \in A$, il \emph{rapporto incrementale di $f$ nella direzione $\vec{v}$}:
-			
+
 			\begin{equation*}
 			\frac{f(\vec{x} + t\vec{v}) - f(\vec{x})}{t}.
 			\end{equation*}
-			
+
 		\begin{defn}
 		Quando esiste finito, il
-			
+
 			\begin{equation}
 			\lim_{t \to 0}\frac{f(\vec{x} + t\vec{v} - f(\vec{x})}{t}
 			\end{equation}
@@ -118,32 +122,32 @@
 		\end{defn}
 
 Le derivate lungo i versori della base canonica $\vec{e}_1, \vec{e}_2, \dots, \vec{e}_n$ si chiamano \emph{derivate parziali} e si indicano con i simboli
-		
+
 		\begin{equation*}
 		\frac{\partial f}{\partial x_j}, \quad D_j f, \quad D_{x_j} f, \quad \partial_{x_j} f, \quad f_{x_j}.
 		\end{equation*}
-		
-Nella derivata parziale rispetto a $x_j$ viene incrementata solo quella variabile; dunque per il calcolo di $f_{x_j}$ si può pensare alle altre variabili come costanti e utilizzare le classiche regole di derivazioni per funzioni di una variabile. 
+
+Nella derivata parziale rispetto a $x_j$ viene incrementata solo quella variabile; dunque per il calcolo di $f_{x_j}$ si può pensare alle altre variabili come costanti e utilizzare le classiche regole di derivazioni per funzioni di una variabile.
 
 Se una funzione $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$ ammette $n$ derivate parziali in un punto $\vec{x} \in A$ è definito il vettore \emph{gradiente} di $f$ in $\vec{x}$, le cui componenti sono le $n$ derivate parziali di $f$ in $\vec{x}$ e che si indica con $\nabla f(\vec{x})$:
 	\begin{equation*}
 	\nabla f(\vec{x}) \coloneqq (f_{x_1}(\vec{x}), f_{x_2}(\vec{x}), \dots, f_{x_n}(\vec{x})).
 	\end{equation*}
 
-È importante notare che l'esistenza di tutte le derivate direzionali in un punto non implica la continuità in quel punto, in dimensione maggiore di $1$; è quindi necessario introdurre un concetto più forte di quello di derivabilità. 
+È importante notare che l'esistenza di tutte le derivate direzionali in un punto non implica la continuità in quel punto, in dimensione maggiore di $1$; è quindi necessario introdurre un concetto più forte di quello di derivabilità.
 
 	\subsection{Differenziale}
-	
+
 L'idea è quella di approssimare l'incremento $\Delta f = f(\vec{x} + \vec{h}) - f(\vec{x})$ con una funzione lineare in $\vec{h}$ a meno di infinitesimi di ordine superiore a $\norma{\vec{h}}$.
 
-Ricordiamo che ogni funzione lineare $L \colon \mathbb{R}^n \to \mathbb{R}$ è identificata da un unico vettore $\vec{a} \in \mathbb{R}^n$, nel senso che 
+Ricordiamo che ogni funzione lineare $L \colon \mathbb{R}^n \to \mathbb{R}$ è identificata da un unico vettore $\vec{a} \in \mathbb{R}^n$, nel senso che
 	\begin{equation*}
 	L(\vec{x}) = (\vec{a}, \vec{h})
 	\end{equation*}
 per ogni $\vec{h} \in \mathbb{R}^n$.
 
 \begin{defn}
-Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto; $f$ si dice differenziabile in $\vec{x} \in A$ se esiste un vettore $\vec{a} \in \mathbb{R}^n$ tale che 
+Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto; $f$ si dice differenziabile in $\vec{x} \in A$ se esiste un vettore $\vec{a} \in \mathbb{R}^n$ tale che
 	\begin{equation}
 	\label{eqn:diff}
 	f(\vec{x} + \vec{h}) - f(\vec{x}) = (\vec{a}, \vec{h}) + o(\norma{h})
@@ -183,7 +187,7 @@ ove $\beta$ è l'angolo formato dai vettori $\vec{v}$ e $\nabla f(\vec{x})$; ci�
 	\begin{equation*}
 	\vec{v}_\textup{max} =\frac{\nabla f(\vec{x})}{\norma{\nabla f(\vec{x})}}, \quad \vec{v}_\textup{min} =- \frac{\nabla f(\vec{x})}{\norma{\nabla f(\vec{x})}};
 	\end{equation*}
-in conclusione,	
+in conclusione,
 	\begin{equation*}
 	\max_{\norma{\vec{v}} = 1} D_{\vec{v}} f(\vec{x}) = \norma{\nabla f(\vec{x})}, \quad \min_{\norma{\vec{v}} = 1} D_{\vec{v}} f(\vec{x}) = - \norma{\nabla f(\vec{x})}.
 	\end{equation*}
@@ -194,14 +198,14 @@ Sia $f$ differenziabile in un punto $\vec{x}_0$; ponendo $\vec{h} = \vec{x} - \v
 	\label{eqn:iperpiano}
 	f(\vec{x}) = f(\vec{x}_0) + (\nabla f(\vec{x}_0), \vec{x} - \vec{x}_0) + o(\norma{\vec{x} - \vec{x}_0}).
 	\end{equation}
-La funzione $z =  f(\vec{x}_0) + (\nabla f(\vec{x}_0), \vec{x} - \vec{x}_0)$ ha come grafico un iperpiano e la~\eqref{eqn:iperpiano} equivale ad affermare che essa è la funzione lineare (affine) che meglio approssima $f$ in un intorno di $\vec{x}_0$; tale piano si chiama piano tangente. 
+La funzione $z =  f(\vec{x}_0) + (\nabla f(\vec{x}_0), \vec{x} - \vec{x}_0)$ ha come grafico un iperpiano e la~\eqref{eqn:iperpiano} equivale ad affermare che essa è la funzione lineare (affine) che meglio approssima $f$ in un intorno di $\vec{x}_0$; tale piano si chiama piano tangente.
 
 In dimensione $2$, se $\vec{x}_0 = (x_0, y_0)$, $\vec{x} = (x, y)$ e $z_0 = f(x_0, y_0)$, la sua equazione si scrive esplicitamente come
 	\begin{equation}
 	\label{eqn:pianotangente}
 	z - z_0 - f_x(x_0, y_0)(x - x_0) - f_y(x_0, y_0)(y - y_0) = 0.
 	\end{equation}
-La~\eqref{eqn:pianotangente} indica che il vettore $\vec{n} = (-f_x(x_0, y_0), -f_y(x_0, y_0)) \in \mathbb{R}^3$ è un vettore normale al piano tangente nel punto $P_0$ di coordinate $(x_0, y_0, z_0)$, dunque, per definizione, normale al grafico di $f$ nello stesso punto. 
+La~\eqref{eqn:pianotangente} indica che il vettore $\vec{n} = (-f_x(x_0, y_0), -f_y(x_0, y_0)) \in \mathbb{R}^3$ è un vettore normale al piano tangente nel punto $P_0$ di coordinate $(x_0, y_0, z_0)$, dunque, per definizione, normale al grafico di $f$ nello stesso punto.
 
 \begin{teor}
 Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto; se in un intorno di $\vec{x} \in A$ esistono tutte le derivate parziali di $f$ ed esse sono continue in $\vec{x}$ allora $f$ è differenziabile in $\vec{x}$.
@@ -209,7 +213,7 @@ Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto; se in un int
 
 La condizione è solo sufficiente: esistono funzioni differenziabili con derivata non continua, ad esempio
 	\begin{equation*}
-	f(x) = \begin{dcases*} 
+	f(x) = \begin{dcases*}
 	x^2 \sin{\frac{1}{x}} &se $x \ne 0$, \\
 	0 &se $x = 0$.
 	\end{dcases*}
@@ -222,18 +226,18 @@ Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto. Se, fissata 
 	\begin{equation*}
 	D_{\vec{v}}f \colon U(\vec{x}) \to \mathbb{R}.
 	\end{equation*}
-Se $\vec{w} \in \mathbb{R}^n$ è un altro versore, è lecito chiedersi se esista $D_{\vec{w}} D_{\vec{v}} f(\vec{x})$, cioè la derivata seconda di $f$ lungo le direzioni $\vec{v}$ e $\vec{w}$ (nell'ordine), che si indica con $D_{\vec{w}\vec{v}}^2f(\vec{x})$. 
+Se $\vec{w} \in \mathbb{R}^n$ è un altro versore, è lecito chiedersi se esista $D_{\vec{w}} D_{\vec{v}} f(\vec{x})$, cioè la derivata seconda di $f$ lungo le direzioni $\vec{v}$ e $\vec{w}$ (nell'ordine), che si indica con $D_{\vec{w}\vec{v}}^2f(\vec{x})$.
 
 Nel caso in cui $\vec{v} = \vec{e}_j$ e $\vec{w} = \vec{e}_k$ si ha la derivata parziale seconda rispetto a $x_j$ e $x_k$, indicata con uno dei seguenti simboli:
 	\begin{equation*}
 	\frac{\partial^2 f}{\partial x_k x_j}(\vec{x}), \quad f_{x_k x_j}(\vec{x}), \quad D_{x_k x_j}f(\vec{x}), \quad D_{kj}^2f(\vec{x}), \quad \partial_{x_kx_j}f(\vec{x}).
 	\end{equation*}
-Se $k\ne j$ le derivate si chiamano miste; se $k=j$ si chiamano pure e il primo simbolo si semplifica in 
+Se $k\ne j$ le derivate si chiamano miste; se $k=j$ si chiamano pure e il primo simbolo si semplifica in
 	\begin{equation*}
 	\frac{\partial^2 f}{\partial x_j^2}(\vec{x}).
 \end{equation*}
 
-In generale, non è vero che, per una funzione due volte derivabile lungo $\vec{v}$ e $\vec{w}$, $D^2_{\vec{w}\vec{v}}f = D^2_{\vec{v}\vec{w}}$; il prossimo teorema indica una condizione sufficiente per l'uguaglianza delle derivate miste. 
+In generale, non è vero che, per una funzione due volte derivabile lungo $\vec{v}$ e $\vec{w}$, $D^2_{\vec{w}\vec{v}}f = D^2_{\vec{v}\vec{w}}$; il prossimo teorema indica una condizione sufficiente per l'uguaglianza delle derivate miste.
 
 	\begin{teor}[di Schwarz]
 	Se $f_{x_kx_j}$ e $f_{x_jx_k}$ esistono in un intorno di $\vec{x}$ e sono continue in $\vec{x}$ allora
@@ -248,7 +252,7 @@ Il Teorema vale per le derivate direzionali seconde qualunque, non solo per le d
 
 In maniera del tutto analoga, si possono considerare derivate di ordine superiore.
 
-Sia ora $f\colon \mathbb{R}^n \supseteq A \to \mathbb{R}$ differenziabile in $A$. Allora per ogni $\vec{x} \in A$ esistono le derivate parziali $f_{x_j}(\vec{x})$, $j = 1, \dots, n$; se queste derivate sono a loro volta differenziabili in $\vec{x}$ diremo che $f$ è due volte differenziabile in $\vec{x}$ e si chiama differenziale secondo di $f$ in $\vec{x}$ la forma quadratica nell'incremento $\vec{h} = (h_1, \dots, h_n)$ data da 
+Sia ora $f\colon \mathbb{R}^n \supseteq A \to \mathbb{R}$ differenziabile in $A$. Allora per ogni $\vec{x} \in A$ esistono le derivate parziali $f_{x_j}(\vec{x})$, $j = 1, \dots, n$; se queste derivate sono a loro volta differenziabili in $\vec{x}$ diremo che $f$ è due volte differenziabile in $\vec{x}$ e si chiama differenziale secondo di $f$ in $\vec{x}$ la forma quadratica nell'incremento $\vec{h} = (h_1, \dots, h_n)$ data da
 	\begin{equation*}
 	d^2f(\vec{x}) \colon\! \vec{h} \mapsto \sum_{i,j = 1}^n f_{x_ix_j}(\vec{x})h_ih_j;
 	\end{equation*}
@@ -263,17 +267,17 @@ La matrice quadrata di ordine $n$ i cui elementi sono $f_{x_ix_j}(\vec{x})$ si c
 	\mathbf{H}_f(\vec{x}) \coloneqq \begin{pmatrix} f_{x_1x_1}(\vec{x}) & f_{x_1x_2}(\vec{x}) & \dots & f_{x_1x_n}(\vec{x}) \\
 			f_{x_2x_1}(\vec{x}) & f_{x_2x2}(\vec{x}) & \dots & f_{x_2x_n}(\vec{x}) \\
 			\vdots & \vdots & \ddots & \vdots \\
-			f_{x_nx_1}(\vec{x}) & f_{x_nx_2}(\vec{x}) & \dots & f_{x_nx_n}(\vec{x}) 
+			f_{x_nx_1}(\vec{x}) & f_{x_nx_2}(\vec{x}) & \dots & f_{x_nx_n}(\vec{x})
 	\end{pmatrix}.
 	\end{equation*}
 
-Si può dunque scrivere 
+Si può dunque scrivere
 	\begin{equation*}
 	d^2f(\vec{x}) = (\mathbf{H}_f(\vec{x})d\vec{x}, d\vec{x}).\footnote{$\mathbf{H}_f(\vec{x})d\vec{x}$ indica il prodotto righe per colonne della matrice hessiana per il vettore $d\vec{x}$.}
 	\end{equation*}
 
-Se $f$ è due volte differenziabile in $\vec{x}$ esistono le derivate $D_{\vec{v}\vec{w}}^2f(\vec{x})$ per ogni coppia di versori $\vec{v}, \vec{w} \in \mathbb{R}^n$; inoltre vale la formula 
-	
+Se $f$ è due volte differenziabile in $\vec{x}$ esistono le derivate $D_{\vec{v}\vec{w}}^2f(\vec{x})$ per ogni coppia di versori $\vec{v}, \vec{w} \in \mathbb{R}^n$; inoltre vale la formula
+
 	\begin{equation}
 	D_{\vec{v}\vec{w}}^2f(\vec{x}) = \sum_{i,j=1}^nf_{x_ix_j}(\vec{x})v_iv_j = (\mathbf{H}_f(\vec{x})\vec{w}, \vec{v}).
 \end{equation}
@@ -287,6 +291,156 @@ Terminiamo il paragrafo menzionando un importante operatore differenziale, l'ope
 	\Delta \colon \! f \mapsto \Delta f \coloneqq \frac{\partial^2 f}{\partial x_1^2} + \frac{\partial^2 f}{\partial x_2^2} + \dots + \frac{\partial^2 f}{\partial x_n^2}.
 	\end{equation*}
 Le funzioni $f \in C^2(A)$ tali che $\Delta f = 0$ in $A$ si dicono armoniche.
+
+\subsection{Formula di Taylor}
+
+\begin{teor}[Formula di Taylor con resto di Lagrange]
+Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$ e supponiamo che il segmento chiuso $[\vec{x}, \vec{x} + d\vec{x}]$ sia contenuto in $A$. Se $f$ è differenziabile con continuità $k-1$ volte nel segmento chiuso e $k$ volte nel segmento aperto, allora esiste $\theta \in (0, 1)$ tale che
+	\begin{equation}
+		\label{eqn:taylor}
+		\begin{split}
+		&f(\vec{x}+d\vec{x})-f(\vec{x}) = \\ &= df(\vec{x}) + \frac{1}{2}d^2f(\vec{x})+\dots+\frac{1}{(k-1)!}d^{k-1}f(\vec{x})+\frac{1}{k!}d^kf(\vec{x}+\theta d \vec{x}).
+	\end{split}
+	\end{equation}
+\end{teor}
+
+Il caso particolare $k=1$ nella~\eqref{eqn:taylor} è l'estensione al caso di funzioni reali di $n$ variabili del teorema del valor medio di Lagrange:
+	\begin{equation}
+		\label{eqn:valmedlagrange}
+		f(\vec{x}+d\vec{x})-f(\vec{x}l) = df(\vec{x}+\theta d \vec{x}),
+	\end{equation}
+con $\theta \in (0, 1)$ opportuno.
+
+Come nel caso unidimensionale, tramite la~\eqref{eqn:valmedlagrange} possiamo caratterizzare le funzioni costanti in un aperto connesso.
+
+	\begin{prop}
+		Sia $A$ aperto connesso e $df(\vec{x}) = 0$ $\forall \vec{x} \in A$. Allora $f$ è costante.
+	\end{prop}
+
+	\begin{teor}[Formula di Taylor con resto di Peano]
+		Sia $f\colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $k$ volte differenziabile in $\vec{x}$. Allora
+			\begin{equation}
+				f(\vec{x} + d\vec{x}) - f(\vec{x}) = df(\vec{x}) + \frac{1}{2}d^2f(\vec{x}) + \dots + \frac{1}{k!}d^k(\vec{x}) + o(\norma{d\vec{x}}^k)
+			\end{equation}
+		per $\norma{d\vec{x}} \to 0$.
+	\end{teor}
+
+
+	\subsection{Funzioni omogenee, funzioni convesse e concave}
+
+Le funzioni positivamente omogenee di grado $\mi$, $\mi \in \mathbb{R}$ sono definite in coni con vertice in $\vec{0}$; cioè, se sono definite in un punto $\vec{x}$, allora sono definite su tutta la semiretta $\rho \vec{x}$ per ogni $\rho > 0$. Un cono non è necessariamente convesso e ovviamente può coincidere con tutto $\mathbb{R}^n$.
+	\begin{defn}
+		Sia $\mathcal{C} \subseteq \mathbb{R}^n$ un cono e $f \colon \mathcal{C} \to \mathbb{R}$; $f$ si dice positivamente omogenea di grado $\mi$, $\mi \in \mathbb{R}$, se $\forall \vec{x} \in \mathcal{C}$ e $\forall \rho > 0$ risulta
+			\begin{equation}
+				f(\rho \vec{x}) = \rho^{\mi}f(\vec{x}).
+			\end{equation}
+	\end{defn}
+
+	\begin{exmp}
+Qualunque polinomio omogeneo di grado $\mi$, $\mi \in \mathbb{N}$, in $k$ variabili è omogeneo dello stesso grado nel senso della definizione precedente.
+	\end{exmp}
+
+	\begin{exmp}
+La norma di un vettore $\vec{x} \in \mathbb{R}^n$ è positivamente omogenea di grado $1$.
+	\end{exmp}
+
+Il seguente teorema caratterizza le funzioni positivamente omogenee differenziabili in insiemi aperti.
+
+	\begin{teor}[di Eulero]
+		Sia $\mathcal{C} \subseteq \mathbb{R}^n$ un cono aperto e $f \colon \mathcal{C} \to \mathbb{R}$ differenziabile in $\mathcal{C}$. Allora $f$ è positivamente omogenea di grado $\mi$ se e solo se, per ogni $\vec{x} \in \mathcal{C}$, risulta
+			\begin{equation}
+				(\vec{x}, \nabla f(\vec{x})) = \mi f(\vec{x}).
+			\end{equation}
+	\end{teor}
+
+Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$. Indichiamo con $\Epi(f)$ l'epigrafico di $f$, cioè
+	\begin{equation*}
+		\Epi(f) \coloneqq \{ (\vec{x}, z) \in \mathbb{R}^{n+1} \colon z \ge f(\vec{x}), \vec{x} \in A \}.
+	\end{equation*}
+
+	\begin{defn}
+		Sia $f$ definita su un insieme convesso $A \subseteq \mathbb{R}^n$; $f$ si dice convessa in $A$ se $\Epi(f)$ è convesso in $\mathbb{R}^{n+1}$; $f$ si dice concava se $-f$ è convessa.
+	\end{defn}
+
+	Alternativamente, $f$ risulta convessa in $A$ se per ogni coppia di punti $\vec{x}, \vec{y} \in A$ e per ogni $t \in (0,1)$ risulta
+		\begin{equation}
+			f(t\vec{y} + (1-t)\vec{x}) \le tf(\vec{y}) + (1-t)f(\vec{x}).
+		\end{equation}
+
+		\begin{teor}
+Sia $f$ convessa in $A$, aperto convesso in $\mathbb{R}^n$. Allora:
+	\begin{enumerate}
+		\item $f$ è continua in $A$;
+		\item in ogni punto di $A$, $f$ ammette derivate parziali destre e sinistre;
+		\item nei punti in cui esistono tutte le derivate parziali, $f$ è differenziabile.
+	\end{enumerate}
+		\end{teor}
+
+\begin{teor}
+Se $f$ è differenziabile in $A$ aperto convesso in $\mathbb{R}^n$, $f$ è convessa in $A$ se e solo se per ogni $\vec{x}, \vec{y} \in A$
+	\begin{equation}
+		\label{eqn:convessa}
+		f(\vec{y}) \ge f(\vec{x})+df(\vec{x}).
+	\end{equation}
+\end{teor}
+
+La~\eqref{eqn:convessa} scritta esplicitamente per una funzione di due variabili diviene
+	\begin{equation*}
+		f(y_1, y_2) \ge f(x_1, x_2) + f_{x_1}(x_1, x_2)(y_1 - x_1) + f_{x_2}(x_1, x_2)(y_2 - x_2).
+	\end{equation*}
+
+	\begin{teor}
+		Sia $f$ due volte differenziabile in $A$ aperto convesso di $\mathbb{R}^n$; $f$ è strettamente convessa in $A$ se, per ogni $\vec{x} \in A$, $d^2f(\vec{x})$ è una forma quadratica definita positiva (ovvero per ogni $d\vec{x} \ne \vec{0}$, $d^2f(\vec{x}) > 0$).
+	\end{teor}
+
+	Per le funzioni di due variabili, se $z = f(x_1, x_2)$ è due volte differenziabile è di sicuro strettamente convessa.
+
+	\section{Funzioni a valori vettoriali}
+
+\subsection{Derivate e differenziali}
+Sia $\vec{f} \colon \mathbb{R}^n \supseteq A \to \mathbb{R}^m$, $A$ aperto.
+
+Per ogni $\vec{x} \in A$, $\vec{f}(\vec{x})$ è un vettore $(f_1(\vec{x}), f_2(\vec{x}), \dots, f_m(\vec{x}))$ le cui componenti $f_j$, $j=1, \dots, m$ sono funzioni da $A$ in $\mathbb{R}$.
+
+Fissato un versore $\vec{v} \in \mathbb{R}^n$, $\vec{f}$ è derivabile lungo la direzione $\vec{v}$ nel punto $\vec{x}$ se e solo se esistono $D_{\vec{v}}f_j(\vec{x})$ per ogni $j = 1, \dots, m$ e
+	\begin{equation*}
+		D_{\vec{v}}\vec{f} \coloneqq (D_{\vec{v}}f_1, D_{\vec{v}}f_2, dots, D_{\vec{v}}f_m).
+	\end{equation*}
+
+	\begin{defn}
+		Si dice che $\vec{f}$ è differenziabile in $\vec{x}$ se esiste una matrice $\mathbf{M}$ di ordine $m \times n$ tale che
+			\begin{equation}
+				\vec{f}(\vec{x}+\vec{h}) - \vec{f}(\vec{x}) = \mathbf{M}\vec{h} + o(\norma{\vec{h}})
+			\end{equation}
+		per $\norma{\vec{h}} \to 0$, per ogni $\vec{h} \in \mathbb{R}^n$ con $\vec{x}+\vec{h} \in A$. L'applicazione lineare da $\mathbb{R}^n$ in $\mathbb{R}^m$ data da
+			\begin{equation*}
+				\vec{h} \mapsto \mathbf{M}\vec{h}
+			\end{equation*}
+		si chiama differenziale di $\vec{f}$ in $\vec{x}$ e si indica col simbolo $d\vec{f}(\vec{x})$.
+	\end{defn}
+
+	Si ha che
+		\begin{equation}
+			\mathbf{M} = \begin{pmatrix}
+			\nabla f_1 (\vec{x}) \\
+			\nabla f_2 (\vec{x}) \\
+			\vdots \\
+			\nabla f_m (\vec{x})
+		\end{pmatrix} = \begin{pmatrix}
+		D_{x_1}f_1(\vec{x}) & D_{x_2}f_1(\vec{x}) & \dots & D_{x_n}f_1(\vec{x}) \\
+		D_{x_1}f_2(\vec{x}) & D_{x_2}f_2(\vec{x}) & \dots & D_{x_n}f_2(\vec{x}) \\
+		\vdots & \vdots & \ddots & \vdots \\
+		D_{x_1}f_m(\vec{x}) & D_{x_2}f_m(\vec{x}) & \dots & D_{x_n}f_m(\vec{x}) \\
+	\end{pmatrix}
+		\end{equation}
+
+
+
+
+
+
+
+
 
 
 \end{document}
