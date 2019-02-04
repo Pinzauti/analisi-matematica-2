@@ -600,7 +600,7 @@ Vi sono opportune condizioni topologiche su $E$ sotto le quali le~\eqref{eqn:irr
 Ogni insieme convesso è stellato; un insieme stellato è ovviamente connesso per segmenti e perciò connesso.
 
 \begin{teor}
-Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F_3\vec{k}$ con $\vec{F} \in C^1(E)$, dove $E$ è un aperto stellato in $\vec{R}^3$. Allora $\omega$ è esatta se e solo se $\rot{\vec{F}} = \vec{0}$ in $E$.
+Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F_3\vec{k}$ con $\vec{F} \in C^1(E)$, dove $E$ è un aperto stellato in $\mathbb{R}^3$. Allora $\omega$ è esatta se e solo se $\rot{\vec{F}} = \vec{0}$ in $E$.
 \end{teor}
 
 La dimostrazione del Teorema fornisce una formula per la costruzione della funzione potenziale; supponendo che $E$ sia stellato rispetto all'origine (a meno di una traslazione degli assi), dato un punto $\vec{p} = (x, y, z) \in E$ indichiamo con $\Gamma$ la curva di equazioni parametriche
@@ -642,7 +642,7 @@ La definizione si può dare in termini di curve chiuse: un aperto connesso $E$ �
 Gli insiemi convessi e quelli stellati sono semplicemente connessi; non lo sono, ad esempio, una corona circolare o il piano privato di un punto (in $\mathbb{R}^2$) o una sfera privata di un diametro o l'interno di un toro (in $\mathbb{R}^3$).
 
 \begin{teor}
-Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F_3\vec{k}$ con $\vec{F} \in C^1(E)$, dove $E$ è un aperto semplicemente connesso in $\vec{R}^3$. Allora $\omega$ è esatta se e solo se $\rot{\vec{F}} = \vec{0}$ in $E$.
+Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F_3\vec{k}$ con $\vec{F} \in C^1(E)$, dove $E$ è un aperto semplicemente connesso in $\mathbb{R}^3$. Allora $\omega$ è esatta se e solo se $\rot{\vec{F}} = \vec{0}$ in $E$.
 \end{teor}
 
 
@@ -1041,8 +1041,46 @@ Riprendiamo la definizione di successione convergente e di successione di Cauchy
 
 		\subsection{Successioni di funzioni, convergenza puntuale e uniforme}
 
-		Sia $I \subseteq \mathbb{R}$ un intervallo, $f_n \colon I \to \mathbb{R}$ una successione di funzioni e sia $t_0 \in I$. La successione $\{ f_n(t_0)\}$ è dunque una successione di numeri reali e potremo determinarne il carattere; possiamo ripetere questa operazione per tutti i punti $t \in I$. Se 
+		Sia $I \subseteq \mathbb{R}$ un intervallo, $f_n \colon I \to \mathbb{R}$ una successione di funzioni e sia $t_0 \in I$. La successione $\{ f_n(t_0)\}$ è dunque una successione di numeri reali e potremo determinarne il carattere; possiamo ripetere questa operazione per tutti i punti $t \in I$. Se, per ogni $t \in I$, la corrispondente successione numerica $\{ f_n(t)\}$ è convergente e $f(t)$ è il suo limite, risulta definita una funzione $f \colon I \to \mathbb{R}$ che sarà naturale chiamare \emph{limite} della successione di funzioni $\{ f_n\}$.
 
+		Più precisamente, diamo la seguente
+			\begin{defn}
+				Una successione di funzioni $f_n \colon I \to \mathbb{R}$ si dirà convergente in $I$ con limite $f \colon I \to \mathbb{R}$ se, fissato $\epsilon > 0$, $\forall t \in I$, $\exists N = N(\epsilon, t)$ tale che
+					\begin{equation*}
+						\abs{f_n(t) - f(t)} < \epsilon
+					\end{equation*}
+				se $n > N$.
+			\end{defn}
+
+	Questa definizione è una semplice estensione dell'analoga definizione di convergenza delle successioni numeriche; essa viene detta anche convergenza puntuale (o ordinaria).
+
+	Secondo un altro punto di vista, potremmo considerare le funzioni come elementi di un dato spazio metrico $X$; il limite è allora già definito dalla metrica di questo spazio.
+
+	Sia $X = C^0(I)$, con $I$ compatto, dotato della metrica lagrangiana. Una successione $\{f_n \}\subset C^0(I)$ converge a $f \in C^0(I)$ se accade che $d(f_n, f)$ tende a zero, cioè
+		\begin{equation*}
+			\lim_{n \to \infty} \max_{t \in I} \abs{f_n(t) - f(t)} = 0.
+		\end{equation*}
+
+Ciò significa che, fissato $\epsilon > 0$, $\exists N = N(\epsilon)$ per cui
+	\begin{equation}
+		\max_{t \in I} \abs{f_n(t) - f(t)} > \epsilon
+	\end{equation}
+se $n > N$.
+
+Ma, se per $n > N(\epsilon)$, $\abs{f_n(t) - f(t)} < \epsilon$ nei punti di massimo, lo stesso accadrà per ogni altro $t \in I$; perciò, senz'altro $f_n$ converge a $f$ puntualmente.
+
+\begin{defn}
+	Una successione di funzioni $f_n \colon I \to \mathbb{R}$ si dice convergente uniformemente in $I$, con limite $f \colon I \to \mathbb{R}$, se, fissato $\epsilon > 0$, $\exists N = N(\epsilon)$ tale che
+		\begin{equation}
+			\label{eqn:uniforme}
+			\abs{f_n(t) - f(t)} < \epsilon \quad \forall t \in I,
+		\end{equation}
+		se $n > N$.
+\end{defn}
+
+Confrontando le definizioni precedenti, si osserva che nel primo caso prima si fissa $t \in I$ e poi si trova $N$, che dipenderà dunque (oltre che dal prefissato $\epsilon$) anche dal punto $t$ scelto; nel secondo, siamo invece in grado di trovare un $N$ indipendente da $t$ per cui la~\eqref{eqn:uniforme} è verificata. Ovviamente, la convergenza uniforme  implica quella puntuale, ma non vale il viceversa.
+
+Osserviamo inoltr che, per le successioni in $C^0(I)$, la convergenza ``naturale'' indotta dalla metrica lagrangiana è proprio quella uniforme; anche la metrica dell'estremo superiore adottata sullo spazio $\mathcal{B}(I)$ conduce alla convergenza uniforme.
 
 
 \chapter{Misura e integrazione}
