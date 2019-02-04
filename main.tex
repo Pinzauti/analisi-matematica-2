@@ -932,6 +932,119 @@ Sia $q(\vec{h}) = (A\vec{h}, \vec{h})$ una forma quadratica in $\mathbb{R}^n$ e 
 
 Nel nostro caso, il lemma si applica con $A = \mathbf{H}_f(\vec{x}_0) - \lambda_0 \mathbf{H}_g(\vec{x}_0)$ e $\vec{b} = \nabla g(\vec{x}_0)$; poiché $\nabla g(\vec{x}_0) \ne \vec{0}$, si può supporre sempre che $D_{x_1}g(\vec{x}_0) \ne 0$.
 
+\chapter{Spazi funzionali e approssimazione di funzioni}
+\section{Spazi funzionali}
+\subsection{Metrica e topologia}
+
+\begin{defn}
+Un insieme $X$ si dice spazio metrico se è definita un'applicazione (distanza o metrica) $d \colon\! X \times X \to \mathbb{R}$ tale che, $\forall\, x, y, z \in X$, valgano le proprietà
+	\begin{enumerate}[$\mathcal{D}$\arabic*.]
+	\item	$d(x, y) \ge 0, \quad d(x, y) = 0 \iff x = y0;$
+	\item $d(x, y) = d(y, x)0:$
+	\item $d(x, y) \le d(x, z) + d(z, y)$.	\end{enumerate}
+\end{defn}
+
+Con spazio metrico s'intende la \emph{coppia} $(X, d)$; su uno stesso insieme potrebbero definirsi più metriche diverse, $d_1, d_2, \dots$; in tal caso, $(X, d_1)$ e $(X, d_2)$ sono spazi metrici diversi.
+
+\begin{exmp}
+Qualunque insieme può diventare spazio metrico con la distanza
+	\begin{equation}
+		d(x, y) \coloneqq \begin{dcases*}
+		0 &se $x = y$ \\
+		1 &se $x \ne y$,
+	\end{dcases*}
+	\end{equation}
+detta \emph{metrica discreta}.
+\end{exmp}
+
+\begin{exmp}
+Gli spazi euclidei $\mathbb{R}^n$ e $\mathbb{C}^n$ sono metrici con la consueta definizione di distanza
+	\begin{equation}
+		d(\vec{x}, \vec{y}) \coloneqq \norma{x-y} \coloneqq \Biggl(\sum_{i = 1}^n \abs{x_i -y_i}^2 \Biggr)^{1/2}
+	\end{equation}
+(\emph{metrica pitagorica}). Altre metriche possibili in $\mathbb{R}^n$ e $\mathbb{C}^n$ sono ad esempio
+	\begin{equation*}
+		d_1(\vec{x}, \vec{y}) \coloneqq \sum_{i=1}^n \abs{x_i - y_i}, \quad d_{\infty}(\vec{x}, \vec{y}) \coloneqq \max_{i=1, \dots, n}\{\abs{x_i, y_i}\}.
+	\end{equation*}
+\end{exmp}
+
+\begin{exmp}
+L'insieme $\mathbb{R}* = \mathbb{R} \cup \{+\infty\} \cup \{-\infty\}$ si può metrizzare con la definizione di distanza ($x, y \in \mathbb{R}$)
+	\begin{align*}
+		&d(x, y) \coloneqq \abs{\arctg x - \arctg y}, \\
+		&d(x, +\infty) = d(+\infty, x) \coloneqq \frac{\pi}{2} - \arctg x, \\
+		&d(x, -\infty) = d(-\infty, x) \coloneqq \arctg x + \frac{\pi}{2}, \\
+		&d(+\infty, +\infty) = d(-\infty, - \infty) \coloneqq 0, \\
+		&d(+\infty, -\infty) = d(-\infty, + \infty) \coloneqq \pi.
+	\end{align*}
+\end{exmp}
+
+\begin{exmp}
+Sia $I \subseteq \mathbb{R}$ un intervallo; indichiamo con $C^0(I)$ la classe della funzioni continue su $I$. Supponiamo che che $I$ sia compatto su $\mathbb{R}$; in $C^0(I)$ si può introdurre una metrica nel modo seguente: se $f(t)$ e $g(t)$ sono due elementi dello spazio, poniamo
+	\begin{equation}
+		\label{eqn:lagrangiana}
+		d(f, g) \coloneqq \max_{t\in I} \abs{f(t) - g(t)}
+	\end{equation}
+(\emph{metrica lagrangiana}); senza difficoltà si può estendere a funzioni di più variabili continue in un sottoinsieme $A \subseteq \mathbb{R}^n$.
+\end{exmp}
+
+\begin{exmp}
+Se (riferendoci all'esempio precedente) $I$ non è compatto, non è più valida la metrica~\eqref{eqn:lagrangiana}. Tuttavia, se consideriamo l'insieme $C^0_b(I)$ delle funzioni continue e limitate su $I$ possiamo definire una nuova metrica ponendo
+	\begin{equation}
+		d(f, g) \coloneqq \sup_{t \in I} \abs{f(t) - g(t)}.
+	\end{equation}
+Più in generale, questa sarà una metrica per lo spazio $\mathcal{B}(I)$ di tutte le funzioni limitate in $I$.
+\end{exmp}
+
+\begin{exmp}
+Sia ancora $I$ compatto; su $C^k(I)$, $k \ge 0$, si pone la metrica
+	\begin{equation}
+		d(f,g) \coloneqq \sum_{j=0}^k \max_{t \in I} \abs{f^{(j)}(t) - g^{(j)}(t)}
+	\end{equation}
+(\emph{metriche lagrangiane di ordine $k$}).
+\end{exmp}
+
+\begin{exmp}
+In $\overset{~}{C}(a, b)$, insieme delle funzioni continue e assolutamente integrabili in senso generalizzato sull'intervallo $(a, b)$, possiamo definire una metrica ponendo
+	\begin{equation}
+		d(f, g) \coloneqq \int_a^b \abs{f(t) - g(t)}\,dt
+	\end{equation}
+(\emph{metrica integrale di ordine $1$}).
+\end{exmp}
+
+Ricordiamo la definizione di intorno sferico.
+	\begin{defn}
+		Se $(X, d)$ è uno spazio metrico e $x \in X$, chiameremo intorno sferico di $x$ di raggio $r$ l'insieme
+			\begin{equation*}
+				B(x, r) \coloneqq \{ y \in X \colon d(x, y) < r \}.
+			\end{equation*}
+	\end{defn}
+
+Riprendiamo la definizione di successione convergente e di successione di Cauchy (o fondamentale).
+	\begin{defn}
+		Sia $(X, d)$ uno spazio metrico e $\{x_n\}$ una successione a valori in $X$; essa si dirà convergente a un punto $x \in X$ se vale una delle seguenti affermazioni (equivalenti):
+			\begin{enumerate}
+				\item fissato un qualunque intorno $V$ di $x$, per $n \to +\infty$, $x_n$ appartiene definitivamente a $V$;
+				\item $\forall \epsilon > 0$, esiste un intero positivo $N$ tale che, per $n > N$, risulta $d(x_n, x) < \epsilon$;
+				\item $\lim_{n\to+\infty} d(x_n, x) = 0.$
+			\end{enumerate}
+	\end{defn}
+
+		\begin{defn}
+			Sia $(X, d)$ no spazio metrico e $\{ x_n\}$ una successione a valori in $X$; essa si dirà fondamentale o di Cauchy se
+				\begin{equation}
+					\lim_{n, m \to +\infty} d(x_n, x_m) = 0.
+				\end{equation}
+		\end{defn}
+
+		Se una successione è convergente, allora essa è fondamentale; l'affermazione inversa è vera negli spazi euclidei, ma non lo è in tutti gli spazi metrici. Uno spazio metrico in cui ogni successione fondamentale è convergente si dice \emph{completo}.
+
+		\subsection{Successioni di funzioni, convergenza puntuale e uniforme}
+
+		Sia $I \subseteq \mathbb{R}$ un intervallo, $f_n \colon I \to \mathbb{R}$ una successione di funzioni e sia $t_0 \in I$. La successione $\{ f_n(t_0)\}$ è dunque una successione di numeri reali e potremo determinarne il carattere; possiamo ripetere questa operazione per tutti i punti $t \in I$. Se 
+
+
+
 \chapter{Misura e integrazione}
 \section{Integrale multiplo secondo Riemann}
 \subsection{Integrale doppio per funzioni definite su un rettangolo}
