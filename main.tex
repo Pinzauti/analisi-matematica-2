@@ -457,9 +457,20 @@ Fissato un versore $\vec{v} \in \mathbb{R}^n$, $\vec{f}$ è derivabile lungo la 
 			\end{equation}
 		\end{defn}
 
-		\begin{teor} (di inversione locale)
-			Sia 
-
+		\begin{teor}(di inversione locale)
+		Sia $\vec{f}:\mathbb{R}^n \supseteq  A \rightarrow  \mathbb{R}^n$, A aperto. Se:
+		\begin{enumerate}
+		  \item $\vec{f} \in C^1(A)$;
+		  \item $\vec{x_0}$ è un punto di A tale che $\vec{J_f(x_0)}$ è non singolare;
+			allora esistono un intorno V di \vec{x_0} e un intorno W di $\vec{y_0} = \vec{f(x_0)}$ tali che:
+			\begin{enumerate}
+				\item $\vec{f}$ è una corrispondenza biunivoca tra $V$ e $W$;
+				\item detta $\vec{g}:\rightarrow V$ la funzione inversa di $\vec{f}$ (ristretto a $V$), $\vec{g} \in C^1(W)$ e se $\vec{x} = \vec{g(y)}$, vale la formula
+				\begin{equation}
+					\vec{J_g(y)} = (\vec{J_f(x)})^{-1}
+				\end{equation}
+			\end{enumerate}
+		\end{enumerate}
 \end{teor}
 
 
