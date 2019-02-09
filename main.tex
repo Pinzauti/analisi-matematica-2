@@ -28,14 +28,13 @@
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\arctg}{arctg}
 \DeclareMathOperator{\sgn}{sgn}
-<<<<<<< HEAD
+
 \DeclareMathOperator{\Epi}{Epi}
-=======
+
 \DeclareMathOperator{\rot}{rot}
 \DeclareMathOperator{\Vol}{Vol}
 \DeclareMathOperator{\divg}{div}
 
->>>>>>> master
 
 
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
@@ -45,11 +44,10 @@
 \renewcommand{\theta}{\vartheta}
 \renewcommand{\rho}{\varrho}
 \renewcommand{\phi}{\varphi}
-<<<<<<< HEAD
-=======
+
 \renewcommand{\ni}{\nu}
->>>>>>> master
-\renewcommand{\mi}{\mu}
+
+
 
 
 \pagestyle{plain}
@@ -339,16 +337,16 @@ Come nel caso unidimensionale, tramite la~\eqref{eqn:valmedlagrange} possiamo ca
 
 	\subsection{Funzioni omogenee, funzioni convesse e concave}
 
-Le funzioni positivamente omogenee di grado $\mi$, $\mi \in \mathbb{R}$ sono definite in coni con vertice in $\vec{0}$; cioè, se sono definite in un punto $\vec{x}$, allora sono definite su tutta la semiretta $\rho \vec{x}$ per ogni $\rho > 0$. Un cono non è necessariamente convesso e ovviamente può coincidere con tutto $\mathbb{R}^n$.
+Le funzioni positivamente omogenee di grado $\mu$, $\mu \in \mathbb{R}$ sono definite in coni con vertice in $\vec{0}$; cioè, se sono definite in un punto $\vec{x}$, allora sono definite su tutta la semiretta $\rho \vec{x}$ per ogni $\rho > 0$. Un cono non è necessariamente convesso e ovviamente può coincidere con tutto $\mathbb{R}^n$.
 	\begin{defn}
-		Sia $\mathcal{C} \subseteq \mathbb{R}^n$ un cono e $f \colon \mathcal{C} \to \mathbb{R}$; $f$ si dice positivamente omogenea di grado $\mi$, $\mi \in \mathbb{R}$, se $\forall \vec{x} \in \mathcal{C}$ e $\forall \rho > 0$ risulta
+		Sia $\mathcal{C} \subseteq \mathbb{R}^n$ un cono e $f \colon \mathcal{C} \to \mathbb{R}$; $f$ si dice positivamente omogenea di grado $\mu$, $\mu \in \mathbb{R}$, se $\forall \vec{x} \in \mathcal{C}$ e $\forall \rho > 0$ risulta
 			\begin{equation}
-				f(\rho \vec{x}) = \rho^{\mi}f(\vec{x}).
+				f(\rho \vec{x}) = \rho^{\mu}f(\vec{x}).
 			\end{equation}
 	\end{defn}
 
 	\begin{exmp}
-Qualunque polinomio omogeneo di grado $\mi$, $\mi \in \mathbb{N}$, in $k$ variabili è omogeneo dello stesso grado nel senso della definizione precedente.
+Qualunque polinomio omogeneo di grado $\mu$, $\mu \in \mathbb{N}$, in $k$ variabili è omogeneo dello stesso grado nel senso della definizione precedente.
 	\end{exmp}
 
 	\begin{exmp}
@@ -358,9 +356,9 @@ La norma di un vettore $\vec{x} \in \mathbb{R}^n$ è positivamente omogenea di g
 Il seguente teorema caratterizza le funzioni positivamente omogenee differenziabili in insiemi aperti.
 
 	\begin{teor}[di Eulero]
-		Sia $\mathcal{C} \subseteq \mathbb{R}^n$ un cono aperto e $f \colon \mathcal{C} \to \mathbb{R}$ differenziabile in $\mathcal{C}$. Allora $f$ è positivamente omogenea di grado $\mi$ se e solo se, per ogni $\vec{x} \in \mathcal{C}$, risulta
+		Sia $\mathcal{C} \subseteq \mathbb{R}^n$ un cono aperto e $f \colon \mathcal{C} \to \mathbb{R}$ differenziabile in $\mathcal{C}$. Allora $f$ è positivamente omogenea di grado $\mu$ se e solo se, per ogni $\vec{x} \in \mathcal{C}$, risulta
 			\begin{equation}
-				(\vec{x}, \nabla f(\vec{x})) = \mi f(\vec{x}).
+				(\vec{x}, \nabla f(\vec{x})) = \mu f(\vec{x}).
 			\end{equation}
 	\end{teor}
 
@@ -1539,49 +1537,49 @@ ove
 	\end{equation*}
 dove $d_k$ indica la distanza di $\vec{p}_k$ dalla retta o dal polo.
 
-Supponiamo ora che un corpo occupi una regione piana $\Omega$. Se $\mi = \mi(x, y)$ indica la densità superficiale di massa, la massa totale $m$ del corpo è data dall'integrale
+Supponiamo ora che un corpo occupi una regione piana $\Omega$. Se $\mu = \mu(x, y)$ indica la densità superficiale di massa, la massa totale $m$ del corpo è data dall'integrale
 	\begin{equation*}
-		m = \iint_{\Omega} \mi(x, y)\,dx\,dy.
+		m = \iint_{\Omega} \mu(x, y)\,dx\,dy.
 	\end{equation*}
 
 Le coordinate del baricentro sono assegnate dalle formule
 	\begin{equation}
-		x_{\vec{b}} \coloneqq \frac{1}{m}\iint_{\Omega}x\mi(x, y)\,dx\,dy, \quad y_{\vec{b}} \coloneqq \frac{1}{m}\iint_{\Omega}y\mi(x, y)\,dx\,dy.
+		x_{\vec{b}} \coloneqq \frac{1}{m}\iint_{\Omega}x\mu(x, y)\,dx\,dy, \quad y_{\vec{b}} \coloneqq \frac{1}{m}\iint_{\Omega}y\mu(x, y)\,dx\,dy.
 	\end{equation}
 
-Se la densità è costante, $\mi = k$ (corpo omogeneo), il baricentro si chiama anche \emph{centroide} ed essendo $m = k\cdot(\Omega)$ le formule precedneti diventano
+Se la densità è costante, $\mu = k$ (corpo omogeneo), il baricentro si chiama anche \emph{centroide} ed essendo $m = k\cdot(\Omega)$ le formule precedneti diventano
 	\begin{equation}
 		x_{\vec{b}} = \frac{1}{a(\Omega)} \iint_{\Omega}x\,dx\,dy, \quad y_{\vec{b}} = \frac{1}{a(\Omega)}\iint_{\Omega}y \, dx\,dy.
 	\end{equation}
 
 	Il momento d'inerzia rispetto a una retta $r$ o un polo $\vec{p}$ giacenti nel piano di $\Omega$ è assegnato dalla formula
 		\begin{equation}
-			I \coloneqq \iint_{\Omega}(\delta(x,y))^2\mi(x,y)\,dx\,dy,
+			I \coloneqq \iint_{\Omega}(\delta(x,y))^2\mu(x,y)\,dx\,dy,
 		\end{equation}
 	dove $\delta = \delta(x, y)$ indica la distanza del punto $(x, y)$ dalla retta o dal polo. Per esempio, per i momenti d'inerzia rispetto agli assi coordinati si ha
 		\begin{equation*}
-			I_x = \iint_{\Omega}y^2\mi(x, y)\,dx\,dy, \quad I_y = \iint_{\Omega}x^2 \mi(x, y)\,dx\,dy,
+			I_x = \iint_{\Omega}y^2\mu(x, y)\,dx\,dy, \quad I_y = \iint_{\Omega}x^2 \mu(x, y)\,dx\,dy,
 		\end{equation*}
 mentre per quello rispetto all'origine
 	\begin{equation*}
-		I_{\vec{0}} = \iint_{\Omega}(x^2+y^2)\mi(x, y)\,dx\,dy = I_x + I_y.
+		I_{\vec{0}} = \iint_{\Omega}(x^2+y^2)\mu(x, y)\,dx\,dy = I_x + I_y.
 	\end{equation*}
 
-	Le formule precedenti si estendono a una distribuzione tridimensionale di massa con densità $\mi = \mi(x, y, z)$, $(x, y, z) \in V$.
+	Le formule precedenti si estendono a una distribuzione tridimensionale di massa con densità $\mu = \mu(x, y, z)$, $(x, y, z) \in V$.
 
 	Per il baricentro si avrà
 		\begin{gather*}
-			x_{\vec{b}} \coloneqq \frac{1}{m} \iint_V x\mi(x, y, z)\,dx\,dy\,dz, \\
-			y_{\vec{b}} \coloneqq \frac{1]{m}}\iint_V y\mi(x, y, z)\,dx\,dy\,dz, \\
-			z_{\vec{b}} \coloneqq \frac{1]{m}}\iint_V z\mi(x, y, z)\,dx\,dy\,dz,
+			x_{\vec{b}} \coloneqq \frac{1}{m} \iint_V x\mu(x, y, z)\,dx\,dy\,dz, \\
+			y_{\vec{b}} \coloneqq \frac{1]{m}}\iint_V y\mu(x, y, z)\,dx\,dy\,dz, \\
+			z_{\vec{b}} \coloneqq \frac{1]{m}}\iint_V z\mu(x, y, z)\,dx\,dy\,dz,
 		\end{gather*}
 	con
 		\begin{equation*}
-			m = \iiint_V \mi\,dx\,dy\,dz
+			m = \iiint_V \mu\,dx\,dy\,dz
 		\end{equation*}
 	massa totale, mentre per il momento d'inerzia
 		\begin{equation*}
-			I \coloneqq \iiint_V (\delta(x, y, z))^2\mi(x, y, z)\,dx\,dy\,dz.
+			I \coloneqq \iiint_V (\delta(x, y, z))^2\mu(x, y, z)\,dx\,dy\,dz.
 		\end{equation*}
 
 \subsection{Cenni agli integrali multipli generalizzati}
