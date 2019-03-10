@@ -100,7 +100,7 @@
 \pgfplotsset{compat=1.15}
 \begin{document}
 
-\title{Perdete ogni speranza, voi ch'intrate}
+\title{Analisi Matematica II}
 
 \author{}
 \date{}
@@ -109,6 +109,344 @@
 
 \tableofcontents
 
+\chapter{Brevi cenni agli spazi metrici}
+
+\epigraph{
+\begin{otherlanguage*}{greek}
+	>Ae\`{i} <o je\`{o}s gewmetre~i.
+\end{otherlanguage*}
+}{Platone}
+\section{Prodotto scalare, norma, distanza}
+Per semplicità, considereremo solamente spazi vettoriali su $\mathbb{R}$.
+
+Si ricorda che lo spazio $\mathbb{R}^n$ è definito come il prodotto cartesiano di $\mathbb{R}$ con se stesso $n$ volte, cioè
+\begin{equation}
+	\mathbb{R}^n = \underbrace{\mathbb{R}\times \mathbb{R} \times \dots \times \mathbb{R}}_{n \text{ volte}}.
+\end{equation}
+Un elemento $x \in \mathbb{R}^n$ (\emph{punto} o \emph{vettore}) è una $n$-upla ordinata $(x_1, x_2, \dots, x_n)$.
+
+\subsection{Prodotto scalare}
+S'introduce l'applicazione binaria $(\ ,\ )\colon\mathbb{R}^n\times\mathbb{R}^n \to \mathbb{R}$ che associa ad una coppia $(x,y)$, con $x,y\in\mathbb{R}^n$, il valore
+\begin{equation}
+	\label{eqn:prodscal}
+	x\cdot y = \sum_{i=1}^nx_iy_i.
+\end{equation}
+Il prodotto $x\cdot y$ è detto \emph{prodotto scalare} di $x$ e $y$, e ha le seguenti proprietà:
+\begin{enumerate}[label=$\mathcal{S}$\arabic*.]
+	\item \label{s1} $x\cdot x \ge 0 \quad \forall x\in \mathbb{R}^n$; $\ x\cdot x = 0 \iff x = 0$ (definita positività);
+	\item \label{s2} $x\cdot y = y \cdot x \quad \forall x, y \in \mathbb{R}^n$ (simmetria);
+	\item \label{s3} $(\alpha x + \beta y, z) = \alpha(x, z) + \beta(y, z) \quad \forall x,y,z \in \mathbb{R}^n,\ \forall \alpha, \beta \in \mathbb{R}$ (bilinearità).
+\end{enumerate}
+\proof La dimostrazione è banale in tutti e tre i casi (si ricava facilmente dalla definizione).
+\endproof
+
+\begin{defn}
+	Se $X$ è uno spazio vettoriale su $\mathbb{R}$, si dice \emph{prodotto scalare} un'operazione $(\ , \ )\colon X \times X \to \mathbb{R}$ con le proprietà suddette. Uno spazio dotato di prodotto scalare è detto \emph{pre-hilbertiano}.
+\end{defn}
+
+\subsection{Norma}
+Il prodotto scalare introdotto in~\eqref{eqn:prodscal} induce una norma in $\mathbb{R}^n$ (più in generale, in $X$); si definisce l'applicazione \emph{norma}
+\begin{equation}
+	\label{eqn:norma}
+	\norma{\ }\colon \mathbb{R}^n \ni x \mapsto \sqrt{x\cdot x} = \sqrt{\sum_{i=1}^n x_i^2}.
+\end{equation}
+
+È facile dimostrare che l'applicazione definita in~\eqref{eqn:norma} gode delle seguenti proprietà:
+\begin{enumerate}[label=$\mathcal{N}$\arabic*.]
+	\item \label{n1} $\norma{x} \ge 0 \quad \forall x \in \mathbb{R}^n; \ \norma{x} = 0 \iff x = 0$;
+	\item \label{n2} $\norma{\lambda x} = \abs{\lambda}\, \norma{x} \quad \forall x \in \mathbb{R}^n, \ \forall \lambda \in \mathbb{R}$;
+	\item \label{n3} $\norma{x+y} \le \norma{x} + \norma{y} \quad \forall x,y \in \mathbb{R}^n$ (disuguaglianza triangolare).
+\end{enumerate}
+
+\proof
+La dimostrazione di~\ref{n1} e~\ref{n2} è banale e segue dalla definizione. La~\ref{n3} verrà provata dopo l'enunciazione del seguente teorema.
+
+\begin{teor}[Disuguaglianza di Cauchy-Schwarz]
+	\label{cauchy-schwarz}
+	Siano $x, y \in \mathbb{R}^n$; allora
+	\begin{equation}
+		\label{eqn:cauchy-schwarz}
+		\abs{(x,y)} \le \norma{x} \cdot \norma{y},
+	\end{equation}
+	ove l'uguaglianza è vera se $x = 0$ (o $y = 0$) oppure se $\exists \lambda \in \mathbb{R}$ tale che $x = \lambda y$.
+\end{teor}
+
+\proof
+Se uno fra $x$ e $y$ è nullo la~\eqref{eqn:cauchy-schwarz} è ovvia. Sia $\lambda \in \mathbb{R}$; si ha
+\begin{equation*}
+	\begin{split}
+		0 \le \norma{x + \lambda y}^2 &= (x + \lambda y, x + \lambda y) = (x, x) + 2 \lambda (x, y) + \lambda^2 (y, y) = \\ &= \norma{x}^2 + 2 \lambda(x, y) + \lambda^2 \norma{y}^2.
+	\end{split}
+\end{equation*}
+Ponendo $\lambda = -(x,y)/\norma{y}^2$ si ha:
+\begin{equation*}
+	\norma{x}^2 - \frac{2(x,y)^2}{\norma{y}^2}+ \frac{(x,y)^2}{y^2} = \norma{x}^2 - \frac{(x,y)^2}{\norma{y}^2}.
+\end{equation*}
+Si ricava quindi:
+\begin{equation*}
+	\norma{x}^2\norma{y}^2 \ge (x, y)^2,
+\end{equation*}
+ed essendo ambo i membri maggiori o uguali a zero estraendo la radice quadrata si ritrova la~\eqref{eqn:cauchy-schwarz} (e facilmente si osserva che vale l'uguaglianza solo se uno dei due vettori è nullo o uno è multiplo dell'altro).
+\endproof
+
+\proof[Dimostrazione di~\ref{n3}]
+Si ha:
+\begin{equation*}
+	\norma{x+y}^2 = \norma{x}^2 + 2(x,y) + \norma{y}^2 \overset{\eqref{eqn:cauchy-schwarz}}{\le} \norma{x}^2 + 2\norma{x}\cdot\norma{y} + \norma{y}^2 = (\norma{x}+\norma{y})^2
+\end{equation*}
+per ogni $x, y \in \mathbb{R}^n$; da ciò segue immediatamente la~\ref{n3} poiché $\norma{x+y} \ge 0$ e $\norma{x} + \norma{y} \ge 0$.
+\endproof
+
+\begin{defn}
+	Sia $X$ uno spazio vettoriale su $\mathbb{R}$; è detta \emph{norma} una funzione $\norma{\cdot}\colon X\to \mathbb{R}$ che soddisfi le proprietà~\ref{n1},~\ref{n2},~\ref{n3}; si dice che $(X, \norma{\cdot})$ è uno spazio normato.
+\end{defn}
+
+\begin{oss}
+	Uno spazio pre-hilbertiano è anche normato (con la norma naturalmente indotta dal prodotto scalare).
+\end{oss}
+
+Una puntualizzazione: non è vero neanche per $\mathbb{R}^n$ dotato della norma euclidea che $\norma{x-y} \le \norma{x} - \norma{y}$; si pensi al caso $n=1,\,x=0$ e $y=1$. Valgono invece le seguenti disuguaglianze, di facile dimostrazione:
+\begin{enumerate}[label = \roman*)]
+	\item $\norma{x-y} \le \norma{x} + \norma{y} \quad \forall x, y \in X$;
+	\item $\norma{x-y} \ge \abs{\,\norma{x}-\norma{y}\,} \quad \forall x,y \in X.$
+\end{enumerate}
+
+Se $X$ è uno spazio pre-hilbertiano con prodotto scalare $(\ , \ )$ si ha:
+\begin{equation}
+	\label{eqn:par1}
+	\norma{x+y}^2 = (x+y, x+y) = \norma{x}^2 + 2(x,y) + \norma{y}^2 \quad \forall x, y \in X;
+\end{equation}
+\begin{equation}
+	\label{eqn:par2}
+	\norma{x-y}^2 = \norma{x} - 2(x, y) + \norma{y}^2 \quad \forall x, y \in X.
+\end{equation}
+Sommando membro a membro~\eqref{eqn:par1} e~\eqref{eqn:par2}
+si ottiene
+\begin{equation}
+	\label{eqn:par3}
+	\norma{x+y}^2 + \norma{x-y}^2 = 2(\norma{x}^2 + \norma{y}^2) \quad \forall x,y \in X,
+\end{equation}
+che nel caso $X = \mathbb{R}^2$ corrisponde alla regola per cui in un parallelogramma la somma delle lunghezze al quadrato è uguale al doppio della somma dei quadrati costruiti sui lati.
+
+\begin{exmp}
+	Si consideri lo spazio $X = C_b (I)$ delle funzioni $f\colon I \subseteq \mathbb{R}\to \mathbb{R}$ continue e limitate in un intervallo $I$ di $\mathbb{R}$ con la norma
+	\begin{equation*}
+		\norma{f}_\infty \coloneqq \sup_{x\in I}\abs{f(x)}.
+	\end{equation*}
+	Si dimostra facilmente che $\norma{\cdot}_\infty$ è effettivamente una norma in $X$ e che non vale la~\eqref{eqn:par3}; ne segue che uno spazio normato non è necessariamente pre-hilbertiano (si può anche provare che la~\eqref{eqn:par3} caratterizza gli spazi normati la cui norma è indotta da un prodotto scalare).
+\end{exmp}
+
+\subsection{Distanza}
+A questo punto, si può introdurre un'applicazione detta distanza che associa a due vettori di $\mathbb{R}^n$ il numero reale
+\begin{equation}
+	\label{distanza}
+	d(x, y) = \norma{x - y}\quad \forall x, y \in \mathbb{R}^n.
+\end{equation}
+
+È facile verificare che valgono le seguenti proprietà:
+\begin{enumerate}[label=$\mathcal{D}$\arabic*.]
+	\item \label{d1} $d(x, y) \ge 0 \quad \forall x, y \in \mathbb{R}^n; \ d(x, y) = 0 \iff x = y;$
+	\item \label{d2} $d(x, y) = d(y, x)$ (simmetria);
+	\item \label{d3} $d(x, y) \le d(x, z) + d(z, y) \quad \forall x, y, z \in \mathbb{R}^n$ (disuguaglianza triangolare).
+\end{enumerate}
+
+\begin{defn}
+	Se $X$ è un insieme e $d\colon X\times X \to \mathbb{R}$ è un'applicazione che soddisfa~\ref{d1},~\ref{d2} e~\ref{d3}, allora $(X, d)$ è detto \emph{spazio metrico}, e $d$ una \emph{metrica} o \emph{distanza} in $X$.
+\end{defn}
+
+La distanza definita in~\eqref{distanza}, cioè
+\begin{equation*}
+	d(x, y) = \norma{x - y} = \biggl( \sum_{i=1}^n (x_i - y_i)^2 \biggr) ^{1/2},
+\end{equation*}
+è detta \emph{distanza euclidea}, e la norma che la induce \emph{norma euclidea}.
+
+\subsection{Ortogonalità}
+Si consideri uno spazio pre-hilbertiano $(X, (\ , \ )) $ con la norma $\norma{\cdot}$ naturalmente indotta dal prodotto scalare. Se $x, y \in \mathbb{R}^n$ sono entrambi diversi da 0, da~\eqref{eqn:cauchy-schwarz} segue che
+\begin{equation*}
+	\abs[\bigg]{\frac{(x, y)}{\norma{x}\, \norma{y}}} \le 1.
+\end{equation*}
+
+Consideriamo adesso $X = \mathbb{R}^n$ con $\norma{\cdot}$ norma euclidea.
+\begin{defn}
+	Dati $x, y \in \mathbb{R}^n,$ entrambi diversi da zero, si definisce per $\theta \in [0, \pi]$
+	\begin{equation*}
+		\cos{\theta} \coloneqq \frac{(x,y)}{\norma{x}\, \norma{y}}.
+	\end{equation*}
+\end{defn}
+
+Moltiplicando ambo i membri per $\norma{x}\, \norma{y}$ e leggendo da destra a sinistra si ottiene $(x,y) = \norma{x}\, \norma{y} \, \cos{\theta}$, in accordo con la definizione classica usata in Fisica.
+
+\begin{defn}
+	Due vettori $x$ e $y$ si dicono \emph{ortogonali} se $(x,y) = 0$.
+\end{defn}
+
+Si noti che la formula di Carnot diviene il teorema di Pitagora nel caso di vettori ortogonali in $\mathbb{R}^n$:
+\begin{equation*}
+	\norma{x+y}^2 = \norma{x}^2 + 2xy + \norma{y}^2 = \norma{x}^2 + \norma{y}^2 \quad \forall x, y \in X.
+\end{equation*}
+
+\section{Topologia}
+\subsection{Intorni sferici}
+\begin{defn}
+	Dato uno spazio metrico $(X, d)$ con la metrica $d$, per ogni elemento $x_0 \in X$ e $r > 0$ l'insieme
+	\begin{equation*}
+		B(x_0, r) = \{x\in X \colon d(x, x_0) < r \}
+	\end{equation*}
+	è detto \emph{intorno sferico} o \emph{palla} di centro $x_0$ e raggio $r$.
+\end{defn}
+
+\begin{exmp}
+	Nel caso di $\mathbb{R}^n$ dotato della metrica euclidea, gli intorni sferici sono:
+	\begin{itemize}
+		\item intervalli del tipo $(x_0 - r, x_0+r)$ per $n=1$;
+		\item dischi di centro $x_0$ e raggio $r$ (privati del bordo) per $n=2$;
+		\item palle di centro $x_0$ e raggio $r$ private della superficie per $n=3$.
+	\end{itemize}
+\end{exmp}
+
+
+
+\begin{oss}
+	In $\mathbb{R}^n$ possono essere introdotte metriche differenti, ad esempio quelle indotte da
+	\begin{equation}
+		\label{diffnorma}
+		\norma{x} = \sum_{i=1}^n\abs{x_i}, \quad \forall x\in \mathbb{R}^n
+	\end{equation}
+	oppure da
+	\begin{equation}
+		\label{diffnorma2}
+		\norma{x}= \max_i \abs{x_i}, \quad \forall x\in \mathbb{R}^n.
+	\end{equation}
+	È bene notare che in questi casi, a dispetto del nome, gli intorni sferici non hanno l'aspetto di dischi o sfere, come evidenziato in \figurename~\ref{fig:intornosferico}.
+\end{oss}
+
+
+\begin{figure}[ht]
+	\centering
+	\captionsetup{justification=centering}
+	\subfloat[][\emph{Intorno sferico; la distanza è indotta da~\eqref{diffnorma}}]{
+	\begin{tikzpicture}
+		\begin{axis}[axis x line = center, axis y line = center, xmin = -2, xmax = 2, ymin = -2, ymax = 2, grid = major, xlabel = $x$, ylabel = $y$, scale = 0.82, axis equal image, ticklabel style = {font =\small}]
+			\addplot [color = BrickRed, dashed, thick, fill = BrickRed, fill opacity = 0.2] coordinates
+			{(1,0) (0, 1) (-1, 0) (0, -1) (1, 0)};
+		\end{axis}
+	\end{tikzpicture}
+	} ~\quad \subfloat[][\emph{Intorno sferico; la distanza è indotta da~\eqref{diffnorma2}}]{
+	\begin{tikzpicture}
+		\begin{axis}[axis x line = center, axis y line = center, xmin = -2, xmax = 2, ymin = -2, ymax = 2, grid = major, xlabel = $x$, ylabel = $y$, scale = 0.82, axis equal image, ticklabel style = {font =\small}]
+			\addplot [color = BrickRed, dashed, thick, fill = BrickRed, fill opacity = 0.2] coordinates
+			{(1,1) (1, -1) (-1, -1) (-1, 1) (1, 1)};
+		\end{axis}
+	\end{tikzpicture}
+	}
+	\caption{Intorni sferici relativi a distanze indotte da norme diverse da quella euclidea; in entrambi i casi $n=2$ e $r=1$.}
+	\label{fig:intornosferico}
+\end{figure}
+
+\subsection{Definizioni di base}
+\begin{defn}
+	Sia $D\in \mathbb{R}^n$. Si dice che $x_0 \in \mathbb{R}^n$ è \emph{interno} a $D$ se esiste un intorno sferico di $x_0$ interamente contenuto in $D$ (intrinsecamente, $x_0 \in D$).
+\end{defn}
+\begin{exmp}
+	($n=1$) Se $D=(-1, +1]=\{x\in \mathbb{R}\colon -1 < x \le 1 \}$, tutti i suoi punti sono interni con l'eccezione di $1$.
+\end{exmp}
+\begin{exmp}
+	($n=2$) Se $E= \dom\,f(x,y)$, ove $f(x,y) = \sqrt{x-y}$, si ha che $E = \{ (x,y) \in \mathbb{R}^2 \colon x- y \ge 0\}$, cioè i punti interni di $E$ sono tutti e soli quelli descritti da $y-x$ (cfr. \figurename~\ref{fig:esinterni}).
+\end{exmp}
+
+
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis} [xmin=-2,xmax=2,ymin=-2,ymax=2,grid=major,xlabel=$x$,ylabel=$y$, axis equal image, axis x line = center, axis y line = center, ticklabel style = {font =\small}]
+			\node[rotate=45] at (1, 1.3)   (a) {$y=x$};
+			\addplot[color = BrickRed, dashed, thick]{x};
+
+			\addplot+[draw = none, name path =A, no marks] {x}; % actual curve
+			\addplot+[draw=none,name path=B, no marks] {-2};     % “fictional” curve
+			\addplot+[BrickRed, opacity = 0.2] fill between[of=A and B,soft clip={domain=-4:4}];
+
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Il dominio di $f(x, y) = \sqrt{x-y}$}
+	\label{fig:esinterni}
+\end{figure}
+
+
+\begin{defn}
+	L'insieme dei punti interni a $D\in \mathbb{R}^n$ è detto \emph{parte interna} o \emph{interno} di $D$ e si indica con il simbolo $\overset{\circ}{D}$.
+\end{defn}
+
+\begin{defn}
+	Sia $D\in \mathbb{R}^n$. Si dice che $x_0 \in \mathbb{R}^n$ è \emph{esterno} a $D$ se esiste un intorno sferico di $x_0$ interamente contenuto nel complementare $D^C$ di $D$.
+\end{defn}
+
+\begin{defn}
+	Sia $D\in \mathbb{R}^n$. Si dice che $x_0 \in \mathbb{R}^n$ è \emph{di frontiera} per $D$ se non è né interno né esterno a $D$. L'insieme dei punti di frontiera per $D$ è detto \emph{frontiera} o \emph{bordo} di $D$; si indica col simbolo $\partial D$.
+\end{defn}
+
+\begin{oss}
+	Tutte le definizioni date sono pertinenti al caso di un generico spazio metrico $(X, d)$.
+\end{oss}
+
+\begin{defn}
+	Dato $D \in \mathbb{R}^n$, si dice che $x_0 \in \mathbb{R}^n$ è \emph{di accumulazione} per $D$ se in ogni intorno di $x_0$ cadono punti di $D$ diversi da $x_0$ (di conseguenza, tali punti sono infiniti).
+\end{defn}
+
+\begin{exmp}
+	Se $I = (a, b)$, con $a<b$, allora $a$ e $b$ sono di accumulazione; i punti di $I$ sono tutti interni e in particolare di accumulazione. Infatti per ogni $r > 0$ si ha che $(b-r, b+r) \cap I = (\max \{ a, b-r \}, b)$.
+\end{exmp}
+
+\begin{defn}
+	Sia $(X, d)$ uno spazio metrico e sia $A \subseteq X$. Si dice che $A$ è aperto se ogni suo punto è interno; in simboli,
+	\begin{equation*}
+		\forall x_0 \in A \ \exists R > 0\colon B(x_0, R) \subseteq A.
+	\end{equation*}
+\end{defn}
+
+\begin{exmp}
+	L'insieme $A = \{(x, y) \in \mathbb{R}^2 \colon y < x \}$ raffigurato in \figurename~\ref{fig:esinterni} è un insieme aperto.
+\end{exmp}
+
+\subsection{Limiti di successioni e funzioni tra spazi metrici}
+\begin{defn}
+	Dati uno spazio metrico $(X, d)$ e una successione $\{x_n\}_{n\in \mathbb{N}}$ a valori in $X$, si dice che il limite di $x_n$ è $x_0 \in X$ e si scrive
+	\begin{equation*}
+		\lim _{n\to \infty} x_n = x_0
+	\end{equation*}
+	(oppure $x_n \to x_0$) se
+	\begin{equation*}
+		\forall \varepsilon > 0 \ \exists \nu \in \mathbb{N}\colon n \in \mathbb{N}, n > \nu \implies d(x_n, x) < \varepsilon.
+	\end{equation*}
+\end{defn}
+
+\begin{defn}
+	Siano $(X, d_X)$ e $(Y, d_Y)$ due spazi metrici e $f\colon D\subseteq X \to Y$ una funzione. Sia $x_0 \in X$ un punto di accumulazione per $D$. Si dice che $f(x)$ ha limite $L \in Y$ per $x \to x_0$, e si scrive
+	\begin{equation*}
+		\lim_{x\to x_0} f(x) = L
+	\end{equation*}
+	(oppure $ f(x) \to L$ per $x \to x_0$), se
+	\begin{equation*}
+		\forall \varepsilon > 0 \ \exists \delta > 0 \colon x \in D, 0 < d_X(x, x_0) < \varepsilon \implies d_Y(f(x), L) < \varepsilon.
+	\end{equation*}
+\end{defn}
+
+Consideriamo adesso il caso $X=\mathbb{R}$, $Y=\mathbb{R}^n$, $n>1$, $d_X$ e $d_Y$ metriche euclidee.
+
+\begin{defn}
+	Sia $I \subseteq \mathbb{R}$ un intervallo e $r\colon I \to \mathbb{R}^n$ un'applicazione a valori vettoriali. Si dice che $r$ è \emph{continua} in $t_0 \in I$ se
+	\begin{equation*}
+		\lim _{t\to t_0} r(t) = r(t_0).
+	\end{equation*}
+	Se $r(t) = (r_1(t), r_2(t),\dots, r_n(t))$ dev'essere
+	\begin{equation*}
+		\forall \varepsilon > 0 \ \exists \delta > 0 \colon t \in I, \abs{t - t_0} < \delta \implies \norma{r(t) - r(t_0)} < \varepsilon,
+	\end{equation*}
+	ovvero
+	\begin{equation*}
+		\forall \varepsilon > 0 \exists \delta > 0 \colon t\in I, \abs{t- t_0} < \delta \implies \sqrt{\sum_{i=1}^n (r_i(t) - r_i(t_0))^2} < \varepsilon.
+	\end{equation*}
+\end{defn}
 \chapter{Funzioni di più variabili}
 
 \section{Funzioni da $\mathbb{R}^n$ in $\mathbb{R}$}
