@@ -1082,6 +1082,159 @@ Confrontando le definizioni precedenti, si osserva che nel primo caso prima si f
 
 Osserviamo inoltr che, per le successioni in $C^0(I)$, la convergenza ``naturale'' indotta dalla metrica lagrangiana è proprio quella uniforme; anche la metrica dell'estremo superiore adottata sullo spazio $\mathcal{B}(I)$ conduce alla convergenza uniforme.
 
+\begin{exmp}
+Sia $f_n \colon [0, 1] \to \mathbb{R} \colon t \to t^n$ e sia $f(t) = 0$ se $0 \le t < 1$, $f(1) = 1$. La successione $f_n$ converge puntualmente a $f$: se $t = 1$ oppure $t = 0$ l'affermazione è ovvia, se $0 < t < 1$, fissato $\epsilon > 0$, basta prendere
+	\begin{equation*}
+		N = \frac{\log{\epsilon}}{\log{t}}
+	\end{equation*}
+per essere certi che $t^n < \epsilon$ se $n > N$. Scegliendo $t$ prossimo a $1$, $N$ diventa sempre più grande: dunque non esiste un $N$ adatto per tutti i $t \in [0, 1]$ e la successione non converge uniformemente. In alternativa,
+	\begin{equation*}
+		\sup_{t\in[0,1]} \abs{f_n(t) - f(t)} = 1,
+	\end{equation*}
+che non tende a $0$ per $n \to + \infty$, quindi $f_n$ non converge uniformemente a $f$ in $[0, 1]$.
+\end{exmp}
+
+\begin{exmp}
+La successione $f_n \colon \mathbb{R} \to \mathbb{R} \colon t \to \sin{(nt)}/n$ converge uniformemente a $0$; infatti risulta
+	\begin{equation*}
+		\frac{1}{n} \abs{\sin{(nt)}} < \epsilon
+	\end{equation*}
+se $ n > 1/\epsilon$.
+\end{exmp}
+
+Rimane valido il criterio di convergenza di Cauchy:
+	\begin{prop}[Criterio di convergenza puntuale]
+		Condizione necessaria e sufficiente affinché la successione di funzioni $f_n \colon I \to \mathbb{R}$ converga puntualmente in $I$ è che, fissato $\epsilon > 0$, $\forall t \in I$, esista $N = N(\epsilon, t)$ tale che
+			\begin{equation*}
+				\abs{f_n(t) - f_m(t)} < \epsilon
+			\end{equation*}
+		se $n, m > N$.
+	\end{prop}
+
+	\begin{prop}[Criterio di convergenza uniforme]
+		Condizione necessaria e sufficiente affinché la successione di funzioni $f_n \colon I \to \mathbb{R}$ converga uniformemente in $I$ è che, fissato $\epsilon > 0$, esista $N = N(\epsilon)$ tale che
+			\begin{equation*}
+				\abs{f_n(t) - f_m(t)} < \epsilon \quad \forall t \in I,
+			\end{equation*}
+		se $n, m > N$.
+	\end{prop}
+
+\subsection{Scambio di limiti; di limite e derivata; di limite e integrale}
+
+\begin{prop}
+	Il limite $f$ di una successione di funzioni limitate $f_n \colon I \to \mathbb{R}$, convergente uniformemente, è una funzione limitata.
+\end{prop}
+
+\begin{teor}[dello scambio dei limiti]
+	Siano $l_n \in \mathbb{R}$, $f_n$ e $f$ fuznioni da $I \subseteq \mathbb{R}$ in $\mathbb{R}$, $t_0 \in I$. Se
+		\begin{enumerate}
+			\item $f_n(t) \to f(t)$ per $n \to \infty$ uniformemente in $I$;
+			\item $f_n(t) \to l_n$ per $t \to t_0$,
+		\end{enumerate}
+	allora esistono finiti i limiti
+		\begin{equation*}
+			\lim_{t\to t_0}f(t), \quad \lim_{n\to\infty} l_n
+		\end{equation*}
+	e sono uguali, cioè
+		\begin{equation}
+			\lim_{t\to t_0} \lim_{n \to \infty} f_n(t) = \lim_{n \to \infty} \lim_{t \to t_0} f_n(t).
+		\end{equation}
+\end{teor}
+
+\begin{cor}
+	\label{cor:contlim}
+	Se la successione di funzioni continue $f_n \colon I \to \mathbb{R}$ converge uniformemente, il suo limite $f \colon I \to \mathbb{R}$ è una funzione continua.
+\end{cor}
+
+In generale, tale risultato è falso se la convergenza della successione $\{ f_n\}$ è puntuale, ma non uniforme; tale corollario è spesso utilizzato al negativo, per mostrare che se una successione di funzioni continue converge a una funzione discontinua, la convergenza non può essere uniforme.
+
+\begin{teor}[dello scambio del limite con la derivata]
+	\label{teor:limder}
+	Sia data una successione di funzioni $f_n \colon (a, b) \to \mathbb{R}$ derivabili; se
+		\begin{enumerate}
+			\item la successione delle derivate $\{ f'_n\}$ converge uniformemente in $(a, b)$ con limite $g;$
+			\item la successione delle funzioni $\{f_n \}$ converge almeno in un punto $t_0 \in (a, b)$,
+		\end{enumerate}
+	allora anche la successione $\{f_n\}$ converge uniformemente in $(a, b)$. Sia $f$ il suo limite; risulta $f$ derivabile e $f' = g$, cioè
+		\begin{equation}
+			\lim_{n \to \infty} \frac{d}{dt}f_n(t) = \frac{d}{dt} \lim_{n \to \infty} f_n(t).
+		\end{equation}
+\end{teor}
+
+\begin{cor}
+	Nelle stesse ipotesi del teorema precedente, se $f_n \in C^1(a, b)$ anche il limite $f \in C^1(a, b)$.
+\end{cor}
+
+\begin{teor}[dello scambio del limite con l'integrale]
+	Sia data una successione $\{ f_n\} \subset \mathcal{R}(a, b)$ di funzione limitate integrabili sull'intervallo $[a, b]$, convergente uniformemente con limite $f$; allora risulta $f \in \mathcal{R}(a, b)$ e
+	 	\begin{equation}
+				\label{eqn:intlim}
+			\lim_{n\to \infty} \int_a^b f_n(t)\,dt = \int_a^b f(t)\,dt.
+		\end{equation}
+\end{teor}
+
+In particolare, se $\{f_n\} \subset C^0([a, b])$, allora $f \in C^0([a, b])$ (per il Corollario~\ref{cor:contlim}) e vale la~\eqref{eqn:intlim}.
+
+\section{Applicazioni tra spazi metrici, teorema delle contrazioni}
+
+Siano $(X, d_X)$ e $(Y, d_Y)$ due spazi metrici, dotati ognuno della propria metrica $d_X$ e $d_Y$.
+	\begin{defn}
+		Un'applicazione $F \colon X \to Y$ si dice limitata se l'immagine $F(X)$ è un insieme limitato (nella metrica di $Y$); si dice continua in $x_0 \in X$ se, per ogni successione $\{x_n\}$ a valori in $X$ convergente a $x_0$ risulta
+			\begin{equation*}
+				\lim_{n\to \infty} F(x_n) = F(x_0);
+			\end{equation*}
+		si dice continua in $X$ se è continua in ogni punto di $X$.
+	\end{defn}
+
+	Più esplicitamente, diremo che $F \colon X \to Y$ è continua in $x_0 \in X$ se, fissato $\epsilon > 0$, è possibile trovare $\delta = \delta(x_0, \epsilon)$ tale che
+		\begin{equation*}
+			d_Y(F(x), F(x_0)) < \epsilon
+		\end{equation*}
+	se $d_X(x, x_0) < \delta$.
+
+	Occupiamoci di una classe particolare di applicazioni continue.
+
+		\begin{defn}
+			Siano $(X, d_X)$ e $(Y, d_Y)$ spazi metrici. Un'applicazione $F \colon X \to Y$ si dice lipschitziana se esiste un numero $\rho > 0$ tale che, per ogni coppia $x_1, x_2$ di punti di $X$, si abbia
+				\begin{equation*}
+					d_Y(F(x_1), F(x_2)) \le \rho \, d_X(x_1, x_2).
+				\end{equation*}
+			Se risulta $\rho < 1$, $F$ si dirà contrazione di costante $\rho$.
+		\end{defn}
+
+		\begin{exmp}
+			Sia $f \colon \mathbb{R}^n \to \mathbb{R}$ differenziabile. Se $\norma{\nabla f(\vec{x})} \le \rho < 1$, $\forall \vec{x} \in \mathbb{R}^n$, $f$ è una contrazione. Infatti, per il teorema del valor medio di Lagrange, si può scrivere
+				\begin{equation*}
+					f(\vec{x}) - f(\vec{y}) = (\nabla f (\vec{\xi}), \vec{x} - \vec{y})
+				\end{equation*}
+			con $\vec{\xi}$ opportuno sul segmento $[\vec{x}, \vec{y}]$. Poiché
+				\begin{equation*}
+					\abs{(\nabla f(\vec{\xi}), \vec{x} - \vec{y})} \le \norma{\nabla f(\vec{\xi})} \cdot \norma{\vec{x}- \vec{y}} \le \rho \, \norma{\vec{x} - \vec{y}}
+				\end{equation*}
+				si conclude che
+					\begin{equation*}
+						\abs{f(\vec{x}) - f(\vec{y})} \le \rho \, \norma{\vec{x}-\vec{y}}
+					\end{equation*}
+					e cioè che $f$ è una contrazione.
+		\end{exmp}
+
+
+	Particolarmente significativo è il caso $X = Y$.
+
+	Data un'applicazione $F \colon X \to X$, spesso è importante stabilire se essa ammette dei \emph{punti fissi}, cioè punti che vengono trasformati in se stessi da $F$; in altre parole, $x_0$ è punto fisso per $F$ se $F(x_0) = x_0$.
+
+		\begin{teor}[di Banach-Caccioppoli, delle contrazioni]
+			Sia $X$ uno spazio metrico completo ed $F \colon X \to X$ una contrazione di costante $\rho$. Allora $F$ ammette un unico punto fisso $\bar{x}$. Inoltre, dato un qualunque $x_0 \in X$, la successione definita ricorsivamente ponendo
+				\begin{equation}
+					x_{n+1} = F(x_n), \quad n \ge 0,
+				\end{equation}
+			converge a $\bar{x}$.
+		\end{teor}
+
+
+
+
+
 
 \chapter{Misura e integrazione}
 \section{Integrale multiplo secondo Riemann}
