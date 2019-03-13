@@ -1475,6 +1475,502 @@ Sia $f\colon \mathbb{R}^n \supseteq X \to \mathbb{R}$.
 
 		Nel nostro caso, il lemma si applica con $A = \mathbf{H}_f(\vec{x}_0) - \lambda_0 \mathbf{H}_g(\vec{x}_0)$ e $\vec{b} = \nabla g(\vec{x}_0)$; poiché $\nabla g(\vec{x}_0) \ne \vec{0}$, si può supporre sempre che $D_{x_1}g(\vec{x}_0) \ne 0$.
 
+		\chapter{Spazi funzionali e approssimazione di funzioni}
+		\section{Spazi funzionali}
+		\subsection{Metrica e topologia}
+
+		\begin{defn}
+		Un insieme $X$ si dice spazio metrico se è definita un'applicazione (distanza o metrica) $d \colon\! X \times X \to \mathbb{R}$ tale che, $\forall\, x, y, z \in X$, valgano le proprietà
+			\begin{enumerate}[$\mathcal{D}$\arabic*.]
+			\item	$d(x, y) \ge 0, \quad d(x, y) = 0 \iff x = y0;$
+			\item $d(x, y) = d(y, x)0:$
+			\item $d(x, y) \le d(x, z) + d(z, y)$.	\end{enumerate}
+		\end{defn}
+
+		Con spazio metrico s'intende la \emph{coppia} $(X, d)$; su uno stesso insieme potrebbero definirsi più metriche diverse, $d_1, d_2, \dots$; in tal caso, $(X, d_1)$ e $(X, d_2)$ sono spazi metrici diversi.
+
+		\begin{exmp}
+		Qualunque insieme può diventare spazio metrico con la distanza
+			\begin{equation}
+				d(x, y) \coloneqq \begin{dcases*}
+				0 &se $x = y$ \\
+				1 &se $x \ne y$,
+			\end{dcases*}
+			\end{equation}
+		detta \emph{metrica discreta}.
+		\end{exmp}
+
+		\begin{exmp}
+		Gli spazi euclidei $\mathbb{R}^n$ e $\mathbb{C}^n$ sono metrici con la consueta definizione di distanza
+			\begin{equation}
+				d(\vec{x}, \vec{y}) \coloneqq \norma{x-y} \coloneqq \Biggl(\sum_{i = 1}^n \abs{x_i -y_i}^2 \Biggr)^{1/2}
+			\end{equation}
+		(\emph{metrica pitagorica}). Altre metriche possibili in $\mathbb{R}^n$ e $\mathbb{C}^n$ sono ad esempio
+			\begin{equation*}
+				d_1(\vec{x}, \vec{y}) \coloneqq \sum_{i=1}^n \abs{x_i - y_i}, \quad d_{\infty}(\vec{x}, \vec{y}) \coloneqq \max_{i=1, \dots, n}\{\abs{x_i, y_i}\}.
+			\end{equation*}
+		\end{exmp}
+
+		\begin{exmp}
+		L'insieme $\mathbb{R}* = \mathbb{R} \cup \{+\infty\} \cup \{-\infty\}$ si può metrizzare con la definizione di distanza ($x, y \in \mathbb{R}$)
+			\begin{align*}
+				&d(x, y) \coloneqq \abs{\arctg x - \arctg y}, \\
+				&d(x, +\infty) = d(+\infty, x) \coloneqq \frac{\pi}{2} - \arctg x, \\
+				&d(x, -\infty) = d(-\infty, x) \coloneqq \arctg x + \frac{\pi}{2}, \\
+				&d(+\infty, +\infty) = d(-\infty, - \infty) \coloneqq 0, \\
+				&d(+\infty, -\infty) = d(-\infty, + \infty) \coloneqq \pi.
+			\end{align*}
+		\end{exmp}
+
+		\begin{exmp}
+		Sia $I \subseteq \mathbb{R}$ un intervallo; indichiamo con $C^0(I)$ la classe della funzioni continue su $I$. Supponiamo che che $I$ sia compatto su $\mathbb{R}$; in $C^0(I)$ si può introdurre una metrica nel modo seguente: se $f(t)$ e $g(t)$ sono due elementi dello spazio, poniamo
+			\begin{equation}
+				\label{eqn:lagrangiana}
+				d(f, g) \coloneqq \max_{t\in I} \abs{f(t) - g(t)}
+			\end{equation}
+		(\emph{metrica lagrangiana}); senza difficoltà si può estendere a funzioni di più variabili continue in un sottoinsieme $A \subseteq \mathbb{R}^n$.
+		\end{exmp}
+
+		\begin{exmp}
+		Se (riferendoci all'esempio precedente) $I$ non è compatto, non è più valida la metrica~\eqref{eqn:lagrangiana}. Tuttavia, se consideriamo l'insieme $C^0_b(I)$ delle funzioni continue e limitate su $I$ possiamo definire una nuova metrica ponendo
+			\begin{equation}
+				d(f, g) \coloneqq \sup_{t \in I} \abs{f(t) - g(t)}.
+			\end{equation}
+		Più in generale, questa sarà una metrica per lo spazio $\mathcal{B}(I)$ di tutte le funzioni limitate in $I$.
+		\end{exmp}
+
+		\begin{exmp}
+		Sia ancora $I$ compatto; su $C^k(I)$, $k \ge 0$, si pone la metrica
+			\begin{equation}
+				d(f,g) \coloneqq \sum_{j=0}^k \max_{t \in I} \abs{f^{(j)}(t) - g^{(j)}(t)}
+			\end{equation}
+		(\emph{metriche lagrangiane di ordine $k$}).
+		\end{exmp}
+
+		\begin{exmp}
+		In $\overset{~}{C}(a, b)$, insieme delle funzioni continue e assolutamente integrabili in senso generalizzato sull'intervallo $(a, b)$, possiamo definire una metrica ponendo
+			\begin{equation}
+				d(f, g) \coloneqq \int_a^b \abs{f(t) - g(t)}\,dt
+			\end{equation}
+		(\emph{metrica integrale di ordine $1$}).
+		\end{exmp}
+
+		Ricordiamo la definizione di intorno sferico.
+			\begin{defn}
+				Se $(X, d)$ è uno spazio metrico e $x \in X$, chiameremo intorno sferico di $x$ di raggio $r$ l'insieme
+					\begin{equation*}
+						B(x, r) \coloneqq \{ y \in X \colon d(x, y) < r \}.
+					\end{equation*}
+			\end{defn}
+
+		Riprendiamo la definizione di successione convergente e di successione di Cauchy (o fondamentale).
+			\begin{defn}
+				Sia $(X, d)$ uno spazio metrico e $\{x_n\}$ una successione a valori in $X$; essa si dirà convergente a un punto $x \in X$ se vale una delle seguenti affermazioni (equivalenti):
+					\begin{enumerate}
+						\item fissato un qualunque intorno $V$ di $x$, per $n \to +\infty$, $x_n$ appartiene definitivamente a $V$;
+						\item $\forall \epsilon > 0$, esiste un intero positivo $N$ tale che, per $n > N$, risulta $d(x_n, x) < \epsilon$;
+						\item $\lim_{n\to+\infty} d(x_n, x) = 0.$
+					\end{enumerate}
+			\end{defn}
+
+				\begin{defn}
+					Sia $(X, d)$ no spazio metrico e $\{ x_n\}$ una successione a valori in $X$; essa si dirà fondamentale o di Cauchy se
+						\begin{equation}
+							\lim_{n, m \to +\infty} d(x_n, x_m) = 0.
+						\end{equation}
+				\end{defn}
+
+				Se una successione è convergente, allora essa è fondamentale; l'affermazione inversa è vera negli spazi euclidei, ma non lo è in tutti gli spazi metrici. Uno spazio metrico in cui ogni successione fondamentale è convergente si dice \emph{completo}.
+
+				\subsection{Successioni di funzioni, convergenza puntuale e uniforme}
+
+				Sia $I \subseteq \mathbb{R}$ un intervallo, $f_n \colon I \to \mathbb{R}$ una successione di funzioni e sia $t_0 \in I$. La successione $\{ f_n(t_0)\}$ è dunque una successione di numeri reali e potremo determinarne il carattere; possiamo ripetere questa operazione per tutti i punti $t \in I$. Se, per ogni $t \in I$, la corrispondente successione numerica $\{ f_n(t)\}$ è convergente e $f(t)$ è il suo limite, risulta definita una funzione $f \colon I \to \mathbb{R}$ che sarà naturale chiamare \emph{limite} della successione di funzioni $\{ f_n\}$.
+
+				Più precisamente, diamo la seguente
+					\begin{defn}
+						Una successione di funzioni $f_n \colon I \to \mathbb{R}$ si dirà convergente in $I$ con limite $f \colon I \to \mathbb{R}$ se, fissato $\epsilon > 0$, $\forall t \in I$, $\exists N = N(\epsilon, t)$ tale che
+							\begin{equation*}
+								\abs{f_n(t) - f(t)} < \epsilon
+							\end{equation*}
+						se $n > N$.
+					\end{defn}
+
+			Questa definizione è una semplice estensione dell'analoga definizione di convergenza delle successioni numeriche; essa viene detta anche convergenza puntuale (o ordinaria).
+
+			Secondo un altro punto di vista, potremmo considerare le funzioni come elementi di un dato spazio metrico $X$; il limite è allora già definito dalla metrica di questo spazio.
+
+			Sia $X = C^0(I)$, con $I$ compatto, dotato della metrica lagrangiana. Una successione $\{f_n \}\subset C^0(I)$ converge a $f \in C^0(I)$ se accade che $d(f_n, f)$ tende a zero, cioè
+				\begin{equation*}
+					\lim_{n \to \infty} \max_{t \in I} \abs{f_n(t) - f(t)} = 0.
+				\end{equation*}
+
+		Ciò significa che, fissato $\epsilon > 0$, $\exists N = N(\epsilon)$ per cui
+			\begin{equation}
+				\max_{t \in I} \abs{f_n(t) - f(t)} > \epsilon
+			\end{equation}
+		se $n > N$.
+
+		Ma, se per $n > N(\epsilon)$, $\abs{f_n(t) - f(t)} < \epsilon$ nei punti di massimo, lo stesso accadrà per ogni altro $t \in I$; perciò, senz'altro $f_n$ converge a $f$ puntualmente.
+
+		\begin{defn}
+			Una successione di funzioni $f_n \colon I \to \mathbb{R}$ si dice convergente uniformemente in $I$, con limite $f \colon I \to \mathbb{R}$, se, fissato $\epsilon > 0$, $\exists N = N(\epsilon)$ tale che
+				\begin{equation}
+					\label{eqn:uniforme}
+					\abs{f_n(t) - f(t)} < \epsilon \quad \forall t \in I,
+				\end{equation}
+				se $n > N$.
+		\end{defn}
+
+		Confrontando le definizioni precedenti, si osserva che nel primo caso prima si fissa $t \in I$ e poi si trova $N$, che dipenderà dunque (oltre che dal prefissato $\epsilon$) anche dal punto $t$ scelto; nel secondo, siamo invece in grado di trovare un $N$ indipendente da $t$ per cui la~\eqref{eqn:uniforme} è verificata. Ovviamente, la convergenza uniforme  implica quella puntuale, ma non vale il viceversa.
+
+		Osserviamo inoltr che, per le successioni in $C^0(I)$, la convergenza ``naturale'' indotta dalla metrica lagrangiana è proprio quella uniforme; anche la metrica dell'estremo superiore adottata sullo spazio $\mathcal{B}(I)$ conduce alla convergenza uniforme.
+
+		\begin{exmp}
+		Sia $f_n \colon [0, 1] \to \mathbb{R} \colon t \to t^n$ e sia $f(t) = 0$ se $0 \le t < 1$, $f(1) = 1$. La successione $f_n$ converge puntualmente a $f$: se $t = 1$ oppure $t = 0$ l'affermazione è ovvia, se $0 < t < 1$, fissato $\epsilon > 0$, basta prendere
+			\begin{equation*}
+				N = \frac{\log{\epsilon}}{\log{t}}
+			\end{equation*}
+		per essere certi che $t^n < \epsilon$ se $n > N$. Scegliendo $t$ prossimo a $1$, $N$ diventa sempre più grande: dunque non esiste un $N$ adatto per tutti i $t \in [0, 1]$ e la successione non converge uniformemente. In alternativa,
+			\begin{equation*}
+				\sup_{t\in[0,1]} \abs{f_n(t) - f(t)} = 1,
+			\end{equation*}
+		che non tende a $0$ per $n \to + \infty$, quindi $f_n$ non converge uniformemente a $f$ in $[0, 1]$.
+		\end{exmp}
+
+		\begin{exmp}
+		La successione $f_n \colon \mathbb{R} \to \mathbb{R} \colon t \to \sin{(nt)}/n$ converge uniformemente a $0$; infatti risulta
+			\begin{equation*}
+				\frac{1}{n} \abs{\sin{(nt)}} < \epsilon
+			\end{equation*}
+		se $ n > 1/\epsilon$.
+		\end{exmp}
+
+		Rimane valido il criterio di convergenza di Cauchy:
+			\begin{prop}[Criterio di convergenza puntuale]
+				Condizione necessaria e sufficiente affinché la successione di funzioni $f_n \colon I \to \mathbb{R}$ converga puntualmente in $I$ è che, fissato $\epsilon > 0$, $\forall t \in I$, esista $N = N(\epsilon, t)$ tale che
+					\begin{equation*}
+						\abs{f_n(t) - f_m(t)} < \epsilon
+					\end{equation*}
+				se $n, m > N$.
+			\end{prop}
+
+			\begin{prop}[Criterio di convergenza uniforme]
+				Condizione necessaria e sufficiente affinché la successione di funzioni $f_n \colon I \to \mathbb{R}$ converga uniformemente in $I$ è che, fissato $\epsilon > 0$, esista $N = N(\epsilon)$ tale che
+					\begin{equation*}
+						\abs{f_n(t) - f_m(t)} < \epsilon \quad \forall t \in I,
+					\end{equation*}
+				se $n, m > N$.
+			\end{prop}
+
+		\subsection{Scambio di limiti; di limite e derivata; di limite e integrale}
+
+		\begin{prop}
+			Il limite $f$ di una successione di funzioni limitate $f_n \colon I \to \mathbb{R}$, convergente uniformemente, è una funzione limitata.
+		\end{prop}
+
+		\begin{teor}[dello scambio dei limiti]
+			Siano $l_n \in \mathbb{R}$, $f_n$ e $f$ fuznioni da $I \subseteq \mathbb{R}$ in $\mathbb{R}$, $t_0 \in I$. Se
+				\begin{enumerate}
+					\item $f_n(t) \to f(t)$ per $n \to \infty$ uniformemente in $I$;
+					\item $f_n(t) \to l_n$ per $t \to t_0$,
+				\end{enumerate}
+			allora esistono finiti i limiti
+				\begin{equation*}
+					\lim_{t\to t_0}f(t), \quad \lim_{n\to\infty} l_n
+				\end{equation*}
+			e sono uguali, cioè
+				\begin{equation}
+					\lim_{t\to t_0} \lim_{n \to \infty} f_n(t) = \lim_{n \to \infty} \lim_{t \to t_0} f_n(t).
+				\end{equation}
+		\end{teor}
+
+		\begin{cor}
+			\label{cor:contlim}
+			Se la successione di funzioni continue $f_n \colon I \to \mathbb{R}$ converge uniformemente, il suo limite $f \colon I \to \mathbb{R}$ è una funzione continua.
+		\end{cor}
+
+		In generale, tale risultato è falso se la convergenza della successione $\{ f_n\}$ è puntuale, ma non uniforme; tale corollario è spesso utilizzato al negativo, per mostrare che se una successione di funzioni continue converge a una funzione discontinua, la convergenza non può essere uniforme.
+
+		\begin{teor}[dello scambio del limite con la derivata]
+			\label{teor:limder}
+			Sia data una successione di funzioni $f_n \colon (a, b) \to \mathbb{R}$ derivabili; se
+				\begin{enumerate}
+					\item la successione delle derivate $\{ f'_n\}$ converge uniformemente in $(a, b)$ con limite $g;$
+					\item la successione delle funzioni $\{f_n \}$ converge almeno in un punto $t_0 \in (a, b)$,
+				\end{enumerate}
+			allora anche la successione $\{f_n\}$ converge uniformemente in $(a, b)$. Sia $f$ il suo limite; risulta $f$ derivabile e $f' = g$, cioè
+				\begin{equation}
+					\lim_{n \to \infty} \frac{d}{dt}f_n(t) = \frac{d}{dt} \lim_{n \to \infty} f_n(t).
+				\end{equation}
+		\end{teor}
+
+		\begin{cor}
+			Nelle stesse ipotesi del teorema precedente, se $f_n \in C^1(a, b)$ anche il limite $f \in C^1(a, b)$.
+		\end{cor}
+
+		\begin{teor}[dello scambio del limite con l'integrale]
+			Sia data una successione $\{ f_n\} \subset \mathcal{R}(a, b)$ di funzione limitate integrabili sull'intervallo $[a, b]$, convergente uniformemente con limite $f$; allora risulta $f \in \mathcal{R}(a, b)$ e
+			 	\begin{equation}
+						\label{eqn:intlim}
+					\lim_{n\to \infty} \int_a^b f_n(t)\,dt = \int_a^b f(t)\,dt.
+				\end{equation}
+		\end{teor}
+
+		In particolare, se $\{f_n\} \subset C^0([a, b])$, allora $f \in C^0([a, b])$ (per il Corollario~\ref{cor:contlim}) e vale la~\eqref{eqn:intlim}.
+
+		\subsection{Applicazioni tra spazi metrici, teorema delle contrazioni}
+
+		Siano $(X, d_X)$ e $(Y, d_Y)$ due spazi metrici, dotati ognuno della propria metrica $d_X$ e $d_Y$.
+			\begin{defn}
+				Un'applicazione $F \colon X \to Y$ si dice limitata se l'immagine $F(X)$ è un insieme limitato (nella metrica di $Y$); si dice continua in $x_0 \in X$ se, per ogni successione $\{x_n\}$ a valori in $X$ convergente a $x_0$ risulta
+					\begin{equation*}
+						\lim_{n\to \infty} F(x_n) = F(x_0);
+					\end{equation*}
+				si dice continua in $X$ se è continua in ogni punto di $X$.
+			\end{defn}
+
+			Più esplicitamente, diremo che $F \colon X \to Y$ è continua in $x_0 \in X$ se, fissato $\epsilon > 0$, è possibile trovare $\delta = \delta(x_0, \epsilon)$ tale che
+				\begin{equation*}
+					d_Y(F(x), F(x_0)) < \epsilon
+				\end{equation*}
+			se $d_X(x, x_0) < \delta$.
+
+			Occupiamoci di una classe particolare di applicazioni continue.
+
+				\begin{defn}
+					Siano $(X, d_X)$ e $(Y, d_Y)$ spazi metrici. Un'applicazione $F \colon X \to Y$ si dice lipschitziana se esiste un numero $\rho > 0$ tale che, per ogni coppia $x_1, x_2$ di punti di $X$, si abbia
+						\begin{equation*}
+							d_Y(F(x_1), F(x_2)) \le \rho \, d_X(x_1, x_2).
+						\end{equation*}
+					Se risulta $\rho < 1$, $F$ si dirà contrazione di costante $\rho$.
+				\end{defn}
+
+				\begin{exmp}
+					Sia $f \colon \mathbb{R}^n \to \mathbb{R}$ differenziabile. Se $\norma{\nabla f(\vec{x})} \le \rho < 1$, $\forall \vec{x} \in \mathbb{R}^n$, $f$ è una contrazione. Infatti, per il teorema del valor medio di Lagrange, si può scrivere
+						\begin{equation*}
+							f(\vec{x}) - f(\vec{y}) = (\nabla f (\vec{\xi}), \vec{x} - \vec{y})
+						\end{equation*}
+					con $\vec{\xi}$ opportuno sul segmento $[\vec{x}, \vec{y}]$. Poiché
+						\begin{equation*}
+							\abs{(\nabla f(\vec{\xi}), \vec{x} - \vec{y})} \le \norma{\nabla f(\vec{\xi})} \cdot \norma{\vec{x}- \vec{y}} \le \rho \, \norma{\vec{x} - \vec{y}}
+						\end{equation*}
+						si conclude che
+							\begin{equation*}
+								\abs{f(\vec{x}) - f(\vec{y})} \le \rho \, \norma{\vec{x}-\vec{y}}
+							\end{equation*}
+							e cioè che $f$ è una contrazione.
+				\end{exmp}
+
+
+			Particolarmente significativo è il caso $X = Y$.
+
+			Data un'applicazione $F \colon X \to X$, spesso è importante stabilire se essa ammette dei \emph{punti fissi}, cioè punti che vengono trasformati in se stessi da $F$; in altre parole, $\bar{x}$ è punto fisso per $F$ se $F(\bar{x}) = \bar{x}$.
+
+				\begin{teor}[di Banach-Caccioppoli, delle contrazioni]
+					Sia $X$ uno spazio metrico completo ed $F \colon X \to X$ una contrazione di costante $\rho$. Allora $F$ ammette un unico punto fisso $\bar{x}$. Inoltre, dato un qualunque $x_0 \in X$, la successione definita ricorsivamente ponendo
+						\begin{equation}
+							x_{n+1} = F(x_n), \quad n \ge 0,
+						\end{equation}
+					converge a $\bar{x}$.
+				\end{teor}
+
+		\section{Serie di funzioni}
+		\subsection{Generalità}
+
+		Sia $\{ x_n\}$ una successione di funzioni che, per semplicità, supporremo reali di variabile reale ($x_n \colon I \to \mathbb{R}$ dove $I \subseteq \mathbb{R}$ è un intervallo). La successione delle \emph{somme parziali} $\{s_n\}$ così definita
+			\begin{align*}
+				s_0(t) &= x_0(t) \\
+				s_1(t) &= x_0(t) + x_1(t) \\
+				\vdots \\
+				s_n(t) &= x_0(t) + x_1(t) + \dots + x_n(t) \\
+				\vdots
+			\end{align*}
+		si dice serie di termini $x_n(t)$ e si indica col simbolo
+			\begin{equation*}
+				\sum_{n=0}^{\infty} x_n(t);
+			\end{equation*}
+		la serie si dirà convergente (puntualmente, uniformemente) in $I$ se converge (puntualmente, uniformemente) la successione delle somme parziali.
+
+		\begin{exmp}
+		Consideriamo la successione di funzioni $\{ t^n\}$, $t \in \mathbb{R}$; la corrispondente serie è la serie geometrica $\sum_{n=0}^{\infty}t^n$, che converge $\forall t \in (-1, +1)$ e ha come somma la funzione $s(t) = (1 - t)^{-1}$; diremo quindi che la serie geometrica converge puntualmente in $(-1, +1)$. Mostriamo che converge uniformemente in $[-r, r]$, con $0 < r < 1$: la successione delle somme parziali è
+			\begin{equation*}
+				s_n(t) = \frac{1 - t^{n+1}}{1 -t},
+			\end{equation*}
+		ed essendo $\abs{t} \le r$
+			\begin{equation*}
+				\abs{s(t) - s_n(t)} = \frac{\abs{t}^{n+1}}{1-t} \le \frac{r^{n+1}}{1-r}.
+			\end{equation*}
+		Poiché la successione numerica $\{ r^n / (1 -r)\}$ tende a $0$ per $n \to \infty$, fissatp $\epsilon > 0$ possiamo determinare $N = N(\epsilon)$ ($N$ indipendente da $t$) tale per cui risulti
+			\begin{equation*}
+				\abs{s(t) - s_n(t)} < \epsilon
+			\end{equation*}
+		se $n > N$, $\forall t \in [-r, r]$; ciò assicura la convergenza uniforme della serie data in $[-r, r]$.
+		\end{exmp}
+
+		Anche per le serie di funzioni vale il criterio di Cauchy: la serie
+			\begin{equation*}
+				\sum_{n = 0}^{\infty}x_n(t)
+			\end{equation*}
+		di funzioni $x_n \colon I \to \mathbb{R}$ converge puntualmente in $I$ se e solo se, fissato $\epsilon > 0$, $\forall t \in I$ si può determinare un indice $N = N(\epsilon, t)$ tale che, $\forall p \ge N$ e $\forall q \ge 0$, si abbia
+			\begin{equation}
+				\label{eqn:critcauchy}
+				\abs{x_p(t) + x_{p+1}(t) + \dots + x_{p+q}(t)} < \epsilon.
+			\end{equation}
+		La convergenza è uniforme se e solo se esiste un indice $N = N(\epsilon)$ (indipendente da $t$) tale che la~\eqref{eqn:critcauchy} sia valida $\forall t \in I$, $\forall p \ge N$, $\forall q \ge 0$.
+
+		Come corollario immediato si ricava che, se $\sum x_n(t)$ converge puntualmente (uniformemente) in $I$ allora $x_n(t) \to 0$ puntualmente (uniformemente) in $I$.
+
+		\begin{prop}[Criterio di Weierstrass]
+			Data la successione di funzioni $x_n \colon I \to \mathbb{R}$, se esistono costanti positive $c_n$ tali che
+				\begin{enumerate}
+					\item $\abs{x_n(t)} \le c_n$, $\forall t \in I$, definitivamente;
+					\item $\sum c_n$ è convergente,
+				\end{enumerate}
+			allora la serie di funzioni $\sum x_n(t)$ converge uniformemente in $I$.
+		\end{prop}
+
+		In molte applicazioni, le funzioni $x_n$ sono elementi di uno spazio di Banach\footnote{Cioè uno spazio metrico normato e completo.} e in tal caso il criterio di Cauchy (necessario e sufficiente per la convergenza di $\sum x_n$) prende la forma seguente: fissato $\epsilon > 0$, esiste $N = N(\epsilon)$ tale che
+			\begin{equation*}
+				\abs{x_p + x_{p+1} + \dots + x_{p+q}} < \epsilon
+			\end{equation*}
+		$\forall p \ge N$, $\forall q \ge 0$.
+
+		C'è anche un criterio sufficiente di convergenza simile al criterio di Weierstrass:
+			\begin{teor}[della convergenza totale]
+		Sia $\{ x_n\}$ una successione a valori in uno spazio di Banach. Se la serie delle norme $\sum \norma{x_n}$ è convergente, anche la serie $\sum x_n$ è convergente, e inoltre
+			\begin{equation}
+				\abs{\sum_{n=0}^{\infty} x_n} \le \sum_{n= 0}
+		^{\infty} \norma{x_n}.
+			\end{equation}
+			\end{teor}
+
+		Una serie per la quale converge la serie delle norme si dice \emph{totalmente convergente}.
+
+		\begin{teor}[limite di una serie]
+			Siano $f_n \colon I \to \mathbb{R}$ e $t_0 \in I$. Se
+				\begin{enumerate}
+					\item $\sum_{n=0}^{\infty} f_n(t)$ converge uniformemente in $I$ con somma $F(t)$;
+					\item esistono finiti i limiti $\lim_{t \to t_0} f_n(t) = l_n$,
+				\end{enumerate}
+			allora la serie $\sum_{n=0}^{\infty} l_n$ converge e, detta $L$ la sua somma, risulta $\lim_{t \to t_0} F(t) = L$, cioè
+			 	\begin{equation}
+					\lim_{t \to t_0} \sum_{n=0}^{\infty} f_n(t) = \sum_{n=0}^{\infty} \lim_{t \to t_0} f_n(t).
+				\end{equation}
+		\end{teor}
+
+		\begin{cor}
+		La somma di una serie uniformemente convergente di funzioni continue è una funzione continua.
+		\end{cor}
+
+		\begin{teor}[derivata di una serie]
+		Sia data una successione di funzioni $(a, b) \to \mathbb{R}$ derivabili; se
+			\begin{enumerate}
+				\item la serie delle derivate $\sum f'_n(t)$ è uniformemente convergente in $(a, b)$, con somma $G(t)$;
+				\item la serie delle funzioni converge almeno in un punto $t_0 \in (a, b)$,
+			\end{enumerate}
+		allora anche la serie $\sum f_n(t)$ converge uniformemente in $(a, b)$; detta $F(t)$ la sua somma, risulta $F$ derivabile e $F' = G$, cioè
+			\begin{equation}
+				\frac{d}{dt} \sum_{n=0}^{\infty} f_n(t) = \sum_{n=0}^{\infty} f'_n(t).
+			\end{equation}
+		\end{teor}
+
+		\begin{cor}
+			Se le funzioni $f_n$ sono di classe $C^k$ in $(a, b)$ e le serie $\sum f_n$, $\sum f'_n$, $\dots$, $\sum f^{(k)}_n$ convergono uniformemente in $(a, b)$ con somma $F, G_1, \dots, G_k$ rispettivamente, allora anche $F$ è di classe $C^k$ in $(a, b)$ e risulta $F^{(i)} = G_i$, $i = 1, 2, \dots, k$.
+		\end{cor}
+
+		\begin{teor}[integrale di una serie]
+			Sia data una successione $f_n$ di funzioni limitate e integrabili sull'intervallo $(a, b)$; se la serie $\sum f_n(t)$ converge uniformemente in $(a, b)$ con somma $F(t)$, allora $F$ è integrabile e si ha
+				\begin{equation}
+					\label{eqn:intserie}
+					\int_a^b \sum_{n=0}^{\infty}f_n(t)\,dt = \sum_{n=0}^{\infty} \int_a^b f_n(t)\,dt.
+				\end{equation}
+		\end{teor}
+		In particolare, se le $f_n$ sono continue su $[a, b]$, anche la somma $F$ è continua, perciò integrabile su $[a, b]$ e vale la~\eqref{eqn:intserie}.
+
+		\subsection{Serie di potenze}
+		Una classe particolare di serie di funzioni è formata dalle cosiddette \emph{serie di potenze}, cioè serie della forma
+			\begin{equation*}
+				\sum_{n=0}^{\infty} a_n(x - x_0)^n
+			\end{equation*}
+		dove $a_n$ sono numeri reali assegnati, $x$ varia in un insieme $A \subseteq \mathbb{R}$ e $x_0 \in A$ è dato.
+
+		Tali serie trovano la loro collocazione più naturale nel campo complesso; considereremo fin da ora serie della forma
+		 	\begin{equation*}
+				\sum_{n=0}^{\infty} a_n(z- z_0)^n \quad a_n, z_0 \in \mathbb{C}
+			\end{equation*}
+		dove $z$ varia in un insieme $A \subseteq \mathbb{C}$. Si può assumere (tramite un cambiamento di variabile) $z_0 = 0$ e ricondursi allo studio di serie del tipo
+			\begin{equation}
+				\label{eqn:seriepotenze}
+				\sum_{n=0}^{\infty}a_nz^n = a_0 + a_1z+a_2z^2 + \dots + a_n z^n + \dots
+			\end{equation}
+		È evidente che tutte le serie del tipo~\eqref{eqn:seriepotenze} convergono almeno in un punto, $z = 0$; si tratta di studiare la convergenza in altri punti.
+
+			\begin{lem}
+				Se una serie di potenze converge in un punto $z_0 \in \mathbb{C}$, allora converge (assolutamente) in ogni punto $z$ con $\abs{z} < \abs{z_0}$.
+			\end{lem}
+
+			Il lemma non ci dice solo che se la serie~\eqref{eqn:seriepotenze} converge in $z_0$ converge anche nel cerchio $\abs{z} < \abs{z_0}$, ma anche che se non converge in $z_0$ non può convergere neppure per $\abs{z} > \abs{z_0}$; perciò l'insieme dei punti $z \in \mathbb{C}$ in cui una serie del tipo~\eqref{eqn:seriepotenze} converge è un cerchio con centro nell'origine e un certo raggio $r$: tale cerchio si chiama \emph{cerchio di convergenza} ed $r$ si dice \emph{raggio di convergenza}.
+
+			Diamo una definizione più precisa: sia $A \subseteq \mathbb{C}$ l'insieme di convergenza per la serie~\eqref{eqn:seriepotenze} e sia $E = \{ \abs{z} \colon z \in A \}$ l'insieme dei numeri reali non negativi che coincidono con i moduli dei numeri che stanno in $A$; tale insieme non è vuoto, perché contiene almeno lo zero. Definiamo il raggio di convergenza $r$ ponendo
+				\begin{equation*}
+					r \coloneqq \sup E.
+				\end{equation*}
+			Può essere:
+				\begin{enumerate}
+					\item $r = 0$; la serie converge solo per $z = 0$;
+					\item $r = + \infty$; la serie converge per ogni $z \in \mathbb{C}$;
+					\item $0 < r < +\infty$; la serie converge per $\abs{z} < r$, non converge per $\abs{z} > r$; non abbiamo informazioni per $\abs{z} = r$.
+				\end{enumerate}
+
+			All'interno del cerchio di convergenza, la serie converge assolutamente; possiamo quindi determinare il raggio di convergenza applicando i criteri di convergenza assoluta, ovvero studiando la convergenza della serie $\sum \abs{a_n} \, \abs{z}^n$.
+
+			\begin{teor}[Criterio della radice]
+				Data la serie~\eqref{eqn:seriepotenze}, sia
+					\begin{equation}
+						l = \varlimsup_{n\to\infty} \sqrt[n]{\abs{a_n}}.
+					\end{equation}
+				Allora $r = 1/l$ è il raggio di convergenza (s'intende che $r = 0$ se $l = + \infty$, $r = +\infty$ se $l = 0$).
+			\end{teor}
+
+			\begin{prop}[Criterio del rapporto]
+				Data la serie~\eqref{eqn:seriepotenze}, se esiste il limite
+					\begin{equation*}
+						\lim_{n\to\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} = l
+					\end{equation*}
+				allora $r = 1/l$ è il raggio di convergenza.
+			\end{prop}
+
+			Consideriamo adesso le serie con raggio di convergenza $r > 0$; esse definiscono, per $\abs{z} < r$, una funzione $f(z)$ detta la loro \emph{somma}:
+				\begin{equation}
+					\label{eqn:sommaserie}
+					f(z) = \sum_{n=0}^{\infty} a_n z^n, \quad \abs{z} < r.
+				\end{equation}
+
+				\begin{prop}
+					\begin{enumerate}
+						\item La serie~\eqref{eqn:sommaserie} converge uniformemente in ogni cerchio $\abs{z} \le r'$, con $r' < r$;
+						\item la somma $f(z)$ è continua in $\abs{z} < r$.
+					\end{enumerate}
+				\end{prop}
+
+				\begin{prop}
+					\begin{enumerate}
+						\item La serie delle derivate della serie~\eqref{eqn:sommaserie} è ancora una serie di potenze che ha lo stesso cerchio di convergenza della~\eqref{eqn:sommaserie};
+						\item la somma $f(z)$ della serie~\eqref{eqn:sommaserie} è derivabile (in senso complesso) con derivata continua in $\abs{z} < r$; la sua derivata $f'(z)$ è la somma della serie delle derivate.
+					\end{enumerate}
+				\end{prop}
+
+				\begin{prop}
+					\begin{enumerate}
+						\item La somma $f(z)$ della serie~\eqref{eqn:sommaserie} è di classe $C^{\infty}$ in $\abs{z} < r$;
+						\item $\forall k \in \mathbb{N}$, la derivata $f^{(k)}(z)$ è la somma della serie ottenuta derivando la~\eqref{eqn:sommaserie} termine a termine $k$ volte;
+						\item tra i coefficienti $a_k$ della serie~\eqref{eqn:sommaserie} e le derivate della somma $f(z)$ sussistono le seguenti relazioni:
+							\begin{equation}
+								a_k = \frac{1}{k!}f^{(k)}(0) \quad \forall k \in \mathbb{N}.
+							\end{equation}
+					\end{enumerate}
+				\end{prop}
+
 		\chapter{Misura e integrazione}
 		\section{Integrale multiplo secondo Riemann}
 		\subsection{Integrale doppio per funzioni definite su un rettangolo}
