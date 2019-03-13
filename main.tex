@@ -1175,7 +1175,7 @@ In generale, tale risultato è falso se la convergenza della successione $\{ f_n
 
 In particolare, se $\{f_n\} \subset C^0([a, b])$, allora $f \in C^0([a, b])$ (per il Corollario~\ref{cor:contlim}) e vale la~\eqref{eqn:intlim}.
 
-\section{Applicazioni tra spazi metrici, teorema delle contrazioni}
+\subsection{Applicazioni tra spazi metrici, teorema delle contrazioni}
 
 Siano $(X, d_X)$ e $(Y, d_Y)$ due spazi metrici, dotati ognuno della propria metrica $d_X$ e $d_Y$.
 	\begin{defn}
@@ -1221,7 +1221,7 @@ Siano $(X, d_X)$ e $(Y, d_Y)$ due spazi metrici, dotati ognuno della propria met
 
 	Particolarmente significativo è il caso $X = Y$.
 
-	Data un'applicazione $F \colon X \to X$, spesso è importante stabilire se essa ammette dei \emph{punti fissi}, cioè punti che vengono trasformati in se stessi da $F$; in altre parole, $x_0$ è punto fisso per $F$ se $F(x_0) = x_0$.
+	Data un'applicazione $F \colon X \to X$, spesso è importante stabilire se essa ammette dei \emph{punti fissi}, cioè punti che vengono trasformati in se stessi da $F$; in altre parole, $\bar{x}$ è punto fisso per $F$ se $F(\bar{x}) = \bar{x}$.
 
 		\begin{teor}[di Banach-Caccioppoli, delle contrazioni]
 			Sia $X$ uno spazio metrico completo ed $F \colon X \to X$ una contrazione di costante $\rho$. Allora $F$ ammette un unico punto fisso $\bar{x}$. Inoltre, dato un qualunque $x_0 \in X$, la successione definita ricorsivamente ponendo
@@ -1230,6 +1230,212 @@ Siano $(X, d_X)$ e $(Y, d_Y)$ due spazi metrici, dotati ognuno della propria met
 				\end{equation}
 			converge a $\bar{x}$.
 		\end{teor}
+
+\section{Serie di funzioni}
+\subsection{Generalità}
+
+Sia $\{ x_n\}$ una successione di funzioni che, per semplicità, supporremo reali di variabile reale ($x_n \colon I \to \mathbb{R}$ dove $I \subseteq \mathbb{R}$ è un intervallo). La successione delle \emph{somme parziali} $\{s_n\}$ così definita
+	\begin{align*}
+		s_0(t) &= x_0(t) \\
+		s_1(t) &= x_0(t) + x_1(t) \\
+		\vdots \\
+		s_n(t) &= x_0(t) + x_1(t) + \dots + x_n(t) \\
+		\vdots
+	\end{align*}
+si dice serie di termini $x_n(t)$ e si indica col simbolo
+	\begin{equation*}
+		\sum_{n=0}^{\infty} x_n(t);
+	\end{equation*}
+la serie si dirà convergente (puntualmente, uniformemente) in $I$ se converge (puntualmente, uniformemente) la successione delle somme parziali.
+
+\begin{exmp}
+Consideriamo la successione di funzioni $\{ t^n\}$, $t \in \mathbb{R}$; la corrispondente serie è la serie geometrica $\sum_{n=0}^{\infty}t^n$, che converge $\forall t \in (-1, +1)$ e ha come somma la funzione $s(t) = (1 - t)^{-1}$; diremo quindi che la serie geometrica converge puntualmente in $(-1, +1)$. Mostriamo che converge uniformemente in $[-r, r]$, con $0 < r < 1$: la successione delle somme parziali è
+	\begin{equation*}
+		s_n(t) = \frac{1 - t^{n+1}}{1 -t},
+	\end{equation*}
+ed essendo $\abs{t} \le r$
+	\begin{equation*}
+		\abs{s(t) - s_n(t)} = \frac{\abs{t}^{n+1}}{1-t} \le \frac{r^{n+1}}{1-r}.
+	\end{equation*}
+Poiché la successione numerica $\{ r^n / (1 -r)\}$ tende a $0$ per $n \to \infty$, fissatp $\epsilon > 0$ possiamo determinare $N = N(\epsilon)$ ($N$ indipendente da $t$) tale per cui risulti
+	\begin{equation*}
+		\abs{s(t) - s_n(t)} < \epsilon
+	\end{equation*}
+se $n > N$, $\forall t \in [-r, r]$; ciò assicura la convergenza uniforme della serie data in $[-r, r]$.
+\end{exmp}
+
+Anche per le serie di funzioni vale il criterio di Cauchy: la serie
+	\begin{equation*}
+		\sum_{n = 0}^{\infty}x_n(t)
+	\end{equation*}
+di funzioni $x_n \colon I \to \mathbb{R}$ converge puntualmente in $I$ se e solo se, fissato $\epsilon > 0$, $\forall t \in I$ si può determinare un indice $N = N(\epsilon, t)$ tale che, $\forall p \ge N$ e $\forall q \ge 0$, si abbia
+	\begin{equation}
+		\label{eqn:critcauchy}
+		\abs{x_p(t) + x_{p+1}(t) + \dots + x_{p+q}(t)} < \epsilon.
+	\end{equation}
+La convergenza è uniforme se e solo se esiste un indice $N = N(\epsilon)$ (indipendente da $t$) tale che la~\eqref{eqn:critcauchy} sia valida $\forall t \in I$, $\forall p \ge N$, $\forall q \ge 0$.
+
+Come corollario immediato si ricava che, se $\sum x_n(t)$ converge puntualmente (uniformemente) in $I$ allora $x_n(t) \to 0$ puntualmente (uniformemente) in $I$.
+
+\begin{prop}[Criterio di Weierstrass]
+	Data la successione di funzioni $x_n \colon I \to \mathbb{R}$, se esistono costanti positive $c_n$ tali che
+		\begin{enumerate}
+			\item $\abs{x_n(t)} \le c_n$, $\forall t \in I$, definitivamente;
+			\item $\sum c_n$ è convergente,
+		\end{enumerate}
+	allora la serie di funzioni $\sum x_n(t)$ converge uniformemente in $I$.
+\end{prop}
+
+In molte applicazioni, le funzioni $x_n$ sono elementi di uno spazio di Banach\footnote{Cioè uno spazio metrico normato e completo.} e in tal caso il criterio di Cauchy (necessario e sufficiente per la convergenza di $\sum x_n$) prende la forma seguente: fissato $\epsilon > 0$, esiste $N = N(\epsilon)$ tale che
+	\begin{equation*}
+		\abs{x_p + x_{p+1} + \dots + x_{p+q}} < \epsilon
+	\end{equation*}
+$\forall p \ge N$, $\forall q \ge 0$.
+
+C'è anche un criterio sufficiente di convergenza simile al criterio di Weierstrass:
+	\begin{teor}[della convergenza totale]
+Sia $\{ x_n\}$ una successione a valori in uno spazio di Banach. Se la serie delle norme $\sum \norma{x_n}$ è convergente, anche la serie $\sum x_n$ è convergente, e inoltre
+	\begin{equation}
+		\abs{\sum_{n=0}^{\infty} x_n} \le \sum_{n= 0}
+^{\infty} \norma{x_n}.
+	\end{equation}
+	\end{teor}
+
+Una serie per la quale converge la serie delle norme si dice \emph{totalmente convergente}.
+
+\begin{teor}[limite di una serie]
+	Siano $f_n \colon I \to \mathbb{R}$ e $t_0 \in I$. Se
+		\begin{enumerate}
+			\item $\sum_{n=0}^{\infty} f_n(t)$ converge uniformemente in $I$ con somma $F(t)$;
+			\item esistono finiti i limiti $\lim_{t \to t_0} f_n(t) = l_n$,
+		\end{enumerate}
+	allora la serie $\sum_{n=0}^{\infty} l_n$ converge e, detta $L$ la sua somma, risulta $\lim_{t \to t_0} F(t) = L$, cioè
+	 	\begin{equation}
+			\lim_{t \to t_0} \sum_{n=0}^{\infty} f_n(t) = \sum_{n=0}^{\infty} \lim_{t \to t_0} f_n(t).
+		\end{equation}
+\end{teor}
+
+\begin{cor}
+La somma di una serie uniformemente convergente di funzioni continue è una funzione continua.
+\end{cor}
+
+\begin{teor}[derivata di una serie]
+Sia data una successione di funzioni $(a, b) \to \mathbb{R}$ derivabili; se
+	\begin{enumerate}
+		\item la serie delle derivate $\sum f'_n(t)$ è uniformemente convergente in $(a, b)$, con somma $G(t)$;
+		\item la serie delle funzioni converge almeno in un punto $t_0 \in (a, b)$,
+	\end{enumerate}
+allora anche la serie $\sum f_n(t)$ converge uniformemente in $(a, b)$; detta $F(t)$ la sua somma, risulta $F$ derivabile e $F' = G$, cioè
+	\begin{equation}
+		\frac{d}{dt} \sum_{n=0}^{\infty} f_n(t) = \sum_{n=0}^{\infty} f'_n(t).
+	\end{equation}
+\end{teor}
+
+\begin{cor}
+	Se le funzioni $f_n$ sono di classe $C^k$ in $(a, b)$ e le serie $\sum f_n$, $\sum f'_n$, $\dots$, $\sum f^{(k)}_n$ convergono uniformemente in $(a, b)$ con somma $F, G_1, \dots, G_k$ rispettivamente, allora anche $F$ è di classe $C^k$ in $(a, b)$ e risulta $F^{(i)} = G_i$, $i = 1, 2, \dots, k$.
+\end{cor}
+
+\begin{teor}[integrale di una serie]
+	Sia data una successione $f_n$ di funzioni limitate e integrabili sull'intervallo $(a, b)$; se la serie $\sum f_n(t)$ converge uniformemente in $(a, b)$ con somma $F(t)$, allora $F$ è integrabile e si ha
+		\begin{equation}
+			\label{eqn:intserie}
+			\int_a^b \sum_{n=0}^{\infty}f_n(t)\,dt = \sum_{n=0}^{\infty} \int_a^b f_n(t)\,dt.
+		\end{equation}
+\end{teor}
+In particolare, se le $f_n$ sono continue su $[a, b]$, anche la somma $F$ è continua, perciò integrabile su $[a, b]$ e vale la~\eqref{eqn:intserie}.
+
+\subsection{Serie di potenze}
+Una classe particolare di serie di funzioni è formata dalle cosiddette \emph{serie di potenze}, cioè serie della forma
+	\begin{equation*}
+		\sum_{n=0}^{\infty} a_n(x - x_0)^n
+	\end{equation*}
+dove $a_n$ sono numeri reali assegnati, $x$ varia in un insieme $A \subseteq \mathbb{R}$ e $x_0 \in A$ è dato.
+
+Tali serie trovano la loro collocazione più naturale nel campo complesso; considereremo fin da ora serie della forma
+ 	\begin{equation*}
+		\sum_{n=0}^{\infty} a_n(z- z_0)^n \quad a_n, z_0 \in \mathbb{C}
+	\end{equation*}
+dove $z$ varia in un insieme $A \subseteq \mathbb{C}$. Si può assumere (tramite un cambiamento di variabile) $z_0 = 0$ e ricondursi allo studio di serie del tipo
+	\begin{equation}
+		\label{eqn:seriepotenze}
+		\sum_{n=0}^{\infty}a_nz^n = a_0 + a_1z+a_2z^2 + \dots + a_n z^n + \dots
+	\end{equation}
+È evidente che tutte le serie del tipo~\eqref{eqn:seriepotenze} convergono almeno in un punto, $z = 0$; si tratta di studiare la convergenza in altri punti.
+
+	\begin{lem}
+		Se una serie di potenze converge in un punto $z_0 \in \mathbb{C}$, allora converge (assolutamente) in ogni punto $z$ con $\abs{z} < \abs{z_0}$.
+	\end{lem}
+
+	Il lemma non ci dice solo che se la serie~\eqref{eqn:seriepotenze} converge in $z_0$ converge anche nel cerchio $\abs{z} < \abs{z_0}$, ma anche che se non converge in $z_0$ non può convergere neppure per $\abs{z} > \abs{z_0}$; perciò l'insieme dei punti $z \in \mathbb{C}$ in cui una serie del tipo~\eqref{eqn:seriepotenze} converge è un cerchio con centro nell'origine e un certo raggio $r$: tale cerchio si chiama \emph{cerchio di convergenza} ed $r$ si dice \emph{raggio di convergenza}.
+
+	Diamo una definizione più precisa: sia $A \subseteq \mathbb{C}$ l'insieme di convergenza per la serie~\eqref{eqn:seriepotenze} e sia $E = \{ \abs{z} \colon z \in A \}$ l'insieme dei numeri reali non negativi che coincidono con i moduli dei numeri che stanno in $A$; tale insieme non è vuoto, perché contiene almeno lo zero. Definiamo il raggio di convergenza $r$ ponendo
+		\begin{equation*}
+			r \coloneqq \sup E.
+		\end{equation*}
+	Può essere:
+		\begin{enumerate}
+			\item $r = 0$; la serie converge solo per $z = 0$;
+			\item $r = + \infty$; la serie converge per ogni $z \in \mathbb{C}$;
+			\item $0 < r < +\infty$; la serie converge per $\abs{z} < r$, non converge per $\abs{z} > r$; non abbiamo informazioni per $\abs{z} = r$.
+		\end{enumerate}
+
+	All'interno del cerchio di convergenza, la serie converge assolutamente; possiamo quindi determinare il raggio di convergenza applicando i criteri di convergenza assoluta, ovvero studiando la convergenza della serie $\sum \abs{a_n} \, \abs{z}^n$.
+
+	\begin{teor}[Criterio della radice]
+		Data la serie~\eqref{eqn:seriepotenze}, sia
+			\begin{equation}
+				l = \varlimsup_{n\to\infty} \sqrt[n]{\abs{a_n}}.
+			\end{equation}
+		Allora $r = 1/l$ è il raggio di convergenza (s'intende che $r = 0$ se $l = + \infty$, $r = +\infty$ se $l = 0$).
+	\end{teor}
+
+	\begin{prop}[Criterio del rapporto]
+		Data la serie~\eqref{eqn:seriepotenze}, se esiste il limite
+			\begin{equation*}
+				\lim_{n\to\infty} \frac{\abs{a_{n+1}}}{\abs{a_n}} = l
+			\end{equation*}
+		allora $r = 1/l$ è il raggio di convergenza.
+	\end{prop}
+
+	Consideriamo adesso le serie con raggio di convergenza $r > 0$; esse definiscono, per $\abs{z} < r$, una funzione $f(z)$ detta la loro \emph{somma}:
+		\begin{equation}
+			\label{eqn:sommaserie}
+			f(z) = \sum_{n=0}^{\infty} a_n z^n, \quad \abs{z} < r.
+		\end{equation}
+
+		\begin{prop}
+			\begin{enumerate}
+				\item La serie~\eqref{eqn:sommaserie} converge uniformemente in ogni cerchio $\abs{z} \le r'$, con $r' < r$;
+				\item la somma $f(z)$ è continua in $\abs{z} < r$.
+			\end{enumerate}
+		\end{prop}
+
+		\begin{prop}
+			\begin{enumerate}
+				\item La serie delle derivate della serie~\eqref{eqn:sommaserie} è ancora una serie di potenze che ha lo stesso cerchio di convergenza della~\eqref{eqn:sommaserie};
+				\item la somma $f(z)$ della serie~\eqref{eqn:sommaserie} è derivabile (in senso complesso) con derivata continua in $\abs{z} < r$; la sua derivata $f'(z)$ è la somma della serie delle derivate.
+			\end{enumerate}
+		\end{prop}
+
+		\begin{prop}
+			\begin{enumerate}
+				\item La somma $f(z)$ della serie~\eqref{eqn:sommaserie} è di classe $C^{\infty}$ in $\abs{z} < r$;
+				\item $\forall k \in \mathbb{N}$, la derivata $f^{(k)}(z)$ è la somma della serie ottenuta derivando la~\eqref{eqn:sommaserie} termine a termine $k$ volte;
+				\item tra i coefficienti $a_k$ della serie~\eqref{eqn:sommaserie} e le derivate della somma $f(z)$ sussistono le seguenti relazioni:
+					\begin{equation}
+						a_k = \frac{1}{k!}f^{(k)}(0) \quad \forall k \in \mathbb{N}.
+					\end{equation}
+			\end{enumerate}
+		\end{prop}
+
+
+
+
+
+
+
+
+
 
 
 
