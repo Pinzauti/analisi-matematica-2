@@ -2046,6 +2046,70 @@ Sia $f\colon \mathbb{R}^n \supseteq X \to \mathbb{R}$.
 					\end{enumerate}
 				\end{prop}
 
+\chapter{Equazioni differenziali ordinarie}
+\section{Concetti e teoremi fondamentali}
+\subsection{Definizioni e terminologia}
+
+Si chiama equazione differenziale ordinaria di ordine $n$ una relazione del tipo
+	\begin{equation}
+		\label{eqn:edo}
+		F(t, y(t), y'(t), y''(t), \dots, y^{(n)}(t)) = 0,
+	\end{equation}
+con $F \colon \mathbb{R}^{n+2} \supseteq U \to \mathbb{R}$.
+
+Nella~\eqref{eqn:edo} compare la funzione incognita $y = y(t)$ insieme alle sue derivate fino all'ordine $n$ incluso calcolate \emph{nello stesso punto}.
+
+L'ordine di un'equazione è l'ordine massimo di derivazione che vi compare; l'aggettivo ordinaria si riferisce al fatto che l'incognita è funzione di una variabile.
+
+Se nella~\eqref{eqn:edo} si può esplicitare la derivata di ordine massimo,
+	\begin{equation}
+		\label{eqn:edonorm}
+		y^{(n)}(t) = f(t, y(t), y'(t), \dots, y^{(n-1)}(t)),
+	\end{equation}
+con $f \colon \mathbb{R}^{n-1} \supseteq D \to \mathbb{R}$, l'equazione si dice in forma normale.
+
+Se nella~\eqref{eqn:edo} $F$ è un polinomio di primo grado in $y, y', \dots, y^{(n)}$ l'equazione si dice \emph{lineare}; la forma generale è
+	\begin{equation}
+		\label{eqn:edolin}
+		a_0(t)y^{(n)}(t) + a_1(t)y^{(n-1)}(t) + \dots + a_{n-1}y'(t) + a_n(t)y(t) = b(t);
+	\end{equation}
+se $a_0(t) \ne 0$ la~\eqref{eqn:edolin} si può scrivere in forma normale.
+
+Se $F$ nella~\eqref{eqn:edo} o $f$ nella~\eqref{eqn:edonorm} non dipendono esplicitamente da $t$ l'equazione si dice \emph{autonoma}.
+
+D'ora in poi, ci riferiremo a equazioni in forma normale; diamo la nozione di soluzione locale di un'equazione differenziale.
+	\begin{defn}
+		Si dice soluzione (o integrale) dell'equazione~\eqref{eqn:edonorm} una funzione $\phi = \phi(t)$, definita e differenziabile $n$ volte in un intervallo $I \subseteq \mathbb{R}$, tale che $(t, \phi(t), \dots, \phi^{(n-1)}(t)) \in D$ e
+			\begin{equation}
+				\phi^{(n)}(t) = f(t, \phi(t), \phi'(t), \dots, \phi^{(n-1)}(t)) \quad \forall t \in I.
+			\end{equation}
+	\end{defn}
+
+	Più generalmente, si può parlare di \emph{sistemi di equazioni differenziali ordinarie}, in più funzioni incognite, tutte di una sola variabile.
+
+	Noi affronteremo il caso di sistemi di $n$ equazioni del 1° ordine in forma normale, in $n$ funzioni incognite; la forma generica è
+		\begin{equation}
+			\label{eqn:sistedo}
+			\begin{dcases}
+				\dot{y}_1 &= f_1 (t, y_1, y_2, \dots, y_n) \\
+				\overset{\cdot}{y_2} &= f_2 (t, y_1, y_2, \dots, y_n) \\
+				\vdots \\
+				\overset{\cdot}{y_n} &= f_n(t, y_1, y_2, \dots, y_n),
+			\end{dcases}
+		\end{equation}
+	dove le funzioni $f_j$, $j = 1, 2, \dots, n$ sono definite in una stessa regione $D$ di $\mathbb{R}^{n+1}$ e $y_1 = y_1(t), \dots, y_n = y_n(t)$ sono le funzioni incognite.
+
+	Introducendo i vettori $\vec{y}(t) = (y_1(t), \dots, y_n(t))$ e $\vec{f} = (f_1, f_2, \dots, f_n)$, il sistema~\eqref{eqn:sistedo} si può scrivere come
+		\begin{equation}
+			\overset{\cdot}{\vec{y}}(t) = \vec{f}(t, \vec{y}(t)).
+		\end{equation}
+
+
+
+
+
+
+
 		\chapter{Misura e integrazione}
 		\section{Integrale multiplo secondo Riemann}
 		\subsection{Integrale doppio per funzioni definite su un rettangolo}
