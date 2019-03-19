@@ -2306,6 +2306,129 @@ Valgano le ipotesi del Teorema~\ref{teor:prolfront} con $D = \mathbb{R}^{n+1}$. 
 allora $J_{\vec{\phi}}^+ = [ \tau, \infty)$. In particolare, ciò accade se $\vec{\phi}$ è limitata in $J_\vec{\phi}^+$ (con $c_2 = 0$).
 \end{cor}
 
+\subsection{Integrazione di alcune equazioni del primo ordine}
+
+\subsubsection*{Equazioni lineari}
+Sono le equazioni del tipo
+	\begin{equation}
+		\label{eqn:edolin}
+		\dot{y} = P(t)y + Q(t),
+	\end{equation}
+dove $P$ e $Q$ sono continue in un intervallo $I \subseteq \mathbb{R}$. Se $Q = 0$ la~\eqref{eqn:edolin} si dice lineare omogenea.
+
+La formula valida in $I$ che dà l'integrale generale è
+	\begin{equation}
+		\label{eqn:soledolin}
+y(t) = e^{\int P(t)\,dt}\Biggl( c + \int Q(t) e^{-\int P(t)\,dt}\,dt \Biggr),
+	\end{equation}
+dove $c$ è una costante arbitraria e
+	\begin{equation*}
+		\int P(t)\,dt
+	\end{equation*}
+è una primitiva di $P$ in $I$.
+
+\subsubsection*{Equazioni differenziali esatte}
+Sono equazioni del tipo
+	\begin{equation}
+		\label{eqn:edoesatta}
+		\dot{y} =  - \frac{P(t,y)}{Q(t, y)},
+	\end{equation}
+dove $P$ e $Q$ sono continue in un dominio $A \subseteq \mathbb{R}^2$, $Q \ne 0$, tali che la forma differenziale
+	\begin{equation*}
+		\omega = P(t,y)\,dt + Q(t,y)\,dy
+	\end{equation*}
+sia esatta, cioè esista $F=F(t,y)$ funzione potenziale tale che
+	\begin{equation*}
+		\frac{\partial F}{\partial t} = P, \quad \frac{\partial F}{\partial y} = Q
+	\end{equation*}
+in $A$.\footnote{Ricordiamo che, se $A$ è semplicemente connesso in $\mathbb{R}^2$ e se
+	\begin{equation*}
+		\frac{\partial Q}{\partial t}, \quad \frac{\partial P}{\partial y}
+	\end{equation*}
+sono continue in $A$, $\omega$ è esatta se e solo se in $A$ risulta
+	\begin{equation*}
+		\frac{\partial Q}{\partial t} = \frac{\partial P}{\partial y}.
+	\end{equation*}}
+
+	In tal caso, una formula per la funzione $F$ è per esempio la seguente:
+		\begin{equation}
+			F(t,y) = \int_{\tau}^t P(s, y)\,ds + \int_{\xi}^y Q(\tau, s)\,ds,
+		\end{equation}
+	valida (almeno) in un intorno di $(\tau, \xi) \in A$. L'integrale generale della~\eqref{eqn:edoesatta} è dato in forma implicita dalla formula
+		\begin{equation}
+			F(t, y) = c.
+		\end{equation}
+
+		\subsubsection*{Equazioni a variabili separabili}
+		Sono della forma
+			\begin{equation}
+				\label{eqn:edovarsep}
+				\dot{y} = f(t)\,g(y),
+			\end{equation}
+		con $f \in C(I)$ e $g \in C(J)$, ove $I$ e $J$ sono intervalli contenuti in $\mathbb{R}$.
+
+		Se $\bar{y}$ è soluzione dell'equazione $g(y) = 0$ la retta $y= \bar{y}$ è una curva integrale. Se $g(y) \ne 0$ in  $J' \subseteq J$, la~\eqref{eqn:edovarsep} è esatta con $P(t,y) = f(t)$ e $Q(t,y) = -1/g(y)$. L'integrale generale in tal caso è dato dalla formula
+		 	\begin{equation}
+				\int \frac{1}{g(y)}\,dy = \int f(t)\,dt + c.
+			\end{equation}
+
+			\subsubsection{Equazioni di Bernoulli}
+			Sono equazioni del tipo
+				\begin{equation}
+					\dot{y} = P(t)y + Q(t)y^{\alpha},
+				\end{equation}
+			con $\alpha \in \mathbb{R}$, $\alpha \ne 0$, $\alpha \ne 1$ e con $P$ e $Q$ continue in un intervallo $I \subseteq \mathbb{R}$.
+
+			Se $\alpha > 0$, $y = 0$ è soluzione dell'equazione. Se $y \ne 0$, dividendo per $y^{\alpha}$ si ottiene $y^{-\alpha}\dot{y} = P(t)y^{1-\alpha} + Q(t)$. Ponendo
+				\begin{equation*}
+					z = y^{1 - \alpha},
+				\end{equation*}
+			si ha
+				\begin{equation*}
+					\dot{z} = (1- \alpha)y^{-\alpha}\dot{y},
+				\end{equation*}
+			e perciò $z$ è soluzione dell'equazione lineare
+				\begin{equation}
+					\dot{z} = (1 - \alpha)P(t)z + (1 - \alpha)Q(t).
+				\end{equation}
+			Trovata $z$ con la formula~\eqref{eqn:soledolin} si trova\footnote{$y = \pm z^{\frac{1}{1-\alpha}}$ se $1 - \alpha$ è un intero pari o un razionale con numeratore pari.} $y = z^{\frac{1}{1-\alpha}}$.
+
+			\subsubsection{Equazioni di Riccati}
+			Sono equazioni del tipo
+			 	\begin{equation}
+					\label{eqn:edoriccati}
+					\dot{y} = P(t)y + Q(t)y^2 + R(t),
+				\end{equation}
+			con $P, Q, R$ continue in un intervallo $I \subseteq \mathbb{R}$, $R(t) \ne 0$; non si conoscono metodi generali di soluzione.
+
+			Conoscendo una soluzione particolare $\psi$, la~\eqref{eqn:edoriccati} si riduce a lineare con il cambio di variabili
+				\begin{equation*}
+					y = \psi + \frac{1}{z}.
+				\end{equation*}
+Si ha infatti $\dot{y} = \dot{psi} - \dot{z}z^{-2}$ che, sostituita nella~\eqref{eqn:edoriccati}, dà per $z$ l'equazione lineare
+	\begin{equation*}
+		\dot{z} = [P(t) + 2Q(t)\psi]z + Q(t).
+	\end{equation*}
+
+	\subsubsection*{Equazioni omogenee (o di Manfredi)}
+	Sono equazioni della forma
+		\begin{equation}
+			\label{eqn:edomanfredi}
+			\dot{y} = f\Biggr(\frac{y}{y}\Biggr),
+		\end{equation}
+	o alternativamente $\dot{y} = \phi(t, y)$ con $\phi$ positivamente omogenea di grado zero.\footnote{Cioè $\phi(\lambda t, \lambda y) = \phi(t, y)$, $\lambda > 0$.}
+	Assumiamo che $f$ e $\phi$ siano continue in un intervallo e in un aperto di $\mathbb{R}^2$ rispettivamente.
+
+	Ponendo
+		\begin{equation}
+			\label{eqn:edomanfrsost}
+			z(t) = \frac{y(t)}{t},
+		\end{equation}
+	ossia $y(t) = tz(t)$, si trova $\dot{y} = z + t\dot{z}$, che sostituita nella~\eqref{eqn:edomanfredi} dà per $z$ l'equazione a variabili separabili
+		\begin{equation*}
+			\dot{z} = \frac{f(z) - z}{t};
+		\end{equation*}
+	risolta l'equazione in $z$, si determina $y$ dalla~\eqref{eqn:edomanfrsost}.
 
 
 
