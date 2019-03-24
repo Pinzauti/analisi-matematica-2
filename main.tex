@@ -28,6 +28,7 @@
 \DeclareMathOperator{\dom}{dom}
 \DeclareMathOperator{\arctg}{arctg}
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\graf}{graf}
 
 \DeclareMathOperator{\Epi}{Epi}
 
@@ -36,6 +37,9 @@
 \DeclareMathOperator{\divg}{div}
 
 
+\newcommand{\skipitems}[1]{%
+  \addtocounter{\@enumctr}{#1}%
+}
 
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \numberwithin{equation}{section}
@@ -148,7 +152,7 @@ Il prodotto $x\cdot y$ è detto \emph{prodotto scalare} di $x$ e $y$, e ha le se
 Il prodotto scalare introdotto in~\eqref{eqn:prodscal} induce una norma in $\mathbb{R}^n$ (più in generale, in $X$); si definisce l'applicazione \emph{norma}
 \begin{equation}
 	\label{eqn:norma}
-	\norma{\ }\colon \mathbb{R}^n \ni x \mapsto \sqrt{x\cdot x} = \sqrt{\sum_{i=1}^n x_i^2}.
+	\norma{\ }\colon \mathbb{R}^n \in x \mapsto \sqrt{x\cdot x} = \sqrt{\sum_{i=1}^n x_i^2}.
 \end{equation}
 
 È facile dimostrare che l'applicazione definita in~\eqref{eqn:norma} gode delle seguenti proprietà:
@@ -286,7 +290,7 @@ Si noti che la formula di Carnot diviene il teorema di Pitagora nel caso di vett
 \end{equation*}
 
 \section{Topologia}
-\subsection{Intorni sferici}
+\subsection{Intorni sferici e definizioni di base}
 \begin{defn}
 	Dato uno spazio metrico $(X, d)$ con la metrica $d$, per ogni elemento $x_0 \in X$ e $r > 0$ l'insieme
 	\begin{equation*}
@@ -343,7 +347,6 @@ Si noti che la formula di Carnot diviene il teorema di Pitagora nel caso di vett
 	\label{fig:intornosferico}
 \end{figure}
 
-\subsection{Definizioni di base}
 \begin{defn}
 	Sia $D\in \mathbb{R}^n$. Si dice che $x_0 \in \mathbb{R}^n$ è \emph{interno} a $D$ se esiste un intorno sferico di $x_0$ interamente contenuto in $D$ (intrinsecamente, $x_0 \in D$).
 \end{defn}
@@ -522,7 +525,7 @@ Anche la definizione di uniforme continuità si estende al caso di più variabil
 \subsubsection*{Funzioni continue su un connesso}
 
 \begin{defn}
-	Si dice che un sottoinsieme $E$ di $\mathbb{R}^n$ è conneso se per ogni coppia di punti $x_1,x_2 \in E$, esiste un arco di curva, che li congiunge (internamente) contenuto in E.
+	Si dice che un sottoinsieme $E$ di $\mathbb{R}^n$ è connesso se, per ogni coppia di punti $x_1,x_2 \in E$, esiste un arco di curv, che li congiunge (internamente) contenuto in $E$.
 \end{defn}
 \begin{teor}
 	Sia $E \subseteq \mathbb{R}^n$ connesso e $\vec{f}\colon E \to \mathbb{R}^m$ continua. Allora $\vec{f}(E)$ è connesso.
@@ -583,9 +586,9 @@ per ogni $\vec{h} \in \mathbb{R}^n$.
 	Sia $f \colon \mathbb{R}^n \supseteq A \to \mathbb{R}$, $A$ aperto; $f$ si dice differenziabile in $\vec{x} \in A$ se esiste un vettore $\vec{a} \in \mathbb{R}^n$ tale che
 	\begin{equation}
 		\label{eqn:diff}
-		f(\vec{x} + \vec{h}) - f(\vec{x}) = (\vec{a}, \vec{h}) + o(\norma{h})
+		f(\vec{x} + \vec{h}) - f(\vec{x}) = (\vec{a}, \vec{h}) + o(\norma{\vec{h}})
 	\end{equation}
-	per $\norma{h} \to 0$, per ogni $\vec{h} \in \mathbb{R}^n$ con $\vec{x} + \vec{h} \in A$.
+	per $\norma{\vec{h}} \to 0$, per ogni $\vec{h} \in \mathbb{R}^n$ con $\vec{x} + \vec{h} \in A$.
 
 	L'applicazione lineare da $\mathbb{R}^n$ in $\mathbb{R}$ data da
 	\begin{equation*}
@@ -740,7 +743,7 @@ Le funzioni $f \in C^2(A)$ tali che $\Delta f = 0$ in $A$ si dicono armoniche.
 Il caso particolare $k=1$ nella~\eqref{eqn:taylor} è l'estensione al caso di funzioni reali di $n$ variabili del teorema del valor medio di Lagrange:
 \begin{equation}
 	\label{eqn:valmedlagrange}
-	f(\vec{x}+d\vec{x})-f(\vec{x}l) = df(\vec{x}+\theta d \vec{x}),
+	f(\vec{x}+d\vec{x})-f(\vec{x}) = df(\vec{x}+\theta d \vec{x}),
 \end{equation}
 con $\theta \in (0, 1)$ opportuno.
 
@@ -868,30 +871,30 @@ D_{x_1}f_m(\vec{x}) & D_{x_2}f_m(\vec{x}) & \dots & D_{x_n}f_m(\vec{x}) \\
 \end{equation}
 
 \begin{defn}
-	Per i campi vettoriali derivaili è definito un operatore differenziale che si chiama \textit{divergenza} e si indica con "div" e che in coordinate cartesiane è assegnato dalla formula
+	Per i campi vettoriali derivabili è definito un operatore differenziale che si chiama \textit{divergenza} e si indica con div e che in coordinate cartesiane è assegnato dalla formula
 
 	\begin{equation}
-		div \vec{f} \coloneqq \frac{\partial{f_1}}{\partial{x_1}} + \frac{\partial{f_2}}{\partial{x_2}}+ ... + \frac{\partial{f_n}}{\partial{x_n}}
+		\divg \vec{f} \coloneqq \frac{\partial{f_1}}{\partial{x_1}} + \frac{\partial{f_2}}{\partial{x_2}}+ ... + \frac{\partial{f_n}}{\partial{x_n}}
 	\end{equation}
 \end{defn}
 \begin{defn}
-	Ai i campi vettoriali f derivabili in $\mathbb{R}^3$ si può associare un altro vettore, il \textit{rotore} di $\vec{f}$, denotato $rot \vec{f}$, le  cui componenti in coordinate cartesiane sono le seguenti:
+	Ai campi vettoriali $\vec{f}$ derivabili in $\mathbb{R}^3$ si può associare un altro vettore, il \textit{rotore} di $\vec{f}$, denotato $\rot \vec{f}$, le  cui componenti in coordinate cartesiane sono le seguenti:
 	\begin{equation}
-		rot \vec{f} \coloneqq (\frac{\partial{f_3}}{\partial{x_2}}-\frac{\partial{f_2}}{\partial{x_3}},\frac{\partial{f_1}}{\partial{x_3}}-\frac{\partial{f_3}}{\partial{x_1}},\frac{\partial{f_2}}{\partial{x_1}}-\frac{\partial{f_1}}{\partial{x_2}})
+		\rot \vec{f} \coloneqq \Biggl(\frac{\partial{f_3}}{\partial{x_2}}-\frac{\partial{f_2}}{\partial{x_3}},\frac{\partial{f_1}}{\partial{x_3}}-\frac{\partial{f_3}}{\partial{x_1}},\frac{\partial{f_2}}{\partial{x_1}}-\frac{\partial{f_1}}{\partial{x_2}} \Biggr)
 	\end{equation}
 \end{defn}
 
-\begin{teor}(di inversione locale)
-	Sia $\vec{f}:\mathbb{R}^n \supseteq  A \rightarrow  \mathbb{R}^n$, A aperto. Se:
+\begin{teor}[di inversione locale]
+	Sia $\vec{f}\colon\mathbb{R}^n \supseteq  A \rightarrow  \mathbb{R}^n$, A aperto. Se:
 	\begin{enumerate}
 		\item $\vec{f} \in C^1(A)$;
-		\item $\vec{x_0}$ è un punto di A tale che $\vec{J_f(x_0)}$ è non singolare;
-		allora esistono un intorno V di $\vec{x_0}$ e un intorno W di $\vec{y_0} = \vec{f(x_0)}$ tali che:
+		\item $\vec{x}_0$ è un punto di A tale che $\vec{J}_{\vec{f}}(\vec{x}_0)$ è non singolare;
+		allora esistono un intorno V di $\vec{x}_0$ e un intorno W di $\vec{y}_0 = \vec{f}(\vec{x}_0)$ tali che:
 		\begin{enumerate}
 			\item $\vec{f}$ è una corrispondenza biunivoca tra $V$ e $W$;
-			\item detta $\vec{g}:\rightarrow V$ la funzione inversa di $\vec{f}$ (ristretto a $V$), $\vec{g} \in C^1(W)$ e se $\vec{x} = \vec{g(y)}$, vale la formula
+			\item detta $\vec{g}:\rightarrow V$ la funzione inversa di $\vec{f}$ (ristretto a $V$), $\vec{g} \in C^1(W)$ e se $\vec{x} = \vec{g}(\vec{y})$, vale la formula
 			\begin{equation}
-				\vec{J_g(y)} = (\vec{J_f(x)})^{-1}
+				\vec{J}_{\vec{g}}(\vec{y}) = (\vec{J}_{\vec{f}}(\vec{x}))^{-1}.
 			\end{equation}
 		\end{enumerate}
 	\end{enumerate}
@@ -900,24 +903,26 @@ D_{x_1}f_m(\vec{x}) & D_{x_2}f_m(\vec{x}) & \dots & D_{x_n}f_m(\vec{x}) \\
 \section{Funzioni implicite}
 
 \begin{defn}
-	Sia $g:\mathbb{R}^2 \supseteq A \rightarrow \mathbb{R}$; la funzione $y=f(x)$, $x \in I \subseteq \mathbb{R}$ (risp. $x = h(y)$), $y \in I \subseteq \mathbb{R}$) si dice definita implicitamente dall'equazione $g(x,y) = 0$ se
+	Sia $g\colon\mathbb{R}^2 \supseteq A \rightarrow \mathbb{R}$; la funzione $y=f(x)$, $x \in I \subseteq \mathbb{R}$ (risp. $x = h(y)$), $y \in I \subseteq \mathbb{R}$) si dice definita implicitamente dall'equazione $g(x,y) = 0$ se
 	\begin{equation}
-		graf(f) \supset A
+		\graf(f) \supset A
 	\end{equation}
 	e
 	\begin{equation*}
-		g(x,f(x)) = 0 \quad \forall x \in I \quad \quad (g(h(y)),y) = 0 \quad \forall x \in I)
+		g(x,f(x)) = 0 \quad \forall x \in I, \qquad  (\text{risp. } g(h(y),y) = 0 \quad \forall x \in I)
 	\end{equation*}
 \end{defn}
 
-\begin{teor} (di Dini) Sia $g:\mathbb{R}^2 \supseteq A \rightarrow \mathbb{R}$, $A$ aperto. Supponiamo che:
+\begin{teor} [di Dini] Sia $g\colon\mathbb{R}^2 \supseteq A \rightarrow \mathbb{R}$, $A$ aperto. Supponiamo che:
 	\begin{enumerate}
 		\item $g$ e $g_y$ siano continue in $A$;
-		\item nel punto $(x_0,y_0) \in A$ si abbia $g(x_0,y_0) = 0$ e $g_y(x_0,y_0) \neq 0$. \\
-		Allora esistono un intorno $U$ di $x_0$ e un'unica funzione $f : U \rightarrow \mathbb{R}$, continua in $U$, tale che $y_0 = f(x_0)$ e che $g(x,f(x)) = 0$ per ogni $x \in U$. Se Inoltre
-		\item $g_x$ è continua in $A$ (dunque $g \in C^1(A)$), \\
-		allora $f \in C^1(U)$ e vale la formula
+		\item nel punto $(x_0,y_0) \in A$ si abbia $g(x_0,y_0) = 0$ e $g_y(x_0,y_0) \neq 0$.
 	\end{enumerate}
+		Allora esistono un intorno $U$ di $x_0$ e un'unica funzione $f \colon U \rightarrow \mathbb{R}$, continua in $U$, tale che $y_0 = f(x_0)$ e che $g(x,f(x)) = 0$ per ogni $x \in U$. Se inoltre
+		 	\begin{enumerate} \skipitems{2}
+				\item $g_x$ è continua in $A$ (dunque $g \in C^1(A)$),
+			\end{enumerate}
+		allora $f \in C^1(U)$ e vale la formula
 	\begin{equation}
 		f'(x) = - \frac{g_x(x,f(x))}{g_y(x,f(x))} \quad \forall x \in U.
 	\end{equation}
@@ -1229,7 +1234,7 @@ Vi sono opportune condizioni topologiche su $E$ sotto le quali le~\eqref{eqn:irr
 Ogni insieme convesso è stellato; un insieme stellato è ovviamente connesso per segmenti e perciò connesso.
 
 \begin{teor}
-	Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F_3\vec{k}$ con $\vec{F} \in C^1(E)$, dove $E$ è un aperto stellato in $\vec{R}^3$. Allora $\omega$ è esatta se e solo se $\rot{\vec{F}} = \vec{0}$ in $E$.
+	Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F_3\vec{k}$ con $\vec{F} \in C^1(E)$, dove $E$ è un aperto stellato in $\mathbb{R}^3$. Allora $\omega$ è esatta se e solo se $\rot{\vec{F}} = \vec{0}$ in $E$.
 \end{teor}
 
 La dimostrazione del Teorema fornisce una formula per la costruzione della funzione potenziale; supponendo che $E$ sia stellato rispetto all'origine (a meno di una traslazione degli assi), dato un punto $\vec{p} = (x, y, z) \in E$ indichiamo con $\Gamma$ la curva di equazioni parametriche
@@ -1271,7 +1276,7 @@ La definizione si può dare in termini di curve chiuse: un aperto connesso $E$ �
 Gli insiemi convessi e quelli stellati sono semplicemente connessi; non lo sono, ad esempio, una corona circolare o il piano privato di un punto (in $\mathbb{R}^2$) o una sfera privata di un diametro o l'interno di un toro (in $\mathbb{R}^3$).
 
 \begin{teor}
-	Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F_3\vec{k}$ con $\vec{F} \in C^1(E)$, dove $E$ è un aperto semplicemente connesso in $\vec{R}^3$. Allora $\omega$ è esatta se e solo se $\rot{\vec{F}} = \vec{0}$ in $E$.
+	Siano $\omega = F_1dx + F_2 dy + F_3 dz$, $\vec{F} = F_1\vec{i} + F_2\vec{j} + F_3\vec{k}$ con $\vec{F} \in C^1(E)$, dove $E$ è un aperto semplicemente connesso in $\mathbb{R}^3$. Allora $\omega$ è esatta se e solo se $\rot{\vec{F}} = \vec{0}$ in $E$.
 \end{teor}
 
 
@@ -1568,8 +1573,8 @@ Sia $f\colon \mathbb{R}^n \supseteq X \to \mathbb{R}$.
 		\begin{defn}
 		Un insieme $X$ si dice spazio metrico se è definita un'applicazione (distanza o metrica) $d \colon\! X \times X \to \mathbb{R}$ tale che, $\forall\, x, y, z \in X$, valgano le proprietà
 			\begin{enumerate}[$\mathcal{D}$\arabic*.]
-			\item	$d(x, y) \ge 0, \quad d(x, y) = 0 \iff x = y0;$
-			\item $d(x, y) = d(y, x)0:$
+			\item	$d(x, y) \ge 0, \quad d(x, y) = 0 \iff x = y;$
+			\item $d(x, y) = d(y, x):$
 			\item $d(x, y) \le d(x, z) + d(z, y)$.	\end{enumerate}
 		\end{defn}
 
@@ -1598,7 +1603,7 @@ Sia $f\colon \mathbb{R}^n \supseteq X \to \mathbb{R}$.
 		\end{exmp}
 
 		\begin{exmp}
-		L'insieme $\mathbb{R}* = \mathbb{R} \cup \{+\infty\} \cup \{-\infty\}$ si può metrizzare con la definizione di distanza ($x, y \in \mathbb{R}$)
+		L'insieme $\mathbb{R}^* = \mathbb{R} \cup \{+\infty\} \cup \{-\infty\}$ si può metrizzare con la definizione di distanza ($x, y \in \mathbb{R}$)
 			\begin{align*}
 				&d(x, y) \coloneqq \abs{\arctg x - \arctg y}, \\
 				&d(x, +\infty) = d(+\infty, x) \coloneqq \frac{\pi}{2} - \arctg x, \\
@@ -1755,7 +1760,7 @@ Sia $f\colon \mathbb{R}^n \supseteq X \to \mathbb{R}$.
 		\end{prop}
 
 		\begin{teor}[dello scambio dei limiti]
-			Siano $l_n \in \mathbb{R}$, $f_n$ e $f$ fuznioni da $I \subseteq \mathbb{R}$ in $\mathbb{R}$, $t_0 \in I$. Se
+			Siano $l_n \in \mathbb{R}$, $f_n$ e $f$ funzioni da $I \subseteq \mathbb{R}$ in $\mathbb{R}$, $t_0 \in I$. Se
 				\begin{enumerate}
 					\item $f_n(t) \to f(t)$ per $n \to \infty$ uniformemente in $I$;
 					\item $f_n(t) \to l_n$ per $t \to t_0$,
@@ -2081,10 +2086,10 @@ con $f \colon \mathbb{R}^{n-1} \supseteq D \to \mathbb{R}$, l'equazione si dice 
 
 Se nella~\eqref{eqn:edo} $F$ è un polinomio di primo grado in $y, y', \dots, y^{(n)}$ l'equazione si dice \emph{lineare}; la forma generale è
 	\begin{equation}
-		\label{eqn:edolin}
+		\label{eqn:edolineare}
 		a_0(t)y^{(n)}(t) + a_1(t)y^{(n-1)}(t) + \dots + a_{n-1}y'(t) + a_n(t)y(t) = b(t);
 	\end{equation}
-se $a_0(t) \ne 0$ la~\eqref{eqn:edolin} si può scrivere in forma normale.
+se $a_0(t) \ne 0$ la~\eqref{eqn:edolineare} si può scrivere in forma normale.
 
 Se $F$ nella~\eqref{eqn:edo} o $f$ nella~\eqref{eqn:edonorm} non dipendono esplicitamente da $t$ l'equazione si dice \emph{autonoma}.
 
@@ -2314,7 +2319,7 @@ Valgano le ipotesi del Teorema~\ref{teor:prolfront} con $D = \mathbb{R}^{n+1}$. 
 	\begin{equation}
 		\norma{\vec{\phi}(t)} \le c_1 + c_2(t - \tau), \quad \forall t \in J_{\vec{\phi}}^+ = [\tau, T_\textup{max}),
 	\end{equation}
-allora $J_{\vec{\phi}}^+ = [ \tau, \infty)$. In particolare, ciò accade se $\vec{\phi}$ è limitata in $J_\vec{\phi}^+$ (con $c_2 = 0$).
+allora $J_{\vec{\phi}}^+ = [ \tau, \infty)$. In particolare, ciò accade se $\vec{\phi}$ è limitata in $J_{\vec{\phi}}^+$ (con $c_2 = 0$).
 \end{cor}
 
 \subsection{Integrazione di alcune equazioni del primo ordine}
